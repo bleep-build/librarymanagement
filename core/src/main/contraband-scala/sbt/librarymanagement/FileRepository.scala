@@ -1,15 +1,15 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 /** sbt interface for an Ivy filesystem repository.  More convenient construction is done using Resolver.file. */
 final class FileRepository private (
   name: String,
-  patterns: sbt.librarymanagement.Patterns,
-  val configuration: sbt.librarymanagement.FileConfiguration) extends sbt.librarymanagement.PatternsBasedRepository(name, patterns) with Serializable {
-  def this(name: String, configuration: sbt.librarymanagement.FileConfiguration, patterns: sbt.librarymanagement.Patterns) =
+  patterns: bleep.nosbt.librarymanagement.Patterns,
+  val configuration: bleep.nosbt.librarymanagement.FileConfiguration) extends bleep.nosbt.librarymanagement.PatternsBasedRepository(name, patterns) with Serializable {
+  def this(name: String, configuration: bleep.nosbt.librarymanagement.FileConfiguration, patterns: bleep.nosbt.librarymanagement.Patterns) =
   this(name, patterns, configuration)
   
   
@@ -18,26 +18,26 @@ final class FileRepository private (
     case _ => false
   })
   override def hashCode: Int = {
-    37 * (37 * (37 * (37 * (17 + "sbt.librarymanagement.FileRepository".##) + name.##) + patterns.##) + configuration.##)
+    37 * (37 * (37 * (37 * (17 + "bleep.nosbt.librarymanagement.FileRepository".##) + name.##) + patterns.##) + configuration.##)
   }
   override def toString: String = {
     "FileRepository(" + name + ", " + patterns + ", " + configuration + ")"
   }
-  private[this] def copy(name: String = name, patterns: sbt.librarymanagement.Patterns = patterns, configuration: sbt.librarymanagement.FileConfiguration = configuration): FileRepository = {
+  private[this] def copy(name: String = name, patterns: bleep.nosbt.librarymanagement.Patterns = patterns, configuration: bleep.nosbt.librarymanagement.FileConfiguration = configuration): FileRepository = {
     new FileRepository(name, patterns, configuration)
   }
   def withName(name: String): FileRepository = {
     copy(name = name)
   }
-  def withPatterns(patterns: sbt.librarymanagement.Patterns): FileRepository = {
+  def withPatterns(patterns: bleep.nosbt.librarymanagement.Patterns): FileRepository = {
     copy(patterns = patterns)
   }
-  def withConfiguration(configuration: sbt.librarymanagement.FileConfiguration): FileRepository = {
+  def withConfiguration(configuration: bleep.nosbt.librarymanagement.FileConfiguration): FileRepository = {
     copy(configuration = configuration)
   }
 }
 object FileRepository {
-  def apply(name: String, configuration: sbt.librarymanagement.FileConfiguration, patterns: sbt.librarymanagement.Patterns) =
+  def apply(name: String, configuration: bleep.nosbt.librarymanagement.FileConfiguration, patterns: bleep.nosbt.librarymanagement.Patterns) =
   new FileRepository(name, patterns, configuration)
-  def apply(name: String, patterns: sbt.librarymanagement.Patterns, configuration: sbt.librarymanagement.FileConfiguration): FileRepository = new FileRepository(name, patterns, configuration)
+  def apply(name: String, patterns: bleep.nosbt.librarymanagement.Patterns, configuration: bleep.nosbt.librarymanagement.FileConfiguration): FileRepository = new FileRepository(name, patterns, configuration)
 }

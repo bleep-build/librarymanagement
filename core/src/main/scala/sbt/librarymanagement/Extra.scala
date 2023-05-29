@@ -1,9 +1,9 @@
 /* sbt -- Simple Build Tool
  * Copyright 2008, 2009, 2010  Mark Harrah
  */
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 
-import sbt.librarymanagement.DependencyBuilders.{ Organization, OrganizationArtifactName }
+import bleep.nosbt.librarymanagement.DependencyBuilders.{ Organization, OrganizationArtifactName }
 
 private[librarymanagement] abstract class InclExclRuleFunctions {
   def everything = InclExclRule("*", "*", "*", Vector.empty, Disabled())

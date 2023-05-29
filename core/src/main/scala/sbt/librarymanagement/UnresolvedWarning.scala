@@ -1,8 +1,7 @@
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 
 import collection.mutable
-import sbt.util.ShowLines
-import sbt.internal.util.{ SourcePosition, LinePosition, RangePosition, LineRange }
+import bleep.nosbt.util.{LinePosition, LineRange, RangePosition, ShowLines, SourcePosition}
 
 final class ResolveException(
     val messages: Seq[String],
@@ -46,7 +45,7 @@ object UnresolvedWarning {
     new UnresolvedWarning(err, failedPaths)
   }
 
-  private[sbt] def sourcePosStr(posOpt: Option[SourcePosition]): String =
+  private[nosbt] def sourcePosStr(posOpt: Option[SourcePosition]): String =
     posOpt match {
       case Some(LinePosition(path, start))                  => s" ($path#L$start)"
       case Some(RangePosition(path, LineRange(start, end))) => s" ($path#L$start-$end)"
@@ -78,7 +77,7 @@ object UnresolvedWarning {
   }
 }
 
-final class UnresolvedWarningConfiguration private[sbt] (
+final class UnresolvedWarningConfiguration private[nosbt] (
     val modulePositions: Map[ModuleID, SourcePosition]
 )
 object UnresolvedWarningConfiguration {

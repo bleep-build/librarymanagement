@@ -1,9 +1,9 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 final class UpdateStats private (
   val resolveTime: Long,
   val downloadTime: Long,
@@ -17,7 +17,7 @@ final class UpdateStats private (
     case _ => false
   })
   override def hashCode: Int = {
-    37 * (37 * (37 * (37 * (37 * (17 + "sbt.librarymanagement.UpdateStats".##) + resolveTime.##) + downloadTime.##) + downloadSize.##) + cached.##)
+    37 * (37 * (37 * (37 * (37 * (17 + "bleep.nosbt.librarymanagement.UpdateStats".##) + resolveTime.##) + downloadTime.##) + downloadSize.##) + cached.##)
   }
   override def toString: String = {
     Seq("Resolve time: " + resolveTime + " ms", "Download time: " + downloadTime + " ms", "Download size: " + downloadSize + " bytes").mkString(", ")

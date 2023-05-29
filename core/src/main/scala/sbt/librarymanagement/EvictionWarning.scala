@@ -1,13 +1,12 @@
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 
 import collection.mutable
 import Configurations.Compile
-import ScalaArtifacts.{ LibraryID, CompilerID }
-import sbt.internal.librarymanagement.VersionSchemes
-import sbt.util.Logger
-import sbt.util.ShowLines
+import ScalaArtifacts.{CompilerID, LibraryID}
+import bleep.nosbt.internal.librarymanagement.VersionSchemes
+import bleep.nosbt.util.ShowLines
 
-final class EvictionWarningOptions private[sbt] (
+final class EvictionWarningOptions private[nosbt] (
     val configurations: Seq[ConfigRef],
     val warnScalaVersionEviction: Boolean,
     val warnDirectEvictions: Boolean,
@@ -36,7 +35,7 @@ final class EvictionWarningOptions private[sbt] (
   ): EvictionWarningOptions =
     copy(guessCompatible = guessCompatible)
 
-  private[sbt] def copy(
+  private[nosbt] def copy(
       configurations: Seq[ConfigRef] = configurations,
       warnScalaVersionEviction: Boolean = warnScalaVersionEviction,
       warnDirectEvictions: Boolean = warnDirectEvictions,
@@ -98,7 +97,7 @@ object EvictionWarningOptions {
   lazy val defaultGuess: Function1[(ModuleID, Option[ModuleID], Option[ScalaModuleInfo]), Boolean] =
     guessSbtOne orElse guessSecondSegment orElse guessSemVer orElse guessFalse
 
-  private[sbt] def isNameScalaSuffixed(name: String): Boolean =
+  private[nosbt] def isNameScalaSuffixed(name: String): Boolean =
     name.contains("_2.") || name.contains("_3") || name.contains("_4")
 
   /** A partial function that checks if given m2 is suffixed, and use pvp to evaluate. */
@@ -114,7 +113,7 @@ object EvictionWarningOptions {
   }
 
   /** A partial function that checks two versions match pvp. */
-  private[sbt] lazy val evalPvp
+  private[nosbt] lazy val evalPvp
       : PartialFunction[(ModuleID, Option[ModuleID], Option[ScalaModuleInfo]), Boolean] = {
     case (m1, Some(m2), _) =>
       (m1.revision, m2.revision) match {
@@ -183,7 +182,7 @@ object EvictionWarningOptions {
   }
 }
 
-final class EvictionPair private[sbt] (
+final class EvictionPair private[nosbt] (
     val organization: String,
     val name: String,
     val winner: Option[ModuleReport],
@@ -231,7 +230,7 @@ object EvictionPair {
   }
 }
 
-final class EvictionWarning private[sbt] (
+final class EvictionWarning private[nosbt] (
     val options: EvictionWarningOptions,
     val scalaEvictions: Seq[EvictionPair],
     val directEvictions: Seq[EvictionPair],
@@ -239,7 +238,7 @@ final class EvictionWarning private[sbt] (
     val allEvictions: Seq[EvictionPair],
     val binaryIncompatibleEvictionExists: Boolean
 ) {
-  private[sbt] def this(
+  private[nosbt] def this(
       options: EvictionWarningOptions,
       scalaEvictions: Seq[EvictionPair],
       directEvictions: Seq[EvictionPair],
@@ -248,18 +247,10 @@ final class EvictionWarning private[sbt] (
   ) = this(options, scalaEvictions, directEvictions, transitiveEvictions, allEvictions, false)
   def reportedEvictions: Seq[EvictionPair] =
     scalaEvictions ++ directEvictions ++ transitiveEvictions
-  private[sbt] def infoAllTheThings: List[String] = EvictionWarning.infoAllTheThings(this)
+  private[nosbt] def infoAllTheThings: List[String] = EvictionWarning.infoAllTheThings(this)
 }
 
 object EvictionWarning {
-  @deprecated("Use variant that doesn't take an unused logger", "1.2.0")
-  def apply(
-      module: ModuleDescriptor,
-      options: EvictionWarningOptions,
-      report: UpdateReport,
-      log: Logger
-  ): EvictionWarning = apply(module, options, report)
-
   def apply(
       module: ModuleDescriptor,
       options: EvictionWarningOptions,
@@ -269,7 +260,7 @@ object EvictionWarning {
     processEvictions(module, options, evictions)
   }
 
-  private[sbt] def buildEvictions(
+  private[nosbt] def buildEvictions(
       options: EvictionWarningOptions,
       report: UpdateReport
   ): Seq[OrganizationArtifactReport] = {
@@ -290,7 +281,7 @@ object EvictionWarning {
     buffer.toList.toVector
   }
 
-  private[sbt] def isScalaArtifact(
+  private[nosbt] def isScalaArtifact(
       module: ModuleDescriptor,
       organization: String,
       name: String
@@ -302,7 +293,7 @@ object EvictionWarning {
       case _ => false
     }
 
-  private[sbt] def processEvictions(
+  private[nosbt] def processEvictions(
       module: ModuleDescriptor,
       options: EvictionWarningOptions,
       reports: Seq[OrganizationArtifactReport]
@@ -392,7 +383,7 @@ object EvictionWarning {
     )
   }
 
-  implicit val evictionWarningLines: ShowLines[EvictionWarning] = ShowLines { a: EvictionWarning =>
+  implicit val evictionWarningLines: ShowLines[EvictionWarning] = ShowLines { (a: EvictionWarning) =>
     import ShowLines._
     val out: mutable.ListBuffer[String] = mutable.ListBuffer()
     if (a.options.warnEvictionSummary && a.binaryIncompatibleEvictionExists) {
@@ -416,7 +407,7 @@ object EvictionWarning {
     out.toList
   }
 
-  private[sbt] def infoAllTheThings(a: EvictionWarning): List[String] =
+  private[nosbt] def infoAllTheThings(a: EvictionWarning): List[String] =
     if (a.options.infoAllEvictions) {
       import ShowLines._
       val evo = a.options

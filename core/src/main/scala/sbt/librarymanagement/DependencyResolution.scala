@@ -1,16 +1,14 @@
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 
 import java.io.File
-import sbt.util.Logger
-import sbt.io.Hash
-import sbt.librarymanagement.syntax._
+import bleep.nosbt.util.Logger
+import bleep.nosbt.io.Hash
 
 /**
  * Library management API to resolve dependencies.
  */
-class DependencyResolution private[sbt] (lmEngine: DependencyResolutionInterface) {
-  import sbt.internal.librarymanagement.InternalDefaults._
-  import sbt.internal.librarymanagement.UpdateClassifiersUtil._
+class DependencyResolution private[nosbt] (lmEngine: DependencyResolutionInterface) {
+  import bleep.nosbt.internal.librarymanagement.InternalDefaults._
 
   /**
    * Builds a ModuleDescriptor that describes a subproject with dependencies.
@@ -80,7 +78,7 @@ class DependencyResolution private[sbt] (lmEngine: DependencyResolutionInterface
       scalaModuleInfo: Option[ScalaModuleInfo]
   ): ModuleDescriptor = {
     val sha1 = Hash.toHex(Hash(dependencyId.name))
-    val dummyID = ModuleID(sbtOrgTemp, modulePrefixTemp + sha1, dependencyId.revision)
+    val dummyID = ModuleID("org.sbt.temp", modulePrefixTemp + sha1, dependencyId.revision)
       .withConfigurations(dependencyId.configurations)
     moduleDescriptor(dummyID, Vector(dependencyId), scalaModuleInfo)
   }
@@ -143,59 +141,6 @@ class DependencyResolution private[sbt] (lmEngine: DependencyResolutionInterface
         //   case files => Some(files)
         // }
         Right(allFiles)
-    }
-  }
-
-  /**
-   * Creates explicit artifacts for each classifier in `config.module`, and then attempts to resolve them directly. This
-   * is for Maven compatibility, where these artifacts are not "published" in the POM, so they don't end up in the Ivy
-   * that sbt generates for them either.<br>
-   * Artifacts can be obtained from calling toSeq on UpdateReport.<br>
-   * In addition, retrieves specific Ivy artifacts if they have one of the requested `config.configuration.types`.
-   * @param config important to set `config.configuration.types` to only allow artifact types that can correspond to
-   *               "classified" artifacts (sources and javadocs).
-   */
-  def updateClassifiers(
-      config: GetClassifiersConfiguration,
-      uwconfig: UnresolvedWarningConfiguration,
-      artifacts: Vector[(String, ModuleID, Artifact, File)],
-      log: Logger
-  ): Either[UnresolvedWarning, UpdateReport] = {
-    import config.{ updateConfiguration => c, module => mod, _ }
-    import mod.{ configurations => confs, _ }
-    val artifactFilter = getArtifactTypeFilter(c.artifactFilter)
-    assert(classifiers.nonEmpty, "classifiers cannot be empty")
-    assert(artifactFilter.types.nonEmpty, "UpdateConfiguration must filter on some types")
-    val baseModules = dependencies map { m =>
-      restrictedCopy(m, true)
-    }
-    // Adding list of explicit artifacts here.
-    val exls = Map(excludes map { case (k, v) => (k, v.toSet) }: _*)
-    val deps = baseModules.distinct flatMap classifiedArtifacts(classifiers, exls, artifacts)
-    val base = restrictedCopy(id, true).withName(id.name + classifiers.mkString("$", "_", ""))
-    val moduleSetting = ModuleDescriptorConfiguration(base, ModuleInfo(base.name))
-      .withScalaModuleInfo(scalaModuleInfo)
-      .withDependencies(deps)
-      .withConfigurations(confs)
-    val module = moduleDescriptor(moduleSetting)
-
-    // c.copy ensures c.types is preserved too
-    val upConf = c.withMissingOk(true)
-    update(module, upConf, uwconfig, log) match {
-      case Right(r) =>
-        // The artifacts that came from Ivy don't have their classifier set, let's set it according to
-        // FIXME: this is only done because IDE plugins depend on `classifier` to determine type. They
-        val typeClassifierMap: Map[String, String] =
-          ((sourceArtifactTypes.toIterable map (_ -> Artifact.SourceClassifier))
-            :: (docArtifactTypes.toIterable map (_ -> Artifact.DocClassifier)) :: Nil).flatten.toMap
-        Right(r.substitute { (conf, mid, artFileSeq) =>
-          artFileSeq map {
-            case (art, f) =>
-              // Deduce the classifier from the type if no classifier is present already
-              art.withClassifier(art.classifier orElse typeClassifierMap.get(art.`type`)) -> f
-          }
-        })
-      case Left(w) => Left(w)
     }
   }
 

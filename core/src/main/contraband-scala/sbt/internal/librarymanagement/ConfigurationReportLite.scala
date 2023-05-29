@@ -1,12 +1,12 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.internal.librarymanagement
+package bleep.nosbt.internal.librarymanagement
 final class ConfigurationReportLite private (
   val configuration: String,
-  val details: Vector[sbt.librarymanagement.OrganizationArtifactReport]) extends Serializable {
+  val details: Vector[bleep.nosbt.librarymanagement.OrganizationArtifactReport]) extends Serializable {
   
   
   
@@ -15,22 +15,22 @@ final class ConfigurationReportLite private (
     case _ => false
   })
   override def hashCode: Int = {
-    37 * (37 * (37 * (17 + "sbt.internal.librarymanagement.ConfigurationReportLite".##) + configuration.##) + details.##)
+    37 * (37 * (37 * (17 + "bleep.nosbt.internal.librarymanagement.ConfigurationReportLite".##) + configuration.##) + details.##)
   }
   override def toString: String = {
     "ConfigurationReportLite(" + configuration + ", " + details + ")"
   }
-  private[this] def copy(configuration: String = configuration, details: Vector[sbt.librarymanagement.OrganizationArtifactReport] = details): ConfigurationReportLite = {
+  private[this] def copy(configuration: String = configuration, details: Vector[bleep.nosbt.librarymanagement.OrganizationArtifactReport] = details): ConfigurationReportLite = {
     new ConfigurationReportLite(configuration, details)
   }
   def withConfiguration(configuration: String): ConfigurationReportLite = {
     copy(configuration = configuration)
   }
-  def withDetails(details: Vector[sbt.librarymanagement.OrganizationArtifactReport]): ConfigurationReportLite = {
+  def withDetails(details: Vector[bleep.nosbt.librarymanagement.OrganizationArtifactReport]): ConfigurationReportLite = {
     copy(details = details)
   }
 }
 object ConfigurationReportLite {
   
-  def apply(configuration: String, details: Vector[sbt.librarymanagement.OrganizationArtifactReport]): ConfigurationReportLite = new ConfigurationReportLite(configuration, details)
+  def apply(configuration: String, details: Vector[bleep.nosbt.librarymanagement.OrganizationArtifactReport]): ConfigurationReportLite = new ConfigurationReportLite(configuration, details)
 }

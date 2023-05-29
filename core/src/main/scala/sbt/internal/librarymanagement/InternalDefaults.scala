@@ -1,15 +1,13 @@
-package sbt
+package bleep.nosbt
 package internal.librarymanagement
 
 import java.io.File
-import sbt.librarymanagement._
-import sbt.io.syntax._
+import bleep.nosbt.librarymanagement._
 
 /**
  * This is a list of functions with default values.
  */
 object InternalDefaults {
-  val sbtOrgTemp = JsonUtil.sbtOrgTemp
   val modulePrefixTemp = "temp-module-"
 
   def getArtifactTypeFilter(opt: Option[ArtifactTypeFilter]): ArtifactTypeFilter =

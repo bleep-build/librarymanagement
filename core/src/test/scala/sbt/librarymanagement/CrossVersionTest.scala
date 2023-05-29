@@ -1,6 +1,6 @@
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 
-import sbt.internal.librarymanagement.UnitSpec
+import bleep.nosbt.internal.librarymanagement.UnitSpec
 import CrossVersion._
 
 class CrossVersionTest extends UnitSpec {

@@ -1,11 +1,11 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.internal.librarymanagement
+package bleep.nosbt.internal.librarymanagement
 final class UpdateReportLite private (
-  val configurations: Vector[sbt.internal.librarymanagement.ConfigurationReportLite]) extends Serializable {
+  val configurations: Vector[bleep.nosbt.internal.librarymanagement.ConfigurationReportLite]) extends Serializable {
   
   
   
@@ -14,19 +14,19 @@ final class UpdateReportLite private (
     case _ => false
   })
   override def hashCode: Int = {
-    37 * (37 * (17 + "sbt.internal.librarymanagement.UpdateReportLite".##) + configurations.##)
+    37 * (37 * (17 + "bleep.nosbt.internal.librarymanagement.UpdateReportLite".##) + configurations.##)
   }
   override def toString: String = {
     "UpdateReportLite(" + configurations + ")"
   }
-  private[this] def copy(configurations: Vector[sbt.internal.librarymanagement.ConfigurationReportLite] = configurations): UpdateReportLite = {
+  private[this] def copy(configurations: Vector[bleep.nosbt.internal.librarymanagement.ConfigurationReportLite]): UpdateReportLite = {
     new UpdateReportLite(configurations)
   }
-  def withConfigurations(configurations: Vector[sbt.internal.librarymanagement.ConfigurationReportLite]): UpdateReportLite = {
+  def withConfigurations(configurations: Vector[bleep.nosbt.internal.librarymanagement.ConfigurationReportLite]): UpdateReportLite = {
     copy(configurations = configurations)
   }
 }
 object UpdateReportLite {
   
-  def apply(configurations: Vector[sbt.internal.librarymanagement.ConfigurationReportLite]): UpdateReportLite = new UpdateReportLite(configurations)
+  def apply(configurations: Vector[bleep.nosbt.internal.librarymanagement.ConfigurationReportLite]): UpdateReportLite = new UpdateReportLite(configurations)
 }

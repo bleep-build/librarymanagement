@@ -1,13 +1,11 @@
 /* sbt -- Simple Build Tool
  * Copyright 2008, 2009, 2010  Mark Harrah
  */
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 
-import scala.annotation.{ nowarn, tailrec }
-import scala.language.experimental.macros
+import scala.annotation.nowarn
 
 object Configurations {
-  def config(name: String): Configuration = macro ConfigurationMacro.configMacroImpl
   def default: Vector[Configuration] = defaultMavenConfigurations
   def defaultMavenConfigurations: Vector[Configuration] =
     Vector(Compile, Runtime, Test, Provided, Optional)
@@ -32,11 +30,11 @@ object Configurations {
     case _               => c
   }
 
-  private[sbt] def internal(base: Configuration, ext: Configuration*) =
+  private[nosbt] def internal(base: Configuration, ext: Configuration*) =
     Configuration.of(base.id + "Internal", base.name + "-internal").extend(ext: _*).hide
-  private[sbt] def fullInternal(base: Configuration): Configuration =
+  private[nosbt] def fullInternal(base: Configuration): Configuration =
     internal(base, base, Optional, Provided)
-  private[sbt] def optionalInternal(base: Configuration): Configuration =
+  private[nosbt] def optionalInternal(base: Configuration): Configuration =
     internal(base, base, Optional)
 
   lazy val Default = Configuration.of("Default", "default")
@@ -55,13 +53,13 @@ object Configurations {
   lazy val CompilerPlugin = Configuration.of("CompilerPlugin", "plugin").hide
   lazy val Component = Configuration.of("Component", "component").hide
 
-  private[sbt] val DefaultMavenConfiguration = defaultConfiguration(true)
-  private[sbt] val DefaultIvyConfiguration = defaultConfiguration(false)
-  private[sbt] def DefaultConfiguration(mavenStyle: Boolean) =
+  private[nosbt] val DefaultMavenConfiguration = defaultConfiguration(true)
+  private[nosbt] val DefaultIvyConfiguration = defaultConfiguration(false)
+  private[nosbt] def DefaultConfiguration(mavenStyle: Boolean) =
     if (mavenStyle) DefaultMavenConfiguration else DefaultIvyConfiguration
-  private[sbt] def defaultConfiguration(mavenStyle: Boolean) =
+  private[nosbt] def defaultConfiguration(mavenStyle: Boolean) =
     if (mavenStyle) Configurations.Compile else Configurations.Default
-  private[sbt] def removeDuplicates(configs: Iterable[Configuration]) =
+  private[nosbt] def removeDuplicates(configs: Iterable[Configuration]) =
     Set(
       scala.collection.mutable
         .Map(configs.map(config => (config.name, config)).toSeq: _*)
@@ -71,7 +69,7 @@ object Configurations {
 
   /** Returns true if the configuration should be under the influence of scalaVersion. */
   @nowarn
-  private[sbt] def underScalaVersion(c: Configuration): Boolean =
+  private[nosbt] def underScalaVersion(c: Configuration): Boolean =
     c match {
       case Default | Compile | IntegrationTest | Provided | Runtime | Test | Optional |
           CompilerPlugin | CompileInternal | RuntimeInternal | TestInternal =>
@@ -106,51 +104,6 @@ private[librarymanagement] abstract class ConfigurationExtra {
   def notTransitive = intransitive
   def intransitive = Configuration.of(id, name, description, isPublic, extendsConfigs, false)
   def hide = Configuration.of(id, name, description, false, extendsConfigs, transitive)
-}
-
-private[sbt] object ConfigurationMacro {
-  import scala.reflect.macros._
-
-  def configMacroImpl(c: blackbox.Context)(name: c.Expr[String]): c.Expr[Configuration] = {
-    import c.universe._
-    val enclosingValName = definingValName(
-      c,
-      methodName =>
-        s"""$methodName must be directly assigned to a val, such as `val Tooling = $methodName("tooling")`."""
-    )
-    if (enclosingValName.head.isLower) {
-      c.error(c.enclosingPosition, "configuration id must be capitalized")
-    }
-    val id = c.Expr[String](Literal(Constant(enclosingValName)))
-    reify { Configuration.of(id.splice, name.splice) }
-  }
-
-  def definingValName(c: blackbox.Context, invalidEnclosingTree: String => String): String = {
-    import c.universe.{ Apply => ApplyTree, _ }
-    val methodName = c.macroApplication.symbol.name
-    def processName(n: Name): String =
-      n.decodedName.toString.trim // trim is not strictly correct, but macros don't expose the API necessary
-    @tailrec def enclosingVal(trees: List[c.Tree]): String = {
-      trees match {
-        case ValDef(_, name, _, _) :: _                      => processName(name)
-        case (_: ApplyTree | _: Select | _: TypeApply) :: xs => enclosingVal(xs)
-        // lazy val x: X = <methodName> has this form for some reason (only when the explicit type is present, though)
-        case Block(_, _) :: DefDef(mods, name, _, _, _, _) :: _ if mods.hasFlag(Flag.LAZY) =>
-          processName(name)
-        case _ =>
-          c.error(c.enclosingPosition, invalidEnclosingTree(methodName.decodedName.toString))
-          "<error>"
-      }
-    }
-    enclosingVal(enclosingTrees(c).toList)
-  }
-
-  def enclosingTrees(c: blackbox.Context): Seq[c.Tree] =
-    c.asInstanceOf[reflect.macros.runtime.Context]
-      .callsiteTyper
-      .context
-      .enclosingContextChain
-      .map(_.tree.asInstanceOf[c.Tree])
 }
 
 private[librarymanagement] abstract class ConfigRefFunctions {

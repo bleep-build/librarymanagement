@@ -1,9 +1,9 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 /**
  * Work around the inadequacy of Ivy's ArtifactTypeFilter (that it cannot reverse a filter)
  * @param types Represents the artifact types that we should try to resolve for (as in the allowed values of
@@ -13,7 +13,7 @@ package sbt.librarymanagement
  */
 final class ArtifactTypeFilter private (
   val types: Set[String],
-  val inverted: Boolean) extends sbt.librarymanagement.ArtifactTypeFilterExtra with Serializable {
+  val inverted: Boolean) extends bleep.nosbt.librarymanagement.ArtifactTypeFilterExtra with Serializable {
   
   
   
@@ -22,7 +22,7 @@ final class ArtifactTypeFilter private (
     case _ => false
   })
   override def hashCode: Int = {
-    37 * (37 * (37 * (17 + "sbt.librarymanagement.ArtifactTypeFilter".##) + types.##) + inverted.##)
+    37 * (37 * (37 * (17 + "bleep.nosbt.librarymanagement.ArtifactTypeFilter".##) + types.##) + inverted.##)
   }
   override def toString: String = {
     "ArtifactTypeFilter(" + types + ", " + inverted + ")"
@@ -37,7 +37,7 @@ final class ArtifactTypeFilter private (
     copy(inverted = inverted)
   }
 }
-object ArtifactTypeFilter extends sbt.librarymanagement.ArtifactTypeFilterFunctions {
+object ArtifactTypeFilter extends bleep.nosbt.librarymanagement.ArtifactTypeFilterFunctions {
   
   def apply(types: Set[String], inverted: Boolean): ArtifactTypeFilter = new ArtifactTypeFilter(types, inverted)
 }

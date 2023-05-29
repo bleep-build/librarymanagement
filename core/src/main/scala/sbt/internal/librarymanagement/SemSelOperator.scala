@@ -1,4 +1,4 @@
-package sbt.internal.librarymanagement
+package bleep.nosbt.internal.librarymanagement
 sealed abstract class SemSelOperator {
   override def toString: String = this match {
     case SemSelOperator.Lte => "<="

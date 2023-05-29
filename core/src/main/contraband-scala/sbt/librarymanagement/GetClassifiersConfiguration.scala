@@ -1,13 +1,13 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 final class GetClassifiersConfiguration private (
-  val module: sbt.librarymanagement.GetClassifiersModule,
-  val excludes: Vector[scala.Tuple2[sbt.librarymanagement.ModuleID, scala.Vector[sbt.librarymanagement.ConfigRef]]],
-  val updateConfiguration: sbt.librarymanagement.UpdateConfiguration,
+  val module: bleep.nosbt.librarymanagement.GetClassifiersModule,
+  val excludes: Vector[scala.Tuple2[bleep.nosbt.librarymanagement.ModuleID, scala.Vector[bleep.nosbt.librarymanagement.ConfigRef]]],
+  val updateConfiguration: bleep.nosbt.librarymanagement.UpdateConfiguration,
   val sourceArtifactTypes: Vector[String],
   val docArtifactTypes: Vector[String]) extends Serializable {
   
@@ -18,21 +18,21 @@ final class GetClassifiersConfiguration private (
     case _ => false
   })
   override def hashCode: Int = {
-    37 * (37 * (37 * (37 * (37 * (37 * (17 + "sbt.librarymanagement.GetClassifiersConfiguration".##) + module.##) + excludes.##) + updateConfiguration.##) + sourceArtifactTypes.##) + docArtifactTypes.##)
+    37 * (37 * (37 * (37 * (37 * (37 * (17 + "bleep.nosbt.librarymanagement.GetClassifiersConfiguration".##) + module.##) + excludes.##) + updateConfiguration.##) + sourceArtifactTypes.##) + docArtifactTypes.##)
   }
   override def toString: String = {
     "GetClassifiersConfiguration(" + module + ", " + excludes + ", " + updateConfiguration + ", " + sourceArtifactTypes + ", " + docArtifactTypes + ")"
   }
-  private[this] def copy(module: sbt.librarymanagement.GetClassifiersModule = module, excludes: Vector[scala.Tuple2[sbt.librarymanagement.ModuleID, scala.Vector[sbt.librarymanagement.ConfigRef]]] = excludes, updateConfiguration: sbt.librarymanagement.UpdateConfiguration = updateConfiguration, sourceArtifactTypes: Vector[String] = sourceArtifactTypes, docArtifactTypes: Vector[String] = docArtifactTypes): GetClassifiersConfiguration = {
+  private[this] def copy(module: bleep.nosbt.librarymanagement.GetClassifiersModule = module, excludes: Vector[scala.Tuple2[bleep.nosbt.librarymanagement.ModuleID, scala.Vector[bleep.nosbt.librarymanagement.ConfigRef]]] = excludes, updateConfiguration: bleep.nosbt.librarymanagement.UpdateConfiguration = updateConfiguration, sourceArtifactTypes: Vector[String] = sourceArtifactTypes, docArtifactTypes: Vector[String] = docArtifactTypes): GetClassifiersConfiguration = {
     new GetClassifiersConfiguration(module, excludes, updateConfiguration, sourceArtifactTypes, docArtifactTypes)
   }
-  def withModule(module: sbt.librarymanagement.GetClassifiersModule): GetClassifiersConfiguration = {
+  def withModule(module: bleep.nosbt.librarymanagement.GetClassifiersModule): GetClassifiersConfiguration = {
     copy(module = module)
   }
-  def withExcludes(excludes: Vector[scala.Tuple2[sbt.librarymanagement.ModuleID, scala.Vector[sbt.librarymanagement.ConfigRef]]]): GetClassifiersConfiguration = {
+  def withExcludes(excludes: Vector[scala.Tuple2[bleep.nosbt.librarymanagement.ModuleID, scala.Vector[bleep.nosbt.librarymanagement.ConfigRef]]]): GetClassifiersConfiguration = {
     copy(excludes = excludes)
   }
-  def withUpdateConfiguration(updateConfiguration: sbt.librarymanagement.UpdateConfiguration): GetClassifiersConfiguration = {
+  def withUpdateConfiguration(updateConfiguration: bleep.nosbt.librarymanagement.UpdateConfiguration): GetClassifiersConfiguration = {
     copy(updateConfiguration = updateConfiguration)
   }
   def withSourceArtifactTypes(sourceArtifactTypes: Vector[String]): GetClassifiersConfiguration = {
@@ -44,5 +44,5 @@ final class GetClassifiersConfiguration private (
 }
 object GetClassifiersConfiguration {
   
-  def apply(module: sbt.librarymanagement.GetClassifiersModule, excludes: Vector[scala.Tuple2[sbt.librarymanagement.ModuleID, scala.Vector[sbt.librarymanagement.ConfigRef]]], updateConfiguration: sbt.librarymanagement.UpdateConfiguration, sourceArtifactTypes: Vector[String], docArtifactTypes: Vector[String]): GetClassifiersConfiguration = new GetClassifiersConfiguration(module, excludes, updateConfiguration, sourceArtifactTypes, docArtifactTypes)
+  def apply(module: bleep.nosbt.librarymanagement.GetClassifiersModule, excludes: Vector[scala.Tuple2[bleep.nosbt.librarymanagement.ModuleID, scala.Vector[bleep.nosbt.librarymanagement.ConfigRef]]], updateConfiguration: bleep.nosbt.librarymanagement.UpdateConfiguration, sourceArtifactTypes: Vector[String], docArtifactTypes: Vector[String]): GetClassifiersConfiguration = new GetClassifiersConfiguration(module, excludes, updateConfiguration, sourceArtifactTypes, docArtifactTypes)
 }

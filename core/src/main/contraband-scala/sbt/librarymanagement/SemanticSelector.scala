@@ -1,9 +1,9 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 /**
  * Semantic version selector API to check if the VersionNumber satisfies
  * conditions described by semantic version selector.
@@ -59,7 +59,7 @@ package sbt.librarymanagement
  * we need to explicitly specify the pre-release identifiers like `>=1.0.0-alpha`.
  */
 final class SemanticSelector private (
-  val selectors: Seq[sbt.internal.librarymanagement.SemSelAndChunk]) extends Serializable {
+  val selectors: Seq[bleep.nosbt.internal.librarymanagement.SemSelAndChunk]) extends Serializable {
   def matches(versionNumber: VersionNumber): Boolean = selectors.exists(_.matches(versionNumber))
   
   
@@ -68,23 +68,23 @@ final class SemanticSelector private (
     case _ => false
   })
   override def hashCode: Int = {
-    37 * (37 * (17 + "sbt.librarymanagement.SemanticSelector".##) + selectors.##)
+    37 * (37 * (17 + "bleep.nosbt.librarymanagement.SemanticSelector".##) + selectors.##)
   }
   override def toString: String = {
     selectors.map(_.toString).mkString(" || ")
   }
-  private[this] def copy(selectors: Seq[sbt.internal.librarymanagement.SemSelAndChunk] = selectors): SemanticSelector = {
+  private[this] def copy(selectors: Seq[bleep.nosbt.internal.librarymanagement.SemSelAndChunk]): SemanticSelector = {
     new SemanticSelector(selectors)
   }
-  def withSelectors(selectors: Seq[sbt.internal.librarymanagement.SemSelAndChunk]): SemanticSelector = {
+  def withSelectors(selectors: Seq[bleep.nosbt.internal.librarymanagement.SemSelAndChunk]): SemanticSelector = {
     copy(selectors = selectors)
   }
 }
 object SemanticSelector {
   def apply(selector: String): SemanticSelector = {
     val orChunkTokens = selector.split("\\s+\\|\\|\\s+").map(_.trim)
-    val orChunks = orChunkTokens.map { chunk => sbt.internal.librarymanagement.SemSelAndChunk(chunk) }
-    SemanticSelector(orChunks)
+    val orChunks = orChunkTokens.map { chunk => bleep.nosbt.internal.librarymanagement.SemSelAndChunk(chunk) }
+    SemanticSelector(orChunks.toIndexedSeq)
   }
-  def apply(selectors: Seq[sbt.internal.librarymanagement.SemSelAndChunk]): SemanticSelector = new SemanticSelector(selectors)
+  def apply(selectors: Seq[bleep.nosbt.internal.librarymanagement.SemSelAndChunk]): SemanticSelector = new SemanticSelector(selectors)
 }

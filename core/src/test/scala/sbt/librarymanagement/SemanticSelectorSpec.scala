@@ -1,4 +1,4 @@
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 
 import org.scalatest.freespec.AnyFreeSpec
 import org.scalatest.matchers.should.Matchers

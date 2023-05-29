@@ -1,4 +1,4 @@
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 
 object ScalaArtifacts {
   final val Organization = "org.scala-lang"
@@ -17,12 +17,12 @@ object ScalaArtifacts {
   final val Scala3DocID = "scala3doc"
   final val Scala3TastyInspectorID = "scala3-tasty-inspector"
 
-  private[sbt] final val Scala3LibraryPrefix = Scala3LibraryID + "_"
-  private[sbt] final val Scala3CompilerPrefix = Scala3CompilerID + "_"
-  private[sbt] final val TastyCorePrefix = TastyCoreID + "_"
-  private[sbt] final val ScaladocPrefix = ScaladocID + "_"
-  private[sbt] final val Scala3DocPrefix = Scala3DocID + "_"
-  private[sbt] final val Scala3TastyInspectorPrefix = Scala3TastyInspectorID + "_"
+  private[nosbt] final val Scala3LibraryPrefix = Scala3LibraryID + "_"
+  private[nosbt] final val Scala3CompilerPrefix = Scala3CompilerID + "_"
+  private[nosbt] final val TastyCorePrefix = TastyCoreID + "_"
+  private[nosbt] final val ScaladocPrefix = ScaladocID + "_"
+  private[nosbt] final val Scala3DocPrefix = Scala3DocID + "_"
+  private[nosbt] final val Scala3TastyInspectorPrefix = Scala3TastyInspectorID + "_"
 
   def isScala2Artifact(name: String): Boolean = {
     name == LibraryID || name == CompilerID || name == ReflectID || name == ActorsID || name == ScalapID
@@ -39,7 +39,7 @@ object ScalaArtifacts {
 
   def isScala3(scalaVersion: String): Boolean = scalaVersion.startsWith("3.")
 
-  private[sbt] def isScala3M123(scalaVersion: String): Boolean =
+  private[nosbt] def isScala3M123(scalaVersion: String): Boolean =
     (scalaVersion == "3.0.0-M1") ||
       (scalaVersion == "3.0.0-M2") ||
       (scalaVersion == "3.0.0-M3")
@@ -64,7 +64,7 @@ object ScalaArtifacts {
       ModuleID(org, LibraryID, version)
   }
 
-  private[sbt] def docToolDependencies(
+  private[nosbt] def docToolDependencies(
       org: String,
       version: String
   ): Seq[ModuleID] =
@@ -82,7 +82,7 @@ object ScalaArtifacts {
       )
     else Seq.empty
 
-  private[sbt] def toolDependencies(
+  private[nosbt] def toolDependencies(
       org: String,
       version: String
   ): Seq[ModuleID] =

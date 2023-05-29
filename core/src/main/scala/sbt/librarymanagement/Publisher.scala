@@ -1,12 +1,12 @@
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 
 import java.io.File
-import sbt.util.Logger
+import bleep.nosbt.util.Logger
 
 /**
  * Library management API to publish artifacts.
  */
-class Publisher private[sbt] (publisherEngine: PublisherInterface) {
+class Publisher private[nosbt] (publisherEngine: PublisherInterface) {
 
   /**
    * Builds a ModuleDescriptor that describes a subproject with dependencies.

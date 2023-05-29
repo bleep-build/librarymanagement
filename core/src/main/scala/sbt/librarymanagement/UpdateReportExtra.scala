@@ -1,7 +1,7 @@
 /* sbt -- Simple Build Tool
  * Copyright 2011  Mark Harrah
  */
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 
 import java.io.File
 import java.{ util => ju }
@@ -101,7 +101,7 @@ private[librarymanagement] abstract class ModuleReportExtra {
           Some(callers.mkString(", "))
         }
       )
-  private[sbt] def reportStr(key: String, value: Option[String]): String =
+  private[nosbt] def reportStr(key: String, value: Option[String]): String =
     value map { x =>
       s"\t\t\t$key: $x\n"
     } getOrElse ""
@@ -119,7 +119,7 @@ private[librarymanagement] abstract class UpdateReportExtra {
   def cachedDescriptor: File
   def configurations: Vector[ConfigurationReport]
   def stats: UpdateStats
-  private[sbt] def stamps: Map[File, Long]
+  private[nosbt] def stamps: Map[File, Long]
 
   /** All resolved modules in all configurations. */
   def allModules: Vector[ModuleID] = {

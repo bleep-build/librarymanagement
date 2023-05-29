@@ -1,14 +1,14 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 final class ModuleConfiguration private (
   val organization: String,
   val name: String,
   val revision: String,
-  val resolver: sbt.librarymanagement.Resolver) extends Serializable {
+  val resolver: bleep.nosbt.librarymanagement.Resolver) extends Serializable {
   
   
   
@@ -17,12 +17,12 @@ final class ModuleConfiguration private (
     case _ => false
   })
   override def hashCode: Int = {
-    37 * (37 * (37 * (37 * (37 * (17 + "sbt.librarymanagement.ModuleConfiguration".##) + organization.##) + name.##) + revision.##) + resolver.##)
+    37 * (37 * (37 * (37 * (37 * (17 + "bleep.nosbt.librarymanagement.ModuleConfiguration".##) + organization.##) + name.##) + revision.##) + resolver.##)
   }
   override def toString: String = {
     "ModuleConfiguration(" + organization + ", " + name + ", " + revision + ", " + resolver + ")"
   }
-  private[this] def copy(organization: String = organization, name: String = name, revision: String = revision, resolver: sbt.librarymanagement.Resolver = resolver): ModuleConfiguration = {
+  private[this] def copy(organization: String = organization, name: String = name, revision: String = revision, resolver: bleep.nosbt.librarymanagement.Resolver = resolver): ModuleConfiguration = {
     new ModuleConfiguration(organization, name, revision, resolver)
   }
   def withOrganization(organization: String): ModuleConfiguration = {
@@ -34,12 +34,12 @@ final class ModuleConfiguration private (
   def withRevision(revision: String): ModuleConfiguration = {
     copy(revision = revision)
   }
-  def withResolver(resolver: sbt.librarymanagement.Resolver): ModuleConfiguration = {
+  def withResolver(resolver: bleep.nosbt.librarymanagement.Resolver): ModuleConfiguration = {
     copy(resolver = resolver)
   }
 }
 object ModuleConfiguration {
-  def apply(org: String, resolver: sbt.librarymanagement.Resolver): ModuleConfiguration = apply(org, "*", "*", resolver)
-  def apply(org: String, name: String, resolver: sbt.librarymanagement.Resolver): ModuleConfiguration = ModuleConfiguration(org, name, "*", resolver)
-  def apply(organization: String, name: String, revision: String, resolver: sbt.librarymanagement.Resolver): ModuleConfiguration = new ModuleConfiguration(organization, name, revision, resolver)
+  def apply(org: String, resolver: bleep.nosbt.librarymanagement.Resolver): ModuleConfiguration = apply(org, "*", "*", resolver)
+  def apply(org: String, name: String, resolver: bleep.nosbt.librarymanagement.Resolver): ModuleConfiguration = ModuleConfiguration(org, name, "*", resolver)
+  def apply(organization: String, name: String, revision: String, resolver: bleep.nosbt.librarymanagement.Resolver): ModuleConfiguration = new ModuleConfiguration(organization, name, revision, resolver)
 }

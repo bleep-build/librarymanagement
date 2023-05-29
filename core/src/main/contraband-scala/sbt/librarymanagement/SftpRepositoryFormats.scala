@@ -1,26 +1,26 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 import _root_.sjsonnew.{ Unbuilder, Builder, JsonFormat, deserializationError }
-trait SftpRepositoryFormats { self: sbt.librarymanagement.PatternsFormats with sbt.librarymanagement.SshConnectionFormats with sjsonnew.BasicJsonProtocol =>
-implicit lazy val SftpRepositoryFormat: JsonFormat[sbt.librarymanagement.SftpRepository] = new JsonFormat[sbt.librarymanagement.SftpRepository] {
-  override def read[J](__jsOpt: Option[J], unbuilder: Unbuilder[J]): sbt.librarymanagement.SftpRepository = {
+trait SftpRepositoryFormats { self: bleep.nosbt.librarymanagement.PatternsFormats with bleep.nosbt.librarymanagement.SshConnectionFormats with sjsonnew.BasicJsonProtocol =>
+implicit lazy val SftpRepositoryFormat: JsonFormat[bleep.nosbt.librarymanagement.SftpRepository] = new JsonFormat[bleep.nosbt.librarymanagement.SftpRepository] {
+  override def read[J](__jsOpt: Option[J], unbuilder: Unbuilder[J]): bleep.nosbt.librarymanagement.SftpRepository = {
     __jsOpt match {
       case Some(__js) =>
       unbuilder.beginObject(__js)
       val name = unbuilder.readField[String]("name")
-      val patterns = unbuilder.readField[sbt.librarymanagement.Patterns]("patterns")
-      val connection = unbuilder.readField[sbt.librarymanagement.SshConnection]("connection")
+      val patterns = unbuilder.readField[bleep.nosbt.librarymanagement.Patterns]("patterns")
+      val connection = unbuilder.readField[bleep.nosbt.librarymanagement.SshConnection]("connection")
       unbuilder.endObject()
-      sbt.librarymanagement.SftpRepository(name, patterns, connection)
+      bleep.nosbt.librarymanagement.SftpRepository(name, patterns, connection)
       case None =>
       deserializationError("Expected JsObject but found None")
     }
   }
-  override def write[J](obj: sbt.librarymanagement.SftpRepository, builder: Builder[J]): Unit = {
+  override def write[J](obj: bleep.nosbt.librarymanagement.SftpRepository, builder: Builder[J]): Unit = {
     builder.beginObject()
     builder.addField("name", obj.name)
     builder.addField("patterns", obj.patterns)

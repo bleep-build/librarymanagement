@@ -1,7 +1,7 @@
 /* sbt -- Simple Build Tool
  * Copyright 2008, 2009, 2010  Mark Harrah
  */
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 
 import java.io.File
 import java.net.URL

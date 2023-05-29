@@ -1,9 +1,9 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 /**
  * Provides information about dependency resolution.
  * It does not include information about evicted modules, only about the modules ultimately selected by the conflict manager.
@@ -14,9 +14,9 @@ package sbt.librarymanagement
  */
 final class UpdateReport private (
   val cachedDescriptor: java.io.File,
-  val configurations: Vector[sbt.librarymanagement.ConfigurationReport],
-  val stats: sbt.librarymanagement.UpdateStats,
-  val stamps: Map[java.io.File, Long]) extends sbt.librarymanagement.UpdateReportExtra with Serializable {
+  val configurations: Vector[bleep.nosbt.librarymanagement.ConfigurationReport],
+  val stats: bleep.nosbt.librarymanagement.UpdateStats,
+  val stamps: Map[java.io.File, Long]) extends bleep.nosbt.librarymanagement.UpdateReportExtra with Serializable {
   
   
   
@@ -25,21 +25,21 @@ final class UpdateReport private (
     case _ => false
   })
   override def hashCode: Int = {
-    37 * (37 * (37 * (37 * (37 * (17 + "sbt.librarymanagement.UpdateReport".##) + cachedDescriptor.##) + configurations.##) + stats.##) + stamps.##)
+    37 * (37 * (37 * (37 * (37 * (17 + "bleep.nosbt.librarymanagement.UpdateReport".##) + cachedDescriptor.##) + configurations.##) + stats.##) + stamps.##)
   }
   override def toString: String = {
     "Update report:\n\t" + stats + "\n" + configurations.mkString
   }
-  private[this] def copy(cachedDescriptor: java.io.File = cachedDescriptor, configurations: Vector[sbt.librarymanagement.ConfigurationReport] = configurations, stats: sbt.librarymanagement.UpdateStats = stats, stamps: Map[java.io.File, Long] = stamps): UpdateReport = {
+  private[this] def copy(cachedDescriptor: java.io.File = cachedDescriptor, configurations: Vector[bleep.nosbt.librarymanagement.ConfigurationReport] = configurations, stats: bleep.nosbt.librarymanagement.UpdateStats = stats, stamps: Map[java.io.File, Long] = stamps): UpdateReport = {
     new UpdateReport(cachedDescriptor, configurations, stats, stamps)
   }
   def withCachedDescriptor(cachedDescriptor: java.io.File): UpdateReport = {
     copy(cachedDescriptor = cachedDescriptor)
   }
-  def withConfigurations(configurations: Vector[sbt.librarymanagement.ConfigurationReport]): UpdateReport = {
+  def withConfigurations(configurations: Vector[bleep.nosbt.librarymanagement.ConfigurationReport]): UpdateReport = {
     copy(configurations = configurations)
   }
-  def withStats(stats: sbt.librarymanagement.UpdateStats): UpdateReport = {
+  def withStats(stats: bleep.nosbt.librarymanagement.UpdateStats): UpdateReport = {
     copy(stats = stats)
   }
   def withStamps(stamps: Map[java.io.File, Long]): UpdateReport = {
@@ -48,5 +48,5 @@ final class UpdateReport private (
 }
 object UpdateReport {
   
-  def apply(cachedDescriptor: java.io.File, configurations: Vector[sbt.librarymanagement.ConfigurationReport], stats: sbt.librarymanagement.UpdateStats, stamps: Map[java.io.File, Long]): UpdateReport = new UpdateReport(cachedDescriptor, configurations, stats, stamps)
+  def apply(cachedDescriptor: java.io.File, configurations: Vector[bleep.nosbt.librarymanagement.ConfigurationReport], stats: bleep.nosbt.librarymanagement.UpdateStats, stamps: Map[java.io.File, Long]): UpdateReport = new UpdateReport(cachedDescriptor, configurations, stats, stamps)
 }

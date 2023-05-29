@@ -1,9 +1,9 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 /** Additional information about a project module */
 final class ModuleInfo private (
   val nameFormal: String,
@@ -13,8 +13,8 @@ final class ModuleInfo private (
   val licenses: Vector[scala.Tuple2[String, java.net.URL]],
   val organizationName: String,
   val organizationHomepage: Option[java.net.URL],
-  val scmInfo: Option[sbt.librarymanagement.ScmInfo],
-  val developers: Vector[sbt.librarymanagement.Developer]) extends Serializable {
+  val scmInfo: Option[bleep.nosbt.librarymanagement.ScmInfo],
+  val developers: Vector[bleep.nosbt.librarymanagement.Developer]) extends Serializable {
   
   private def this(nameFormal: String) = this(nameFormal, "", None, None, Vector.empty, "", None, None, Vector.empty)
   
@@ -23,12 +23,12 @@ final class ModuleInfo private (
     case _ => false
   })
   override def hashCode: Int = {
-    37 * (37 * (37 * (37 * (37 * (37 * (37 * (37 * (37 * (37 * (17 + "sbt.librarymanagement.ModuleInfo".##) + nameFormal.##) + description.##) + homepage.##) + startYear.##) + licenses.##) + organizationName.##) + organizationHomepage.##) + scmInfo.##) + developers.##)
+    37 * (37 * (37 * (37 * (37 * (37 * (37 * (37 * (37 * (37 * (17 + "bleep.nosbt.librarymanagement.ModuleInfo".##) + nameFormal.##) + description.##) + homepage.##) + startYear.##) + licenses.##) + organizationName.##) + organizationHomepage.##) + scmInfo.##) + developers.##)
   }
   override def toString: String = {
     "ModuleInfo(" + nameFormal + ", " + description + ", " + homepage + ", " + startYear + ", " + licenses + ", " + organizationName + ", " + organizationHomepage + ", " + scmInfo + ", " + developers + ")"
   }
-  private[this] def copy(nameFormal: String = nameFormal, description: String = description, homepage: Option[java.net.URL] = homepage, startYear: Option[Int] = startYear, licenses: Vector[scala.Tuple2[String, java.net.URL]] = licenses, organizationName: String = organizationName, organizationHomepage: Option[java.net.URL] = organizationHomepage, scmInfo: Option[sbt.librarymanagement.ScmInfo] = scmInfo, developers: Vector[sbt.librarymanagement.Developer] = developers): ModuleInfo = {
+  private[this] def copy(nameFormal: String = nameFormal, description: String = description, homepage: Option[java.net.URL] = homepage, startYear: Option[Int] = startYear, licenses: Vector[scala.Tuple2[String, java.net.URL]] = licenses, organizationName: String = organizationName, organizationHomepage: Option[java.net.URL] = organizationHomepage, scmInfo: Option[bleep.nosbt.librarymanagement.ScmInfo] = scmInfo, developers: Vector[bleep.nosbt.librarymanagement.Developer] = developers): ModuleInfo = {
     new ModuleInfo(nameFormal, description, homepage, startYear, licenses, organizationName, organizationHomepage, scmInfo, developers)
   }
   def withNameFormal(nameFormal: String): ModuleInfo = {
@@ -52,15 +52,15 @@ final class ModuleInfo private (
   def withOrganizationHomepage(organizationHomepage: Option[java.net.URL]): ModuleInfo = {
     copy(organizationHomepage = organizationHomepage)
   }
-  def withScmInfo(scmInfo: Option[sbt.librarymanagement.ScmInfo]): ModuleInfo = {
+  def withScmInfo(scmInfo: Option[bleep.nosbt.librarymanagement.ScmInfo]): ModuleInfo = {
     copy(scmInfo = scmInfo)
   }
-  def withDevelopers(developers: Vector[sbt.librarymanagement.Developer]): ModuleInfo = {
+  def withDevelopers(developers: Vector[bleep.nosbt.librarymanagement.Developer]): ModuleInfo = {
     copy(developers = developers)
   }
 }
 object ModuleInfo {
   
   def apply(nameFormal: String): ModuleInfo = new ModuleInfo(nameFormal)
-  def apply(nameFormal: String, description: String, homepage: Option[java.net.URL], startYear: Option[Int], licenses: Vector[scala.Tuple2[String, java.net.URL]], organizationName: String, organizationHomepage: Option[java.net.URL], scmInfo: Option[sbt.librarymanagement.ScmInfo], developers: Vector[sbt.librarymanagement.Developer]): ModuleInfo = new ModuleInfo(nameFormal, description, homepage, startYear, licenses, organizationName, organizationHomepage, scmInfo, developers)
+  def apply(nameFormal: String, description: String, homepage: Option[java.net.URL], startYear: Option[Int], licenses: Vector[scala.Tuple2[String, java.net.URL]], organizationName: String, organizationHomepage: Option[java.net.URL], scmInfo: Option[bleep.nosbt.librarymanagement.ScmInfo], developers: Vector[bleep.nosbt.librarymanagement.Developer]): ModuleInfo = new ModuleInfo(nameFormal, description, homepage, startYear, licenses, organizationName, organizationHomepage, scmInfo, developers)
 }

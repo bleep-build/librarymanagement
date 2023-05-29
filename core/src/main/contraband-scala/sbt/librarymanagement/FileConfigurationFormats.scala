@@ -1,25 +1,25 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 import _root_.sjsonnew.{ Unbuilder, Builder, JsonFormat, deserializationError }
 trait FileConfigurationFormats { self: sjsonnew.BasicJsonProtocol =>
-implicit lazy val FileConfigurationFormat: JsonFormat[sbt.librarymanagement.FileConfiguration] = new JsonFormat[sbt.librarymanagement.FileConfiguration] {
-  override def read[J](__jsOpt: Option[J], unbuilder: Unbuilder[J]): sbt.librarymanagement.FileConfiguration = {
+implicit lazy val FileConfigurationFormat: JsonFormat[bleep.nosbt.librarymanagement.FileConfiguration] = new JsonFormat[bleep.nosbt.librarymanagement.FileConfiguration] {
+  override def read[J](__jsOpt: Option[J], unbuilder: Unbuilder[J]): bleep.nosbt.librarymanagement.FileConfiguration = {
     __jsOpt match {
       case Some(__js) =>
       unbuilder.beginObject(__js)
       val isLocal = unbuilder.readField[Boolean]("isLocal")
       val isTransactional = unbuilder.readField[Option[Boolean]]("isTransactional")
       unbuilder.endObject()
-      sbt.librarymanagement.FileConfiguration(isLocal, isTransactional)
+      bleep.nosbt.librarymanagement.FileConfiguration(isLocal, isTransactional)
       case None =>
       deserializationError("Expected JsObject but found None")
     }
   }
-  override def write[J](obj: sbt.librarymanagement.FileConfiguration, builder: Builder[J]): Unit = {
+  override def write[J](obj: bleep.nosbt.librarymanagement.FileConfiguration, builder: Builder[J]): Unit = {
     builder.beginObject()
     builder.addField("isLocal", obj.isLocal)
     builder.addField("isTransactional", obj.isTransactional)

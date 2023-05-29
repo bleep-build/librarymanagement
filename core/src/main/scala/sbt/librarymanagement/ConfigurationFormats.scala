@@ -1,19 +1,19 @@
 /**
- * This code is generated using [[http://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[http://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
-package sbt
+package bleep.nosbt
 package librarymanagement
 
 import _root_.sjsonnew.{ deserializationError, Builder, JsonFormat, Unbuilder }
 
 trait ConfigurationFormats {
-  self: sbt.librarymanagement.ConfigurationFormats with sjsonnew.BasicJsonProtocol =>
-  implicit lazy val ConfigurationFormat: JsonFormat[sbt.librarymanagement.Configuration] =
-    new JsonFormat[sbt.librarymanagement.Configuration] {
+  self: bleep.nosbt.librarymanagement.ConfigurationFormats with sjsonnew.BasicJsonProtocol =>
+  implicit lazy val ConfigurationFormat: JsonFormat[bleep.nosbt.librarymanagement.Configuration] =
+    new JsonFormat[bleep.nosbt.librarymanagement.Configuration] {
       override def read[J](
           jsOpt: Option[J],
           unbuilder: Unbuilder[J]
-      ): sbt.librarymanagement.Configuration = {
+      ): bleep.nosbt.librarymanagement.Configuration = {
         jsOpt match {
           case Some(js) =>
             unbuilder.beginObject(js)
@@ -22,10 +22,10 @@ trait ConfigurationFormats {
             val description = unbuilder.readField[String]("description")
             val isPublic = unbuilder.readField[Boolean]("isPublic")
             val extendsConfigs =
-              unbuilder.readField[Vector[sbt.librarymanagement.Configuration]]("extendsConfigs")
+              unbuilder.readField[Vector[bleep.nosbt.librarymanagement.Configuration]]("extendsConfigs")
             val transitive = unbuilder.readField[Boolean]("transitive")
             unbuilder.endObject()
-            new sbt.librarymanagement.Configuration(
+            new bleep.nosbt.librarymanagement.Configuration(
               id,
               name,
               description,
@@ -37,7 +37,7 @@ trait ConfigurationFormats {
             deserializationError("Expected JsObject but found None")
         }
       }
-      override def write[J](obj: sbt.librarymanagement.Configuration, builder: Builder[J]): Unit = {
+      override def write[J](obj: bleep.nosbt.librarymanagement.Configuration, builder: Builder[J]): Unit = {
         builder.beginObject()
         builder.addField("id", obj.id)
         builder.addField("name", obj.name)

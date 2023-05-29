@@ -1,14 +1,14 @@
 /* sbt -- Simple Build Tool
  * Copyright 2008, 2009, 2010  Mark Harrah
  */
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 
 import java.io.{ IOException, File }
 import java.net.{ URI, URL }
 import scala.annotation.nowarn
 import scala.xml.XML
 import org.xml.sax.SAXParseException
-import sbt.util.Logger
+import bleep.nosbt.util.Logger
 
 final class RawRepository(val resolver: AnyRef, name: String) extends Resolver(name) {
   override def toString = "Raw(" + resolver.toString + ")"
@@ -71,7 +71,7 @@ private[librarymanagement] trait SshBasedRepositoryExtra {
 
 private[librarymanagement] trait SshRepositoryExtra extends SshBasedRepositoryExtra {
   def name: String
-  def patterns: sbt.librarymanagement.Patterns
+  def patterns: bleep.nosbt.librarymanagement.Patterns
   def publishPermissions: Option[String]
 
   type RepositoryType = SshRepository
@@ -82,7 +82,7 @@ private[librarymanagement] trait SshRepositoryExtra extends SshBasedRepositoryEx
 
 private[librarymanagement] trait SftpRepositoryExtra extends SshBasedRepositoryExtra {
   def name: String
-  def patterns: sbt.librarymanagement.Patterns
+  def patterns: bleep.nosbt.librarymanagement.Patterns
 
   type RepositoryType = SftpRepository
 
@@ -91,12 +91,12 @@ private[librarymanagement] trait SftpRepositoryExtra extends SshBasedRepositoryE
 }
 
 /** A repository that conforms to sbt launcher's interface */
-private[sbt] class FakeRepository(resolver: AnyRef, name: String) extends xsbti.Repository {
+private[nosbt] class FakeRepository(resolver: AnyRef, name: String) extends Repository {
   def rawRepository = new RawRepository(resolver, name)
 }
 
 private[librarymanagement] abstract class ResolverFunctions {
-  import sbt.internal.librarymanagement.LMSysProp.useSecureResolvers
+  import bleep.nosbt.internal.librarymanagement.LMSysProp.useSecureResolvers
 
   val TypesafeRepositoryRoot = typesafeRepositoryRoot(useSecureResolvers)
   val SbtRepositoryRoot = sbtRepositoryRoot(useSecureResolvers)
@@ -120,27 +120,27 @@ private[librarymanagement] abstract class ResolverFunctions {
   def defaults: Vector[Resolver] = Vector(mavenCentral)
 
   // TODO: This switch is only kept for backward compatibility. Hardcode to HTTPS in the future.
-  private[sbt] def centralRepositoryRoot(secure: Boolean) =
+  private[nosbt] def centralRepositoryRoot(secure: Boolean) =
     (if (secure) "https" else "http") + "://repo1.maven.org/maven2/"
   // TODO: This switch is only kept for backward compatibility. Hardcode to HTTPS in the future.
-  private[sbt] def javanet2RepositoryRoot(secure: Boolean) =
+  private[nosbt] def javanet2RepositoryRoot(secure: Boolean) =
     if (secure) "https://maven.java.net/content/repositories/public/"
     else "http://download.java.net/maven/2"
   // TODO: This switch is only kept for backward compatibility. Hardcode to HTTPS in the future.
-  private[sbt] def typesafeRepositoryRoot(secure: Boolean) =
+  private[nosbt] def typesafeRepositoryRoot(secure: Boolean) =
     (if (secure) "https" else "http") + "://repo.typesafe.com/typesafe"
   // TODO: This switch is only kept for backward compatibility. Hardcode to HTTPS in the future.
-  private[sbt] def sbtRepositoryRoot(secure: Boolean) =
-    (if (secure) "https" else "http") + "://repo.scala-sbt.org/scalasbt"
+  private[nosbt] def sbtRepositoryRoot(secure: Boolean) =
+    (if (secure) "https" else "http") + "://repo.scala-bleep.nosbt.org/scalasbt"
 
   // obsolete: kept only for launcher compatibility
-  private[sbt] val ScalaToolsReleasesName = "Sonatype OSS Releases"
-  private[sbt] val ScalaToolsSnapshotsName = "Sonatype OSS Snapshots"
-  private[sbt] val ScalaToolsReleasesRoot = SonatypeReleasesRepository
-  private[sbt] val ScalaToolsSnapshotsRoot = SonatypeRepositoryRoot + "/snapshots"
-  private[sbt] val ScalaToolsReleases =
+  private[nosbt] val ScalaToolsReleasesName = "Sonatype OSS Releases"
+  private[nosbt] val ScalaToolsSnapshotsName = "Sonatype OSS Snapshots"
+  private[nosbt] val ScalaToolsReleasesRoot = SonatypeReleasesRepository
+  private[nosbt] val ScalaToolsSnapshotsRoot = SonatypeRepositoryRoot + "/snapshots"
+  private[nosbt] val ScalaToolsReleases =
     MavenRepository(ScalaToolsReleasesName, ScalaToolsReleasesRoot)
-  private[sbt] val ScalaToolsSnapshots =
+  private[nosbt] val ScalaToolsSnapshots =
     MavenRepository(ScalaToolsSnapshotsName, ScalaToolsSnapshotsRoot)
 
   def typesafeRepo(status: String) =
@@ -219,7 +219,7 @@ private[librarymanagement] abstract class ResolverFunctions {
    * If `jcenter` is true, add the JCenter.
    * If `mavenCentral` is true, add the Maven Central repository.
    */
-  private[sbt] def reorganizeAppResolvers(
+  private[nosbt] def reorganizeAppResolvers(
       appResolvers: Vector[Resolver],
       jcenter: Boolean,
       mavenCentral: Boolean
@@ -374,7 +374,7 @@ private[librarymanagement] abstract class ResolverFunctions {
       basePatterns.skipConsistencyCheck
     )
   }
-  private[sbt] def resolvePattern(base: String, pattern: String): String = {
+  private[nosbt] def resolvePattern(base: String, pattern: String): String = {
     val normBase = base.replace('\\', '/')
     if (normBase.endsWith("/") || pattern.startsWith("/")) normBase + pattern
     else normBase + "/" + pattern
@@ -422,9 +422,9 @@ private[librarymanagement] abstract class ResolverFunctions {
           None
       }
     sys.props.get("maven.repo.local").map(new File(_)) orElse
-      loadHomeFromSettings(() => new File(sbt.io.Path.userHome, ".m2/settings.xml")) orElse
+      loadHomeFromSettings(() => new File(bleep.nosbt.io.Path.userHome, ".m2/settings.xml")) orElse
       loadHomeFromSettings(() => new File(new File(System.getenv("M2_HOME")), "conf/settings.xml")) getOrElse
-      new File(sbt.io.Path.userHome, ".m2/repository")
+      new File(bleep.nosbt.io.Path.userHome, ".m2/repository")
   }
   // TODO - should this just be the *exact* same as mavenLocal?  probably...
   def publishMavenLocal: MavenCache = new MavenCache("publish-m2-local", mavenLocalDir)
@@ -445,10 +445,10 @@ private[librarymanagement] abstract class ResolverFunctions {
   }
 
   // to display all error messages at once, just log here don't throw
-  private[sbt] def warnHttp(value: String, suggestion: String, logger: Logger): Unit = {
+  private[nosbt] def warnHttp(value: String, suggestion: String, logger: Logger): Unit = {
     logger.error(s"insecure HTTP request is unsupported '$value'; switch to HTTPS$suggestion")
   }
-  private[sbt] def isInsecureUrl(str: String): Boolean = {
+  private[nosbt] def isInsecureUrl(str: String): Boolean = {
     // don't try to parse str as URL because it could contain $variable from Ivy pattern
     str.startsWith("http:") &&
     !(str.startsWith("http://localhost/")
@@ -456,7 +456,7 @@ private[librarymanagement] abstract class ResolverFunctions {
       || str.startsWith("http://127.0.0.1/")
       || str.startsWith("http://127.0.0.1:"))
   }
-  private[sbt] def validateURLRepository(repo: URLRepository, logger: Logger): Boolean = {
+  private[nosbt] def validateURLRepository(repo: URLRepository, logger: Logger): Boolean = {
     if (repo.allowInsecureProtocol) false
     else {
       val patterns = repo.patterns
@@ -479,7 +479,7 @@ private[librarymanagement] abstract class ResolverFunctions {
     }
   }
 
-  private[sbt] def validateMavenRepo(repo: MavenRepo, logger: Logger): Boolean =
+  private[nosbt] def validateMavenRepo(repo: MavenRepo, logger: Logger): Boolean =
     if (repo.allowInsecureProtocol) false
     else if (isInsecureUrl(repo.root)) {
       warnHttp(
@@ -490,7 +490,7 @@ private[librarymanagement] abstract class ResolverFunctions {
       true
     } else false
 
-  private[sbt] def validateArtifact(art: Artifact, logger: Logger): Boolean =
+  private[nosbt] def validateArtifact(art: Artifact, logger: Logger): Boolean =
     if (art.allowInsecureProtocol) false
     else
       art.url match {

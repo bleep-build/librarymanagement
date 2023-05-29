@@ -1,9 +1,9 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 /**
  * An instance of maven CACHE directory.  You cannot treat a cache directory the same as a a remote repository because
  * the metadata is different (see Aether ML discussion).
@@ -12,7 +12,7 @@ final class MavenCache private (
   name: String,
   root: String,
   localIfFile: Boolean,
-  val rootFile: java.io.File) extends sbt.librarymanagement.MavenRepository(name, root, localIfFile) with Serializable {
+  val rootFile: java.io.File) extends bleep.nosbt.librarymanagement.MavenRepository(name, root, localIfFile) with Serializable {
   def this(name: String, rootFile: java.io.File) = this(name, rootFile.toURI.toURL.toString, true, rootFile)
   override def isCache: Boolean = true
   override def allowInsecureProtocol: Boolean = false
@@ -23,7 +23,7 @@ final class MavenCache private (
     case _ => false
   })
   override def hashCode: Int = {
-    37 * (37 * (37 * (37 * (37 * (17 + "sbt.librarymanagement.MavenCache".##) + name.##) + root.##) + localIfFile.##) + rootFile.##)
+    37 * (37 * (37 * (37 * (37 * (17 + "bleep.nosbt.librarymanagement.MavenCache".##) + name.##) + root.##) + localIfFile.##) + rootFile.##)
   }
   override def toString: String = {
     s"cache:$name: ${rootFile.getAbsolutePath}"

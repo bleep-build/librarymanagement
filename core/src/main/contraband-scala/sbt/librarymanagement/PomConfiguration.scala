@@ -1,14 +1,14 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 final class PomConfiguration private (
   validate: Boolean,
-  scalaModuleInfo: Option[sbt.librarymanagement.ScalaModuleInfo],
+  scalaModuleInfo: Option[bleep.nosbt.librarymanagement.ScalaModuleInfo],
   val file: java.io.File,
-  val autoScalaTools: Boolean) extends sbt.librarymanagement.ModuleSettings(validate, scalaModuleInfo) with Serializable {
+  val autoScalaTools: Boolean) extends bleep.nosbt.librarymanagement.ModuleSettings(validate, scalaModuleInfo) with Serializable {
   
   private def this(file: java.io.File, autoScalaTools: Boolean) = this(false, None, file, autoScalaTools)
   
@@ -17,21 +17,21 @@ final class PomConfiguration private (
     case _ => false
   })
   override def hashCode: Int = {
-    37 * (37 * (37 * (37 * (37 * (17 + "sbt.librarymanagement.PomConfiguration".##) + validate.##) + scalaModuleInfo.##) + file.##) + autoScalaTools.##)
+    37 * (37 * (37 * (37 * (37 * (17 + "bleep.nosbt.librarymanagement.PomConfiguration".##) + validate.##) + scalaModuleInfo.##) + file.##) + autoScalaTools.##)
   }
   override def toString: String = {
     "PomConfiguration(" + validate + ", " + scalaModuleInfo + ", " + file + ", " + autoScalaTools + ")"
   }
-  private[this] def copy(validate: Boolean = validate, scalaModuleInfo: Option[sbt.librarymanagement.ScalaModuleInfo] = scalaModuleInfo, file: java.io.File = file, autoScalaTools: Boolean = autoScalaTools): PomConfiguration = {
+  private[this] def copy(validate: Boolean = validate, scalaModuleInfo: Option[bleep.nosbt.librarymanagement.ScalaModuleInfo] = scalaModuleInfo, file: java.io.File = file, autoScalaTools: Boolean = autoScalaTools): PomConfiguration = {
     new PomConfiguration(validate, scalaModuleInfo, file, autoScalaTools)
   }
   def withValidate(validate: Boolean): PomConfiguration = {
     copy(validate = validate)
   }
-  def withScalaModuleInfo(scalaModuleInfo: Option[sbt.librarymanagement.ScalaModuleInfo]): PomConfiguration = {
+  def withScalaModuleInfo(scalaModuleInfo: Option[bleep.nosbt.librarymanagement.ScalaModuleInfo]): PomConfiguration = {
     copy(scalaModuleInfo = scalaModuleInfo)
   }
-  def withScalaModuleInfo(scalaModuleInfo: sbt.librarymanagement.ScalaModuleInfo): PomConfiguration = {
+  def withScalaModuleInfo(scalaModuleInfo: bleep.nosbt.librarymanagement.ScalaModuleInfo): PomConfiguration = {
     copy(scalaModuleInfo = Option(scalaModuleInfo))
   }
   def withFile(file: java.io.File): PomConfiguration = {
@@ -44,6 +44,6 @@ final class PomConfiguration private (
 object PomConfiguration {
   
   def apply(file: java.io.File, autoScalaTools: Boolean): PomConfiguration = new PomConfiguration(file, autoScalaTools)
-  def apply(validate: Boolean, scalaModuleInfo: Option[sbt.librarymanagement.ScalaModuleInfo], file: java.io.File, autoScalaTools: Boolean): PomConfiguration = new PomConfiguration(validate, scalaModuleInfo, file, autoScalaTools)
-  def apply(validate: Boolean, scalaModuleInfo: sbt.librarymanagement.ScalaModuleInfo, file: java.io.File, autoScalaTools: Boolean): PomConfiguration = new PomConfiguration(validate, Option(scalaModuleInfo), file, autoScalaTools)
+  def apply(validate: Boolean, scalaModuleInfo: Option[bleep.nosbt.librarymanagement.ScalaModuleInfo], file: java.io.File, autoScalaTools: Boolean): PomConfiguration = new PomConfiguration(validate, scalaModuleInfo, file, autoScalaTools)
+  def apply(validate: Boolean, scalaModuleInfo: bleep.nosbt.librarymanagement.ScalaModuleInfo, file: java.io.File, autoScalaTools: Boolean): PomConfiguration = new PomConfiguration(validate, Option(scalaModuleInfo), file, autoScalaTools)
 }

@@ -1,9 +1,9 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 /** See http://ant.apache.org/ivy/history/latest-milestone/settings/conflict-managers.html for details of the different conflict managers. */
 final class ConflictManager private (
   val name: String,
@@ -17,7 +17,7 @@ final class ConflictManager private (
     case _ => false
   })
   override def hashCode: Int = {
-    37 * (37 * (37 * (37 * (17 + "sbt.librarymanagement.ConflictManager".##) + name.##) + organization.##) + module.##)
+    37 * (37 * (37 * (37 * (17 + "bleep.nosbt.librarymanagement.ConflictManager".##) + name.##) + organization.##) + module.##)
   }
   override def toString: String = {
     "ConflictManager(" + name + ", " + organization + ", " + module + ")"
@@ -35,7 +35,7 @@ final class ConflictManager private (
     copy(module = module)
   }
 }
-object ConflictManager extends sbt.librarymanagement.ConflictManagerFunctions {
+object ConflictManager extends bleep.nosbt.librarymanagement.ConflictManagerFunctions {
   
   def apply(name: String): ConflictManager = new ConflictManager(name)
   def apply(name: String, organization: String, module: String): ConflictManager = new ConflictManager(name, organization, module)

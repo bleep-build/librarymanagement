@@ -1,9 +1,9 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 final class Checksum private (
   val digest: String,
   val `type`: String) extends Serializable {
@@ -15,7 +15,7 @@ final class Checksum private (
     case _ => false
   })
   override def hashCode: Int = {
-    37 * (37 * (37 * (17 + "sbt.librarymanagement.Checksum".##) + digest.##) + `type`.##)
+    37 * (37 * (37 * (17 + "bleep.nosbt.librarymanagement.Checksum".##) + digest.##) + `type`.##)
   }
   override def toString: String = {
     "Checksum(" + digest + ", " + `type` + ")"

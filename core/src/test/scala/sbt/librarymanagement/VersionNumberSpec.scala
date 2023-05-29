@@ -1,4 +1,4 @@
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 
 import org.scalatest.Inside
 import org.scalatest.freespec.AnyFreeSpec

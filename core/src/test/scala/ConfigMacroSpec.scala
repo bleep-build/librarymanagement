@@ -1,7 +1,7 @@
-package sbt.internal.librarymanagement
+package bleep.nosbt.internal.librarymanagement
 
-import sbt.librarymanagement.Configuration
-import sbt.librarymanagement.Configurations.config
+import bleep.nosbt.librarymanagement.Configuration
+import bleep.nosbt.librarymanagement.Configurations.config
 import scala.util.control.NonFatal
 import org.scalacheck._
 import Prop._

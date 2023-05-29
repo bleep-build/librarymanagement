@@ -1,12 +1,12 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 abstract class ModuleSettings(
   val validate: Boolean,
-  val scalaModuleInfo: Option[sbt.librarymanagement.ScalaModuleInfo]) extends Serializable {
+  val scalaModuleInfo: Option[bleep.nosbt.librarymanagement.ScalaModuleInfo]) extends Serializable {
   
   def this() = this(false, None)
   
@@ -16,7 +16,7 @@ abstract class ModuleSettings(
     case _ => false
   })
   override def hashCode: Int = {
-    37 * (37 * (37 * (17 + "sbt.librarymanagement.ModuleSettings".##) + validate.##) + scalaModuleInfo.##)
+    37 * (37 * (37 * (17 + "bleep.nosbt.librarymanagement.ModuleSettings".##) + validate.##) + scalaModuleInfo.##)
   }
   override def toString: String = {
     "ModuleSettings(" + validate + ", " + scalaModuleInfo + ")"

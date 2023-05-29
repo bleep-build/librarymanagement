@@ -1,10 +1,11 @@
-package sbt
+package bleep.nosbt
 package librarymanagement
 
+import bleep.nosbt.internal.librarymanagement.VersionSchemes
+import bleep.nosbt.librarymanagement.EvictionWarningOptions.isNameScalaSuffixed
+import bleep.nosbt.util.ShowLines
+
 import scala.collection.mutable
-import sbt.internal.librarymanagement.VersionSchemes
-import sbt.util.{ Level, ShowLines }
-import EvictionWarningOptions.isNameScalaSuffixed
 
 object EvictionError {
   def apply(
@@ -12,7 +13,7 @@ object EvictionError {
       module: ModuleDescriptor,
       schemes: Seq[ModuleID],
   ): EvictionError = {
-    apply(report, module, schemes, "always", "always", Level.Debug)
+    apply(report, module, schemes, "always", "always")
   }
 
   def apply(
@@ -21,7 +22,6 @@ object EvictionError {
       schemes: Seq[ModuleID],
       assumedVersionScheme: String,
       assumedVersionSchemeJava: String,
-      assumedEvictionErrorLevel: Level.Value,
   ): EvictionError = {
     val options = EvictionWarningOptions.full
     val evictions = EvictionWarning.buildEvictions(options, report)
@@ -32,20 +32,18 @@ object EvictionError {
       schemes,
       assumedVersionScheme,
       assumedVersionSchemeJava,
-      assumedEvictionErrorLevel,
     )
   }
 
-  private[sbt] def processEvictions(
+  private[nosbt] def processEvictions(
       module: ModuleDescriptor,
       options: EvictionWarningOptions,
       reports: Seq[OrganizationArtifactReport],
       schemes: Seq[ModuleID],
       assumedVersionScheme: String,
       assumedVersionSchemeJava: String,
-      assumedEvictionErrorLevel: Level.Value,
   ): EvictionError = {
-    val directDependencies = module.directDependencies
+
     val pairs = reports map { detail =>
       val evicteds = detail.modules filter { _.evicted }
       val winner = (detail.modules filterNot { _.evicted }).headOption
@@ -62,7 +60,7 @@ object EvictionError {
     val assumedIncompatEvictions: mutable.ListBuffer[(EvictionPair, String)] = mutable.ListBuffer()
     val sbvOpt = module.scalaModuleInfo.map(_.scalaBinaryVersion)
     val userDefinedSchemes: Map[(String, String), String] = Map(schemes flatMap { s =>
-      val organization = s.organization
+
       VersionSchemes.validateScheme(s.revision)
       val versionScheme = s.revision
       (s.crossVersion, sbvOpt) match {
@@ -140,7 +138,7 @@ object EvictionError {
   }
 }
 
-final class EvictionError private[sbt] (
+final class EvictionError private[nosbt] (
     val incompatibleEvictions: Seq[(EvictionPair, String)],
     val assumedIncompatibleEvictions: Seq[(EvictionPair, String)],
 ) {

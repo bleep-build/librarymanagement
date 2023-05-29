@@ -1,8 +1,8 @@
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 
 import java.net.URL
 
-import sbt.internal.librarymanagement.UnitSpec
+import bleep.nosbt.internal.librarymanagement.UnitSpec
 
 object ResolverTest extends UnitSpec {
 

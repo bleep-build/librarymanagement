@@ -1,7 +1,7 @@
 /* sbt -- Simple Build Tool
  * Copyright 2009  Mark Harrah
  */
-package sbt.internal.librarymanagement
+package bleep.nosbt.internal.librarymanagement
 
 import java.util.Locale
 

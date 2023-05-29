@@ -1,9 +1,9 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 /**
  * OrganizationArtifactReport represents an organization+name entry in Ivy resolution report.
  * In sbt's terminology, "module" consists of organization, name, and version.
@@ -18,7 +18,7 @@ package sbt.librarymanagement
 final class OrganizationArtifactReport private (
   val organization: String,
   val name: String,
-  val modules: Vector[sbt.librarymanagement.ModuleReport]) extends Serializable {
+  val modules: Vector[bleep.nosbt.librarymanagement.ModuleReport]) extends Serializable {
   
   
   
@@ -27,13 +27,13 @@ final class OrganizationArtifactReport private (
     case _ => false
   })
   override def hashCode: Int = {
-    37 * (37 * (37 * (37 * (17 + "sbt.librarymanagement.OrganizationArtifactReport".##) + organization.##) + name.##) + modules.##)
+    37 * (37 * (37 * (37 * (17 + "bleep.nosbt.librarymanagement.OrganizationArtifactReport".##) + organization.##) + name.##) + modules.##)
   }
   override def toString: String = {
     val details = modules map { _.detailReport }
     s"\t$organization:$name\n${details.mkString}\n"
   }
-  private[this] def copy(organization: String = organization, name: String = name, modules: Vector[sbt.librarymanagement.ModuleReport] = modules): OrganizationArtifactReport = {
+  private[this] def copy(organization: String = organization, name: String = name, modules: Vector[bleep.nosbt.librarymanagement.ModuleReport] = modules): OrganizationArtifactReport = {
     new OrganizationArtifactReport(organization, name, modules)
   }
   def withOrganization(organization: String): OrganizationArtifactReport = {
@@ -42,11 +42,11 @@ final class OrganizationArtifactReport private (
   def withName(name: String): OrganizationArtifactReport = {
     copy(name = name)
   }
-  def withModules(modules: Vector[sbt.librarymanagement.ModuleReport]): OrganizationArtifactReport = {
+  def withModules(modules: Vector[bleep.nosbt.librarymanagement.ModuleReport]): OrganizationArtifactReport = {
     copy(modules = modules)
   }
 }
 object OrganizationArtifactReport {
   
-  def apply(organization: String, name: String, modules: Vector[sbt.librarymanagement.ModuleReport]): OrganizationArtifactReport = new OrganizationArtifactReport(organization, name, modules)
+  def apply(organization: String, name: String, modules: Vector[bleep.nosbt.librarymanagement.ModuleReport]): OrganizationArtifactReport = new OrganizationArtifactReport(organization, name, modules)
 }

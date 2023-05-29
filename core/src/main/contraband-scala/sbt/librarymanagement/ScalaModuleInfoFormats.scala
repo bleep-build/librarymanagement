@@ -1,31 +1,31 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 import _root_.sjsonnew.{ Unbuilder, Builder, JsonFormat, deserializationError }
-trait ScalaModuleInfoFormats { self: sbt.librarymanagement.ConfigurationFormats with sjsonnew.BasicJsonProtocol =>
-implicit lazy val ScalaModuleInfoFormat: JsonFormat[sbt.librarymanagement.ScalaModuleInfo] = new JsonFormat[sbt.librarymanagement.ScalaModuleInfo] {
-  override def read[J](__jsOpt: Option[J], unbuilder: Unbuilder[J]): sbt.librarymanagement.ScalaModuleInfo = {
+trait ScalaModuleInfoFormats { self: bleep.nosbt.librarymanagement.ConfigurationFormats with sjsonnew.BasicJsonProtocol =>
+implicit lazy val ScalaModuleInfoFormat: JsonFormat[bleep.nosbt.librarymanagement.ScalaModuleInfo] = new JsonFormat[bleep.nosbt.librarymanagement.ScalaModuleInfo] {
+  override def read[J](__jsOpt: Option[J], unbuilder: Unbuilder[J]): bleep.nosbt.librarymanagement.ScalaModuleInfo = {
     __jsOpt match {
       case Some(__js) =>
       unbuilder.beginObject(__js)
       val scalaFullVersion = unbuilder.readField[String]("scalaFullVersion")
       val scalaBinaryVersion = unbuilder.readField[String]("scalaBinaryVersion")
-      val configurations = unbuilder.readField[Vector[sbt.librarymanagement.Configuration]]("configurations")
+      val configurations = unbuilder.readField[Vector[bleep.nosbt.librarymanagement.Configuration]]("configurations")
       val checkExplicit = unbuilder.readField[Boolean]("checkExplicit")
       val filterImplicit = unbuilder.readField[Boolean]("filterImplicit")
       val overrideScalaVersion = unbuilder.readField[Boolean]("overrideScalaVersion")
       val scalaOrganization = unbuilder.readField[String]("scalaOrganization")
       val scalaArtifacts = unbuilder.readField[scala.Vector[String]]("scalaArtifacts")
       unbuilder.endObject()
-      sbt.librarymanagement.ScalaModuleInfo(scalaFullVersion, scalaBinaryVersion, configurations, checkExplicit, filterImplicit, overrideScalaVersion, scalaOrganization, scalaArtifacts)
+      bleep.nosbt.librarymanagement.ScalaModuleInfo(scalaFullVersion, scalaBinaryVersion, configurations, checkExplicit, filterImplicit, overrideScalaVersion, scalaOrganization, scalaArtifacts)
       case None =>
       deserializationError("Expected JsObject but found None")
     }
   }
-  override def write[J](obj: sbt.librarymanagement.ScalaModuleInfo, builder: Builder[J]): Unit = {
+  override def write[J](obj: bleep.nosbt.librarymanagement.ScalaModuleInfo, builder: Builder[J]): Unit = {
     builder.beginObject()
     builder.addField("scalaFullVersion", obj.scalaFullVersion)
     builder.addField("scalaBinaryVersion", obj.scalaBinaryVersion)

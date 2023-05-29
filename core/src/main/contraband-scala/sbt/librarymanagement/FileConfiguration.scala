@@ -1,9 +1,9 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 /** Configuration specific to an Ivy filesystem resolver. */
 final class FileConfiguration private (
   val isLocal: Boolean,
@@ -16,7 +16,7 @@ final class FileConfiguration private (
     case _ => false
   })
   override def hashCode: Int = {
-    37 * (37 * (37 * (17 + "sbt.librarymanagement.FileConfiguration".##) + isLocal.##) + isTransactional.##)
+    37 * (37 * (37 * (17 + "bleep.nosbt.librarymanagement.FileConfiguration".##) + isLocal.##) + isTransactional.##)
   }
   override def toString: String = {
     "FileConfiguration(" + isLocal + ", " + isTransactional + ")"

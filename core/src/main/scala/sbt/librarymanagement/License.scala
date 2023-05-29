@@ -1,4 +1,4 @@
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 
 import java.net.URL
 

@@ -1,18 +1,18 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 /** This is the internal implementation of actual Maven Repository (as opposed to a file cache). */
 final class MavenRepo private (
   name: String,
   root: String,
   localIfFile: Boolean,
-  val _allowInsecureProtocol: Boolean) extends sbt.librarymanagement.MavenRepository(name, root, localIfFile) with Serializable {
+  val _allowInsecureProtocol: Boolean) extends bleep.nosbt.librarymanagement.MavenRepository(name, root, localIfFile) with Serializable {
   override def isCache: Boolean = false
   override def allowInsecureProtocol: Boolean = _allowInsecureProtocol
-  private[sbt] override def validateProtocol(logger: sbt.util.Logger): Boolean = Resolver.validateMavenRepo(this, logger)
+  private[nosbt] override def validateProtocol(logger: bleep.nosbt.util.Logger): Boolean = Resolver.validateMavenRepo(this, logger)
   private def this(name: String, root: String) = this(name, root, true, false)
   private def this(name: String, root: String, localIfFile: Boolean) = this(name, root, localIfFile, false)
   
@@ -21,7 +21,7 @@ final class MavenRepo private (
     case _ => false
   })
   override def hashCode: Int = {
-    37 * (37 * (37 * (37 * (37 * (17 + "sbt.librarymanagement.MavenRepo".##) + name.##) + root.##) + localIfFile.##) + _allowInsecureProtocol.##)
+    37 * (37 * (37 * (37 * (37 * (17 + "bleep.nosbt.librarymanagement.MavenRepo".##) + name.##) + root.##) + localIfFile.##) + _allowInsecureProtocol.##)
   }
   override def toString: String = {
     s"$name: $root"

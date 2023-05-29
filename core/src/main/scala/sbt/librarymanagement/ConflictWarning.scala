@@ -1,6 +1,6 @@
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 
-import sbt.util.{ Logger, Level }
+import bleep.nosbt.util.{ Logger, Level }
 
 /**
  * Provide warnings for cross version conflicts.
@@ -44,9 +44,10 @@ object ConflictWarning {
   /** Map from (organization, rawName) to set of multiple full names. */
   def crossVersionMismatches(report: UpdateReport): Map[(String, String), Set[String]] = {
     val mismatches = report.configurations.flatMap { confReport =>
-      groupByRawName(confReport.allModules).mapValues { modules =>
+      groupByRawName(confReport.allModules).map { case (k, modules) =>
         val differentFullNames = modules.map(_.name).toSet
-        if (differentFullNames.size > 1) differentFullNames else Set.empty[String]
+        val newModules = if (differentFullNames.size > 1) differentFullNames else Set.empty[String]
+        (k, newModules)
       }
     }
     mismatches.foldLeft(Map.empty[(String, String), Set[String]])(merge)

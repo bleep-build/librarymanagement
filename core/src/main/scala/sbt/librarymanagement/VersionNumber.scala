@@ -1,6 +1,6 @@
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 
-final class VersionNumber private[sbt] (
+final class VersionNumber private[nosbt] (
     val numbers: Seq[Long],
     val tags: Seq[String],
     val extras: Seq[String]

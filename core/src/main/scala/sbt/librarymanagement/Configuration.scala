@@ -1,8 +1,8 @@
-package sbt
+package bleep.nosbt
 package librarymanagement
 
 /** Represents an Ivy configuration. */
-final class Configuration private[sbt] (
+final class Configuration private[nosbt] (
     val id: String,
     val name: String,
     val description: String,
@@ -82,7 +82,7 @@ The reasons that block it from being made a Contraband type (AFAIK):
  * it doesn't have companion apply methods, but "of" instead
 
 Other reasons that I don't think are blocking:
- * it's constructor is private[sbt] (doesn't matter, Configuration.of is public)
+ * it's constructor is private[nosbt] (doesn't matter, Configuration.of is public)
 
 Reasons that are definitely not blocking:
  * it has a custom toString, supported by Contraband

@@ -1,25 +1,25 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 import _root_.sjsonnew.{ Unbuilder, Builder, JsonFormat, deserializationError }
 trait PasswordAuthenticationFormats { self: sjsonnew.BasicJsonProtocol =>
-implicit lazy val PasswordAuthenticationFormat: JsonFormat[sbt.librarymanagement.PasswordAuthentication] = new JsonFormat[sbt.librarymanagement.PasswordAuthentication] {
-  override def read[J](__jsOpt: Option[J], unbuilder: Unbuilder[J]): sbt.librarymanagement.PasswordAuthentication = {
+implicit lazy val PasswordAuthenticationFormat: JsonFormat[bleep.nosbt.librarymanagement.PasswordAuthentication] = new JsonFormat[bleep.nosbt.librarymanagement.PasswordAuthentication] {
+  override def read[J](__jsOpt: Option[J], unbuilder: Unbuilder[J]): bleep.nosbt.librarymanagement.PasswordAuthentication = {
     __jsOpt match {
       case Some(__js) =>
       unbuilder.beginObject(__js)
       val user = unbuilder.readField[String]("user")
       val password = unbuilder.readField[Option[String]]("password")
       unbuilder.endObject()
-      sbt.librarymanagement.PasswordAuthentication(user, password)
+      bleep.nosbt.librarymanagement.PasswordAuthentication(user, password)
       case None =>
       deserializationError("Expected JsObject but found None")
     }
   }
-  override def write[J](obj: sbt.librarymanagement.PasswordAuthentication, builder: Builder[J]): Unit = {
+  override def write[J](obj: bleep.nosbt.librarymanagement.PasswordAuthentication, builder: Builder[J]): Unit = {
     builder.beginObject()
     builder.addField("user", obj.user)
     builder.addField("password", obj.password)

@@ -1,9 +1,9 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 /** Basic SCM information for a project module */
 final class ScmInfo private (
   val browseUrl: java.net.URL,
@@ -17,7 +17,7 @@ final class ScmInfo private (
     case _ => false
   })
   override def hashCode: Int = {
-    37 * (37 * (37 * (37 * (17 + "sbt.librarymanagement.ScmInfo".##) + browseUrl.##) + connection.##) + devConnection.##)
+    37 * (37 * (37 * (37 * (17 + "bleep.nosbt.librarymanagement.ScmInfo".##) + browseUrl.##) + connection.##) + devConnection.##)
   }
   override def toString: String = {
     "ScmInfo(" + browseUrl + ", " + connection + ", " + devConnection + ")"

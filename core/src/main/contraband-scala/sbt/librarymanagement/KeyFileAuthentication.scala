@@ -1,13 +1,13 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 final class KeyFileAuthentication private (
   val user: String,
   val keyfile: java.io.File,
-  val password: Option[String]) extends sbt.librarymanagement.SshAuthentication() with Serializable {
+  val password: Option[String]) extends bleep.nosbt.librarymanagement.SshAuthentication() with Serializable {
   
   
   
@@ -16,7 +16,7 @@ final class KeyFileAuthentication private (
     case _ => false
   })
   override def hashCode: Int = {
-    37 * (37 * (37 * (37 * (17 + "sbt.librarymanagement.KeyFileAuthentication".##) + user.##) + keyfile.##) + password.##)
+    37 * (37 * (37 * (37 * (17 + "bleep.nosbt.librarymanagement.KeyFileAuthentication".##) + user.##) + keyfile.##) + password.##)
   }
   override def toString: String = {
     "KeyFileAuthentication(" + user + ", " + keyfile + ", " + password + ")"

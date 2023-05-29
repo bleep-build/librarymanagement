@@ -1,9 +1,9 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 final class Patterns private (
   val ivyPatterns: Vector[String],
   val artifactPatterns: Vector[String],
@@ -18,7 +18,7 @@ final class Patterns private (
     case _ => false
   })
   override def hashCode: Int = {
-    37 * (37 * (37 * (37 * (37 * (37 * (17 + "sbt.librarymanagement.Patterns".##) + ivyPatterns.##) + artifactPatterns.##) + isMavenCompatible.##) + descriptorOptional.##) + skipConsistencyCheck.##)
+    37 * (37 * (37 * (37 * (37 * (37 * (17 + "bleep.nosbt.librarymanagement.Patterns".##) + ivyPatterns.##) + artifactPatterns.##) + isMavenCompatible.##) + descriptorOptional.##) + skipConsistencyCheck.##)
   }
   override def toString: String = {
     "Patterns(ivyPatterns=%s, artifactPatterns=%s, isMavenCompatible=%s, descriptorOptional=%s, skipConsistencyCheck=%s)".format(
@@ -43,7 +43,7 @@ final class Patterns private (
     copy(skipConsistencyCheck = skipConsistencyCheck)
   }
 }
-object Patterns extends sbt.librarymanagement.PatternsFunctions {
+object Patterns extends bleep.nosbt.librarymanagement.PatternsFunctions {
   
   def apply(): Patterns = new Patterns()
   def apply(ivyPatterns: Vector[String], artifactPatterns: Vector[String], isMavenCompatible: Boolean, descriptorOptional: Boolean, skipConsistencyCheck: Boolean): Patterns = new Patterns(ivyPatterns, artifactPatterns, isMavenCompatible, descriptorOptional, skipConsistencyCheck)

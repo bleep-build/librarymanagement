@@ -5,15 +5,15 @@
  * Licensed under Apache License 2.0 (see LICENSE)
  */
 
-package sbt
+package bleep.nosbt
 package internal
 package librarymanagement
 
-import sbt.internal.librarymanagement.mavenint.SbtPomExtraProperties
-import sbt.librarymanagement.{ EvictionWarningOptions, ModuleID, ScalaModuleInfo }
+import bleep.nosbt.internal.librarymanagement.mavenint.SbtPomExtraProperties
+import bleep.nosbt.librarymanagement.{ EvictionWarningOptions, ModuleID, ScalaModuleInfo }
 
 // See APIMappings.scala
-private[sbt] object VersionSchemes {
+private[nosbt] object VersionSchemes {
   final val EarlySemVer = "early-semver"
   final val SemVerSpec = "semver-spec"
   final val PackVer = "pvp"

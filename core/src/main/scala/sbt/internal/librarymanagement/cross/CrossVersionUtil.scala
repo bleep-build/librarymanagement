@@ -1,7 +1,7 @@
-package sbt.internal.librarymanagement
+package bleep.nosbt.internal.librarymanagement
 package cross
 
-import sbt.librarymanagement.ScalaArtifacts
+import bleep.nosbt.librarymanagement.ScalaArtifacts
 
 object CrossVersionUtil {
   val trueString = "true"
@@ -24,21 +24,20 @@ object CrossVersionUtil {
   private val basicVersion = raw"""($longPattern)\.($longPattern)\.($longPattern)"""
   private val tagPattern = raw"""(?:\w+(?:\.\w+)*)"""
   private val ReleaseV = raw"""$basicVersion(-\d+)?""".r
-  private[sbt] val BinCompatV = raw"""$basicVersion(-$tagPattern)?-bin(-.*)?""".r
+  private[nosbt] val BinCompatV = raw"""$basicVersion(-$tagPattern)?-bin(-.*)?""".r
   private val CandidateV = raw"""$basicVersion(-RC\d+)""".r
-  private val MilestonV = raw"""$basicVersion(-M$tagPattern)""".r
   private val NonReleaseV_n = raw"""$basicVersion((?:-$tagPattern)*)""".r // 0-n word suffixes, with leading dashes
   private val NonReleaseV_1 = raw"""$basicVersion(-$tagPattern)""".r // 1 word suffix, after a dash
-  private[sbt] val PartialVersion = raw"""($longPattern)\.($longPattern)(?:\..+)?""".r
+  private[nosbt] val PartialVersion = raw"""($longPattern)\.($longPattern)(?:\..+)?""".r
 
-  private[sbt] def isSbtApiCompatible(v: String): Boolean = sbtApiVersion(v).isDefined
+  private[nosbt] def isSbtApiCompatible(v: String): Boolean = sbtApiVersion(v).isDefined
 
   /**
    * Returns sbt binary interface x.y API compatible with the given version string v.
    * RCs for x.y.0 are considered API compatible.
    * Compatible versions include 0.12.0-1 and 0.12.0-RC1 for Some(0, 12).
    */
-  private[sbt] def sbtApiVersion(v: String): Option[(Long, Long)] = v match {
+  private[nosbt] def sbtApiVersion(v: String): Option[(Long, Long)] = v match {
     case ReleaseV(x, y, _, _)   => Some(sbtApiVersion(x.toLong, y.toLong))
     case CandidateV(x, y, _, _) => Some(sbtApiVersion(x.toLong, y.toLong))
     case NonReleaseV_n(x, y, z, _) if x.toLong == 0 && z.toLong > 0 =>
@@ -56,26 +55,26 @@ object CrossVersionUtil {
     if (x > 0) (x, 0L) else (x, y)
   }
 
-  private[sbt] def isScalaApiCompatible(v: String): Boolean = scalaApiVersion(v).isDefined
+  private[nosbt] def isScalaApiCompatible(v: String): Boolean = scalaApiVersion(v).isDefined
 
   /**
    * Returns Scala binary interface x.y API compatible with the given version string v.
    * Compatible versions include 2.10.0-1 and 2.10.1-M1 for Some(2, 10), but not 2.10.0-RC1.
    */
-  private[sbt] def scalaApiVersion(v: String): Option[(Long, Long)] = v match {
+  private[nosbt] def scalaApiVersion(v: String): Option[(Long, Long)] = v match {
     case ReleaseV(x, y, _, _)                     => Some((x.toLong, y.toLong))
     case BinCompatV(x, y, _, _, _)                => Some((x.toLong, y.toLong))
     case NonReleaseV_1(x, y, z, _) if z.toInt > 0 => Some((x.toLong, y.toLong))
     case _                                        => None
   }
 
-  private[sbt] def partialVersion(s: String): Option[(Long, Long)] =
+  private[nosbt] def partialVersion(s: String): Option[(Long, Long)] =
     s match {
       case PartialVersion(major, minor) => Some((major.toLong, minor.toLong))
       case _                            => None
     }
 
-  private[sbt] def binaryScala3Version(full: String): String = full match {
+  private[nosbt] def binaryScala3Version(full: String): String = full match {
     case ReleaseV(maj, _, _, _)                                                  => maj
     case NonReleaseV_n(maj, min, patch, _) if min.toLong > 0 || patch.toLong > 0 => maj
     case BinCompatV(maj, min, patch, stageOrNull, _) =>
@@ -92,7 +91,7 @@ object CrossVersionUtil {
   //
   //   - For non-stable Scala 3 versions, compiler versions can read TASTy in an older stable format but their TASTY versions are not compatible between each other even if the compilers have the same minor version (https://docs.scala-lang.org/scala3/reference/language-versions/binary-compatibility.html)
   //
-  private[sbt] def isScalaBinaryCompatibleWith(newVersion: String, origVersion: String): Boolean = {
+  private[nosbt] def isScalaBinaryCompatibleWith(newVersion: String, origVersion: String): Boolean = {
     (newVersion, origVersion) match {
       case (NonReleaseV_n("2", _, _, _), NonReleaseV_n("2", _, _, _)) =>
         val api1 = scalaApiVersion(newVersion)

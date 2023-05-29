@@ -1,7 +1,7 @@
-package sbt.internal.librarymanagement
+package bleep.nosbt.internal.librarymanagement
 
-import sbt.librarymanagement.VersionNumber
-import sbt.internal.librarymanagement.SemSelOperator.{ Lt, Lte, Gt, Gte, Eq }
+import bleep.nosbt.librarymanagement.VersionNumber
+import bleep.nosbt.internal.librarymanagement.SemSelOperator.{ Lt, Lte, Gt, Gte, Eq }
 
 import scala.annotation.tailrec
 import java.util.Locale
@@ -39,7 +39,7 @@ private[librarymanagement] abstract class SemSelAndChunkFunctions {
           )
       }
     }
-    SemSelAndChunk(comparators.flatMap(_.expandWildcard))
+    SemSelAndChunk(comparators.flatMap(_.expandWildcard).toIndexedSeq)
   }
 
   private[this] def hasOperator(comparator: String): Boolean = {

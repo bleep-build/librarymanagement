@@ -1,6 +1,6 @@
 package example.tests
 
-import sbt.librarymanagement.{ CrossVersion, Disabled }
+import bleep.nosbt.librarymanagement.{ CrossVersion, Disabled }
 import verify.BasicTestSuite
 import scala.annotation.nowarn
 
@@ -37,36 +37,36 @@ object CrossVersionCompatTest extends BasicTestSuite {
     })
   }
 
-  test("sbt.librarymanagement.Disabled is typed to be Disabled") {
+  test("bleep.nosbt.librarymanagement.Disabled is typed to be Disabled") {
     assert(Disabled match {
       case _: Disabled => true
       case _           => false
     })
   }
 
-  test("sbt.librarymanagement.Disabled is stable") {
+  test("bleep.nosbt.librarymanagement.Disabled is stable") {
     assert(Disabled match {
       case Disabled => true
       case _        => false
     })
   }
 
-  test("sbt.librarymanagement.Disabled() is typed to be Disabled") {
+  test("bleep.nosbt.librarymanagement.Disabled() is typed to be Disabled") {
     assert(Disabled() match {
       case _: Disabled => true
       case _           => false
     })
   }
 
-  test("CrossVersion.disabled is sbt.librarymanagement.Disabled") {
+  test("CrossVersion.disabled is bleep.nosbt.librarymanagement.Disabled") {
     assert(CrossVersion.disabled == Disabled)
   }
 
-  test("CrossVersion.Disabled is sbt.librarymanagement.Disabled") {
+  test("CrossVersion.Disabled is bleep.nosbt.librarymanagement.Disabled") {
     assert(CrossVersion.Disabled == Disabled)
   }
 
-  test("CrossVersion.Disabled() is sbt.librarymanagement.Disabled") {
+  test("CrossVersion.Disabled() is bleep.nosbt.librarymanagement.Disabled") {
     assert(CrossVersion.Disabled() == Disabled)
   }
 }

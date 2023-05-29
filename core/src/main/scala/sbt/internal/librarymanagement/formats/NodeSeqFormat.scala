@@ -1,4 +1,4 @@
-package sbt.internal.librarymanagement.formats
+package bleep.nosbt.internal.librarymanagement.formats
 
 import sjsonnew._
 import scala.xml._

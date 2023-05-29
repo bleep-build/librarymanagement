@@ -1,4 +1,4 @@
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 
 import sjsonnew.support.scalajson.unsafe.{ Converter, CompactPrinter, Parser }
 

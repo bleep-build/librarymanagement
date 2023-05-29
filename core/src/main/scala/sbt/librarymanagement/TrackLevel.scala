@@ -1,4 +1,4 @@
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 
 /**
  * An enumeration defining the tracking of dependencies.  A level includes all of the levels
@@ -15,7 +15,7 @@ object TrackLevel {
     override def id: Int = 10
   }
 
-  private[sbt] def apply(x: Int): TrackLevel =
+  private[nosbt] def apply(x: Int): TrackLevel =
     x match {
       case 0  => NoTracking
       case 1  => TrackIfMissing

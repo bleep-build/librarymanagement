@@ -1,26 +1,26 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 import _root_.sjsonnew.{ Unbuilder, Builder, JsonFormat, deserializationError }
-trait ConfigurationReportFormats { self: sbt.librarymanagement.ConfigRefFormats with sbt.librarymanagement.ModuleReportFormats with sbt.librarymanagement.OrganizationArtifactReportFormats with sjsonnew.BasicJsonProtocol =>
-implicit lazy val ConfigurationReportFormat: JsonFormat[sbt.librarymanagement.ConfigurationReport] = new JsonFormat[sbt.librarymanagement.ConfigurationReport] {
-  override def read[J](__jsOpt: Option[J], unbuilder: Unbuilder[J]): sbt.librarymanagement.ConfigurationReport = {
+trait ConfigurationReportFormats { self: bleep.nosbt.librarymanagement.ConfigRefFormats with bleep.nosbt.librarymanagement.ModuleReportFormats with bleep.nosbt.librarymanagement.OrganizationArtifactReportFormats with sjsonnew.BasicJsonProtocol =>
+implicit lazy val ConfigurationReportFormat: JsonFormat[bleep.nosbt.librarymanagement.ConfigurationReport] = new JsonFormat[bleep.nosbt.librarymanagement.ConfigurationReport] {
+  override def read[J](__jsOpt: Option[J], unbuilder: Unbuilder[J]): bleep.nosbt.librarymanagement.ConfigurationReport = {
     __jsOpt match {
       case Some(__js) =>
       unbuilder.beginObject(__js)
-      val configuration = unbuilder.readField[sbt.librarymanagement.ConfigRef]("configuration")
-      val modules = unbuilder.readField[Vector[sbt.librarymanagement.ModuleReport]]("modules")
-      val details = unbuilder.readField[Vector[sbt.librarymanagement.OrganizationArtifactReport]]("details")
+      val configuration = unbuilder.readField[bleep.nosbt.librarymanagement.ConfigRef]("configuration")
+      val modules = unbuilder.readField[Vector[bleep.nosbt.librarymanagement.ModuleReport]]("modules")
+      val details = unbuilder.readField[Vector[bleep.nosbt.librarymanagement.OrganizationArtifactReport]]("details")
       unbuilder.endObject()
-      sbt.librarymanagement.ConfigurationReport(configuration, modules, details)
+      bleep.nosbt.librarymanagement.ConfigurationReport(configuration, modules, details)
       case None =>
       deserializationError("Expected JsObject but found None")
     }
   }
-  override def write[J](obj: sbt.librarymanagement.ConfigurationReport, builder: Builder[J]): Unit = {
+  override def write[J](obj: bleep.nosbt.librarymanagement.ConfigurationReport, builder: Builder[J]): Unit = {
     builder.beginObject()
     builder.addField("configuration", obj.configuration)
     builder.addField("modules", obj.modules)

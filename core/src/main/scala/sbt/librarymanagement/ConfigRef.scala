@@ -1,7 +1,7 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 
 import scala.collection.concurrent.TrieMap
 
@@ -15,14 +15,14 @@ final class ConfigRef private (val name: String) extends Serializable {
     this.eq(o.asInstanceOf[AnyRef])
 
   override val hashCode: Int = {
-    37 * (37 * (17 + "sbt.librarymanagement.ConfigRef".##) + name.##)
+    37 * (37 * (17 + "bleep.nosbt.librarymanagement.ConfigRef".##) + name.##)
   }
 
   override def toString: String = {
     name
   }
 
-  private[this] def copy(name: String = name): ConfigRef = {
+  private[this] def copy(name: String): ConfigRef = {
     ConfigRef(name)
   }
 
@@ -31,7 +31,7 @@ final class ConfigRef private (val name: String) extends Serializable {
   }
 }
 
-object ConfigRef extends sbt.librarymanagement.ConfigRefFunctions {
+object ConfigRef extends bleep.nosbt.librarymanagement.ConfigRefFunctions {
   // cache the reference to ConfigRefs
   private val cache = new TrieMap[String, ConfigRef]
   private lazy val Default = new ConfigRef("default")

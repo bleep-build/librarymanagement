@@ -1,13 +1,13 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 abstract class Resolver(
   val name: String) extends Serializable {
   /** check for HTTP */
-  private[sbt] def validateProtocol(logger: sbt.util.Logger): Boolean = false
+  private[nosbt] def validateProtocol(logger: bleep.nosbt.util.Logger): Boolean = false
   
   
   
@@ -16,12 +16,12 @@ abstract class Resolver(
     case _ => false
   })
   override def hashCode: Int = {
-    37 * (37 * (17 + "sbt.librarymanagement.Resolver".##) + name.##)
+    37 * (37 * (17 + "bleep.nosbt.librarymanagement.Resolver".##) + name.##)
   }
   override def toString: String = {
     "Resolver(" + name + ")"
   }
 }
-object Resolver extends sbt.librarymanagement.ResolverFunctions {
+object Resolver extends bleep.nosbt.librarymanagement.ResolverFunctions {
   
 }

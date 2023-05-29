@@ -1,4 +1,4 @@
-package sbt
+package bleep.nosbt
 package internal
 package librarymanagement
 

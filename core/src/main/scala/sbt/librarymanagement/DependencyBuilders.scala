@@ -1,9 +1,9 @@
 /* sbt -- Simple Build Tool
  * Copyright 2009,2010  Mark Harrah
  */
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 
-import sbt.internal.librarymanagement.StringUtilities.nonEmpty
+import bleep.nosbt.internal.librarymanagement.StringUtilities.nonEmpty
 
 /**
  * DependencyBuilders implements the implicits for % and %% DSL.
@@ -33,7 +33,7 @@ trait DependencyBuilders {
 }
 
 object DependencyBuilders {
-  final class Organization private[sbt] (private[sbt] val organization: String) {
+  final class Organization private[nosbt] (private[nosbt] val organization: String) {
     def %(name: String) = organizationArtifact(name, Disabled())
     def %%(name: String): OrganizationArtifactName =
       organizationArtifact(name, CrossVersion.binary)
@@ -44,10 +44,10 @@ object DependencyBuilders {
     }
   }
 
-  final class OrganizationArtifactName private[sbt] (
-      private[sbt] val organization: String,
-      private[sbt] val name: String,
-      private[sbt] val crossVersion: CrossVersion
+  final class OrganizationArtifactName private[nosbt] (
+      private[nosbt] val organization: String,
+      private[nosbt] val name: String,
+      private[nosbt] val crossVersion: CrossVersion
   ) {
     def %(revision: String): ModuleID = {
       nonEmpty(revision, "Revision")
@@ -55,7 +55,7 @@ object DependencyBuilders {
     }
   }
 
-  final class ModuleIDConfigurable private[sbt] (moduleID: ModuleID) {
+  final class ModuleIDConfigurable private[nosbt] (moduleID: ModuleID) {
     def %(configuration: Configuration): ModuleID = %(configuration.name)
     def %(configuration: ConfigRef): ModuleID = %(configuration.name)
 
@@ -66,7 +66,7 @@ object DependencyBuilders {
     }
   }
 
-  final class RepositoryName private[sbt] (name: String) {
+  final class RepositoryName private[nosbt] (name: String) {
     def at(location: String): MavenRepository = {
       nonEmpty(location, "Repository location")
       MavenRepository(name, location)

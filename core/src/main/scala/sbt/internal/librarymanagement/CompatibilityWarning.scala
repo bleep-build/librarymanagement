@@ -1,11 +1,11 @@
-package sbt.internal.librarymanagement
+package bleep.nosbt.internal.librarymanagement
 
-import sbt.librarymanagement._
-import sbt.util.{ Level, Logger }
+import bleep.nosbt.librarymanagement._
+import bleep.nosbt.util.{ Level, Logger }
 
 import Configurations._
 
-final class CompatibilityWarningOptions private[sbt] (
+final class CompatibilityWarningOptions private[nosbt] (
     val configurations: Seq[Configuration],
     val level: Level.Value
 )
@@ -23,7 +23,7 @@ object CompatibilityWarningOptions {
     )
 }
 
-private[sbt] object CompatibilityWarning {
+private[nosbt] object CompatibilityWarning {
   def run(
       config: CompatibilityWarningOptions,
       module: ModuleDescriptor,

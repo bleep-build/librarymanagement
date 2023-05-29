@@ -1,7 +1,7 @@
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 
 private[librarymanagement] abstract class MakePomConfigurationFunctions {
-  private[sbt] lazy val constTrue: MavenRepository => Boolean = _ => true
+  private[nosbt] lazy val constTrue: MavenRepository => Boolean = _ => true
 
   def apply(): MakePomConfiguration =
     MakePomConfiguration(

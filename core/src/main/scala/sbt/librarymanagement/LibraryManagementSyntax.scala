@@ -1,18 +1,11 @@
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 
 trait LibraryManagementSyntax0 {
-  // See http://www.scala-lang.org/news/2.12.0#traits-compile-to-interfaces
-  // Avoid defining fields (val or var, but a constant is ok – final val without result type)
-  // Avoid calling super
-  // Avoid initializer statements in the body
-
-  implicit def richUpdateReport(ur: UpdateReport): RichUpdateReport = new RichUpdateReport(ur)
 }
 
 trait LibraryManagementSyntax
     extends LibraryManagementSyntax0
-    with DependencyBuilders
-    with DependencyFilterExtra {
+    with DependencyBuilders{
   // See http://www.scala-lang.org/news/2.12.0#traits-compile-to-interfaces
   // Avoid defining fields (val or var, but a constant is ok – final val without result type)
   // Avoid calling super
@@ -24,7 +17,7 @@ trait LibraryManagementSyntax
   type InclusionRule = InclExclRule
   final val InclusionRule = InclExclRule
 
-  import sbt.librarymanagement.{ Configurations => C }
+  import bleep.nosbt.librarymanagement.{ Configurations => C }
   final val Compile = C.Compile
   final val Test = C.Test
   final val Runtime = C.Runtime

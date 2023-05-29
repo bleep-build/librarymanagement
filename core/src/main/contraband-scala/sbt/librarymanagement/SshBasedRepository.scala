@@ -1,14 +1,14 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 /** sbt interface for an Ivy ssh-based repository (ssh and sftp).  Requires the Jsch library.. */
 abstract class SshBasedRepository(
   name: String,
-  patterns: sbt.librarymanagement.Patterns,
-  val connection: sbt.librarymanagement.SshConnection) extends sbt.librarymanagement.PatternsBasedRepository(name, patterns) with sbt.librarymanagement.SshBasedRepositoryExtra with Serializable {
+  patterns: bleep.nosbt.librarymanagement.Patterns,
+  val connection: bleep.nosbt.librarymanagement.SshConnection) extends bleep.nosbt.librarymanagement.PatternsBasedRepository(name, patterns) with bleep.nosbt.librarymanagement.SshBasedRepositoryExtra with Serializable {
   
   
   
@@ -18,7 +18,7 @@ abstract class SshBasedRepository(
     case _ => false
   })
   override def hashCode: Int = {
-    37 * (37 * (37 * (37 * (17 + "sbt.librarymanagement.SshBasedRepository".##) + name.##) + patterns.##) + connection.##)
+    37 * (37 * (37 * (37 * (17 + "bleep.nosbt.librarymanagement.SshBasedRepository".##) + name.##) + patterns.##) + connection.##)
   }
   override def toString: String = {
     "SshBasedRepository(" + name + ", " + patterns + ", " + connection + ")"

@@ -1,4 +1,4 @@
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 
 import verify.BasicTestSuite
 import scala.annotation.nowarn

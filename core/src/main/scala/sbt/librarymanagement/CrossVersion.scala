@@ -1,7 +1,7 @@
 /**
- * This code is generated using [[http://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[http://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 
 import _root_.sjsonnew.{ Unbuilder, Builder, JsonFormat, deserializationError }
 
@@ -12,33 +12,30 @@ abstract class CrossVersion() extends Serializable {
     case _               => false
   }
   override def hashCode: Int = {
-    37 * (17 + "sbt.librarymanagement.CrossVersion".##)
+    37 * (17 + "bleep.nosbt.librarymanagement.CrossVersion".##)
   }
   override def toString: String = {
     "CrossVersion()"
   }
 }
-object CrossVersion extends sbt.librarymanagement.CrossVersionFunctions {}
+object CrossVersion extends bleep.nosbt.librarymanagement.CrossVersionFunctions {}
 
 /** Disables cross versioning for a module. */
-sealed class Disabled private () extends sbt.librarymanagement.CrossVersion() with Serializable {
+sealed class Disabled private () extends bleep.nosbt.librarymanagement.CrossVersion() with Serializable {
 
   override def equals(o: Any): Boolean = o match {
     case _: Disabled => true
     case _           => false
   }
   override def hashCode: Int = {
-    37 * (17 + "sbt.librarymanagement.Disabled".##)
+    37 * (17 + "bleep.nosbt.librarymanagement.Disabled".##)
   }
   override def toString: String = {
     "Disabled()"
   }
-  private[this] def copy(): Disabled = {
-    new Disabled()
-  }
 
 }
-object Disabled extends sbt.librarymanagement.Disabled {
+object Disabled extends bleep.nosbt.librarymanagement.Disabled {
   def apply(): Disabled = Disabled
 }
 
@@ -49,7 +46,7 @@ object Disabled extends sbt.librarymanagement.Disabled {
  * the module is cross-versioned with "foo_2.10_bar".
  */
 final class Binary private (val prefix: String, val suffix: String)
-    extends sbt.librarymanagement.CrossVersion()
+    extends bleep.nosbt.librarymanagement.CrossVersion()
     with Serializable {
 
   private def this() = this("", "")
@@ -59,7 +56,7 @@ final class Binary private (val prefix: String, val suffix: String)
     case _         => false
   }
   override def hashCode: Int = {
-    37 * (37 * (37 * (17 + "sbt.librarymanagement.Binary".##) + prefix.##) + suffix.##)
+    37 * (37 * (37 * (17 + "bleep.nosbt.librarymanagement.Binary".##) + prefix.##) + suffix.##)
   }
   override def toString: String = {
     "Binary(" + prefix + ", " + suffix + ")"
@@ -82,7 +79,7 @@ object Binary {
 
 /** Cross-versions a module using the string `value`. */
 final class Constant private (val value: String)
-    extends sbt.librarymanagement.CrossVersion()
+    extends bleep.nosbt.librarymanagement.CrossVersion()
     with Serializable {
 
   private def this() = this("")
@@ -92,12 +89,12 @@ final class Constant private (val value: String)
     case _           => false
   }
   override def hashCode: Int = {
-    37 * (37 * (17 + "sbt.librarymanagement.Constant".##) + value.##)
+    37 * (37 * (17 + "bleep.nosbt.librarymanagement.Constant".##) + value.##)
   }
   override def toString: String = {
     "Constant(" + value + ")"
   }
-  private[this] def copy(value: String = value): Constant = {
+  private[this] def copy(value: String): Constant = {
     new Constant(value)
   }
   def withValue(value: String): Constant = {
@@ -113,20 +110,17 @@ object Constant {
  * Cross-versions a module by stripping off -bin-suffix.
  * This is intended for patch-version compatible alternative replacements.
  */
-final class Patch private () extends sbt.librarymanagement.CrossVersion() with Serializable {
+final class Patch private () extends bleep.nosbt.librarymanagement.CrossVersion() with Serializable {
 
   override def equals(o: Any): Boolean = o match {
     case _: Patch => true
     case _        => false
   }
   override def hashCode: Int = {
-    37 * (17 + "sbt.librarymanagement.Patch".##)
+    37 * (17 + "bleep.nosbt.librarymanagement.Patch".##)
   }
   override def toString: String = {
     "Patch()"
-  }
-  private[this] def copy(): Patch = {
-    new Patch()
   }
 }
 
@@ -141,7 +135,7 @@ object Patch {
  * the module is cross-versioned with "foo_2.12.1_bar".
  */
 final class Full private (val prefix: String, val suffix: String)
-    extends sbt.librarymanagement.CrossVersion()
+    extends bleep.nosbt.librarymanagement.CrossVersion()
     with Serializable {
 
   private def this() = this("", "")
@@ -151,7 +145,7 @@ final class Full private (val prefix: String, val suffix: String)
     case _       => false
   }
   override def hashCode: Int = {
-    37 * (37 * (37 * (17 + "sbt.librarymanagement.Full".##) + prefix.##) + suffix.##)
+    37 * (37 * (37 * (17 + "bleep.nosbt.librarymanagement.Full".##) + prefix.##) + suffix.##)
   }
   override def toString: String = {
     "Full(" + prefix + ", " + suffix + ")"
@@ -179,7 +173,7 @@ object Full {
  * the module is cross-versioned with "foo_2.13_bar".
  */
 final class For3Use2_13 private (val prefix: String, val suffix: String)
-    extends sbt.librarymanagement.CrossVersion()
+    extends bleep.nosbt.librarymanagement.CrossVersion()
     with Serializable {
 
   private def this() = this("", "")
@@ -189,7 +183,7 @@ final class For3Use2_13 private (val prefix: String, val suffix: String)
     case _              => false
   }
   override def hashCode: Int = {
-    37 * (37 * (37 * (17 + "sbt.librarymanagement.For3Use2_13".##) + prefix.##) + suffix.##)
+    37 * (37 * (37 * (17 + "bleep.nosbt.librarymanagement.For3Use2_13".##) + prefix.##) + suffix.##)
   }
   override def toString: String = {
     "For3Use2_13(" + prefix + ", " + suffix + ")"
@@ -217,7 +211,7 @@ object For3Use2_13 {
  * the module is cross-versioned with "foo_3_bar".
  */
 final class For2_13Use3 private (val prefix: String, val suffix: String)
-    extends sbt.librarymanagement.CrossVersion()
+    extends bleep.nosbt.librarymanagement.CrossVersion()
     with Serializable {
 
   private def this() = this("", "")
@@ -227,7 +221,7 @@ final class For2_13Use3 private (val prefix: String, val suffix: String)
     case _              => false
   }
   override def hashCode: Int = {
-    37 * (37 * (37 * (17 + "sbt.librarymanagement.For3Use2_13".##) + prefix.##) + suffix.##)
+    37 * (37 * (37 * (17 + "bleep.nosbt.librarymanagement.For3Use2_13".##) + prefix.##) + suffix.##)
   }
   override def toString: String = {
     "For3Use2_13(" + prefix + ", " + suffix + ")"
@@ -249,46 +243,46 @@ object For2_13Use3 {
 }
 
 trait DisabledFormats { self: sjsonnew.BasicJsonProtocol =>
-  implicit lazy val DisabledFormat: JsonFormat[sbt.librarymanagement.Disabled] =
-    new JsonFormat[sbt.librarymanagement.Disabled] {
+  implicit lazy val DisabledFormat: JsonFormat[bleep.nosbt.librarymanagement.Disabled] =
+    new JsonFormat[bleep.nosbt.librarymanagement.Disabled] {
       override def read[J](
           jsOpt: Option[J],
           unbuilder: Unbuilder[J]
-      ): sbt.librarymanagement.Disabled = {
+      ): bleep.nosbt.librarymanagement.Disabled = {
         jsOpt match {
           case Some(js) =>
             unbuilder.beginObject(js)
 
             unbuilder.endObject()
-            sbt.librarymanagement.Disabled()
+            bleep.nosbt.librarymanagement.Disabled()
           case None =>
             deserializationError("Expected JsObject but found None")
         }
       }
-      override def write[J](obj: sbt.librarymanagement.Disabled, builder: Builder[J]): Unit = {
+      override def write[J](obj: bleep.nosbt.librarymanagement.Disabled, builder: Builder[J]): Unit = {
         builder.beginObject()
 
         builder.endObject()
       }
     }
 
-  implicit lazy val DisabledObjectFormat: JsonFormat[sbt.librarymanagement.Disabled.type] =
-    new JsonFormat[sbt.librarymanagement.Disabled.type] {
+  implicit lazy val DisabledObjectFormat: JsonFormat[bleep.nosbt.librarymanagement.Disabled.type] =
+    new JsonFormat[bleep.nosbt.librarymanagement.Disabled.type] {
       override def read[J](
           jsOpt: Option[J],
           unbuilder: Unbuilder[J]
-      ): sbt.librarymanagement.Disabled.type = {
+      ): bleep.nosbt.librarymanagement.Disabled.type = {
         jsOpt match {
           case Some(js) =>
             unbuilder.beginObject(js)
 
             unbuilder.endObject()
-            sbt.librarymanagement.Disabled
+            bleep.nosbt.librarymanagement.Disabled
           case None =>
             deserializationError("Expected JsObject but found None")
         }
       }
-      override def write[J](obj: sbt.librarymanagement.Disabled.type, builder: Builder[J]): Unit = {
+      override def write[J](obj: bleep.nosbt.librarymanagement.Disabled.type, builder: Builder[J]): Unit = {
         builder.beginObject()
 
         builder.endObject()
@@ -297,24 +291,24 @@ trait DisabledFormats { self: sjsonnew.BasicJsonProtocol =>
 }
 
 trait BinaryFormats { self: sjsonnew.BasicJsonProtocol =>
-  implicit lazy val BinaryFormat: JsonFormat[sbt.librarymanagement.Binary] =
-    new JsonFormat[sbt.librarymanagement.Binary] {
+  implicit lazy val BinaryFormat: JsonFormat[bleep.nosbt.librarymanagement.Binary] =
+    new JsonFormat[bleep.nosbt.librarymanagement.Binary] {
       override def read[J](
           jsOpt: Option[J],
           unbuilder: Unbuilder[J]
-      ): sbt.librarymanagement.Binary = {
+      ): bleep.nosbt.librarymanagement.Binary = {
         jsOpt match {
           case Some(js) =>
             unbuilder.beginObject(js)
             val prefix = unbuilder.readField[String]("prefix")
             val suffix = unbuilder.readField[String]("suffix")
             unbuilder.endObject()
-            sbt.librarymanagement.Binary(prefix, suffix)
+            bleep.nosbt.librarymanagement.Binary(prefix, suffix)
           case None =>
             deserializationError("Expected JsObject but found None")
         }
       }
-      override def write[J](obj: sbt.librarymanagement.Binary, builder: Builder[J]): Unit = {
+      override def write[J](obj: bleep.nosbt.librarymanagement.Binary, builder: Builder[J]): Unit = {
         builder.beginObject()
         builder.addField("prefix", obj.prefix)
         builder.addField("suffix", obj.suffix)
@@ -324,23 +318,23 @@ trait BinaryFormats { self: sjsonnew.BasicJsonProtocol =>
 }
 
 trait ConstantFormats { self: sjsonnew.BasicJsonProtocol =>
-  implicit lazy val ConstantFormat: JsonFormat[sbt.librarymanagement.Constant] =
-    new JsonFormat[sbt.librarymanagement.Constant] {
+  implicit lazy val ConstantFormat: JsonFormat[bleep.nosbt.librarymanagement.Constant] =
+    new JsonFormat[bleep.nosbt.librarymanagement.Constant] {
       override def read[J](
           jsOpt: Option[J],
           unbuilder: Unbuilder[J]
-      ): sbt.librarymanagement.Constant = {
+      ): bleep.nosbt.librarymanagement.Constant = {
         jsOpt match {
           case Some(js) =>
             unbuilder.beginObject(js)
             val value = unbuilder.readField[String]("value")
             unbuilder.endObject()
-            sbt.librarymanagement.Constant(value)
+            bleep.nosbt.librarymanagement.Constant(value)
           case None =>
             deserializationError("Expected JsObject but found None")
         }
       }
-      override def write[J](obj: sbt.librarymanagement.Constant, builder: Builder[J]): Unit = {
+      override def write[J](obj: bleep.nosbt.librarymanagement.Constant, builder: Builder[J]): Unit = {
         builder.beginObject()
         builder.addField("value", obj.value)
         builder.endObject()
@@ -349,23 +343,23 @@ trait ConstantFormats { self: sjsonnew.BasicJsonProtocol =>
 }
 
 trait PatchFormats { self: sjsonnew.BasicJsonProtocol =>
-  implicit lazy val PatchFormat: JsonFormat[sbt.librarymanagement.Patch] =
-    new JsonFormat[sbt.librarymanagement.Patch] {
+  implicit lazy val PatchFormat: JsonFormat[bleep.nosbt.librarymanagement.Patch] =
+    new JsonFormat[bleep.nosbt.librarymanagement.Patch] {
       override def read[J](
           jsOpt: Option[J],
           unbuilder: Unbuilder[J]
-      ): sbt.librarymanagement.Patch = {
+      ): bleep.nosbt.librarymanagement.Patch = {
         jsOpt match {
           case Some(js) =>
             unbuilder.beginObject(js)
 
             unbuilder.endObject()
-            sbt.librarymanagement.Patch()
+            bleep.nosbt.librarymanagement.Patch()
           case None =>
             deserializationError("Expected JsObject but found None")
         }
       }
-      override def write[J](obj: sbt.librarymanagement.Patch, builder: Builder[J]): Unit = {
+      override def write[J](obj: bleep.nosbt.librarymanagement.Patch, builder: Builder[J]): Unit = {
         builder.beginObject()
 
         builder.endObject()
@@ -374,24 +368,24 @@ trait PatchFormats { self: sjsonnew.BasicJsonProtocol =>
 }
 
 trait FullFormats { self: sjsonnew.BasicJsonProtocol =>
-  implicit lazy val FullFormat: JsonFormat[sbt.librarymanagement.Full] =
-    new JsonFormat[sbt.librarymanagement.Full] {
+  implicit lazy val FullFormat: JsonFormat[bleep.nosbt.librarymanagement.Full] =
+    new JsonFormat[bleep.nosbt.librarymanagement.Full] {
       override def read[J](
           jsOpt: Option[J],
           unbuilder: Unbuilder[J]
-      ): sbt.librarymanagement.Full = {
+      ): bleep.nosbt.librarymanagement.Full = {
         jsOpt match {
           case Some(js) =>
             unbuilder.beginObject(js)
             val prefix = unbuilder.readField[String]("prefix")
             val suffix = unbuilder.readField[String]("suffix")
             unbuilder.endObject()
-            sbt.librarymanagement.Full(prefix, suffix)
+            bleep.nosbt.librarymanagement.Full(prefix, suffix)
           case None =>
             deserializationError("Expected JsObject but found None")
         }
       }
-      override def write[J](obj: sbt.librarymanagement.Full, builder: Builder[J]): Unit = {
+      override def write[J](obj: bleep.nosbt.librarymanagement.Full, builder: Builder[J]): Unit = {
         builder.beginObject()
         builder.addField("prefix", obj.prefix)
         builder.addField("suffix", obj.suffix)
@@ -401,24 +395,24 @@ trait FullFormats { self: sjsonnew.BasicJsonProtocol =>
 }
 
 trait For3Use2_13Formats { self: sjsonnew.BasicJsonProtocol =>
-  implicit lazy val For3Use2_13Format: JsonFormat[sbt.librarymanagement.For3Use2_13] =
-    new JsonFormat[sbt.librarymanagement.For3Use2_13] {
+  implicit lazy val For3Use2_13Format: JsonFormat[bleep.nosbt.librarymanagement.For3Use2_13] =
+    new JsonFormat[bleep.nosbt.librarymanagement.For3Use2_13] {
       override def read[J](
           jsOpt: Option[J],
           unbuilder: Unbuilder[J]
-      ): sbt.librarymanagement.For3Use2_13 = {
+      ): bleep.nosbt.librarymanagement.For3Use2_13 = {
         jsOpt match {
           case Some(js) =>
             unbuilder.beginObject(js)
             val prefix = unbuilder.readField[String]("prefix")
             val suffix = unbuilder.readField[String]("suffix")
             unbuilder.endObject()
-            sbt.librarymanagement.For3Use2_13(prefix, suffix)
+            bleep.nosbt.librarymanagement.For3Use2_13(prefix, suffix)
           case None =>
             deserializationError("Expected JsObject but found None")
         }
       }
-      override def write[J](obj: sbt.librarymanagement.For3Use2_13, builder: Builder[J]): Unit = {
+      override def write[J](obj: bleep.nosbt.librarymanagement.For3Use2_13, builder: Builder[J]): Unit = {
         builder.beginObject()
         builder.addField("prefix", obj.prefix)
         builder.addField("suffix", obj.suffix)
@@ -428,24 +422,24 @@ trait For3Use2_13Formats { self: sjsonnew.BasicJsonProtocol =>
 }
 
 trait For2_13Use3Formats { self: sjsonnew.BasicJsonProtocol =>
-  implicit lazy val For2_13Use3Format: JsonFormat[sbt.librarymanagement.For2_13Use3] =
-    new JsonFormat[sbt.librarymanagement.For2_13Use3] {
+  implicit lazy val For2_13Use3Format: JsonFormat[bleep.nosbt.librarymanagement.For2_13Use3] =
+    new JsonFormat[bleep.nosbt.librarymanagement.For2_13Use3] {
       override def read[J](
           jsOpt: Option[J],
           unbuilder: Unbuilder[J]
-      ): sbt.librarymanagement.For2_13Use3 = {
+      ): bleep.nosbt.librarymanagement.For2_13Use3 = {
         jsOpt match {
           case Some(js) =>
             unbuilder.beginObject(js)
             val prefix = unbuilder.readField[String]("prefix")
             val suffix = unbuilder.readField[String]("suffix")
             unbuilder.endObject()
-            sbt.librarymanagement.For2_13Use3(prefix, suffix)
+            bleep.nosbt.librarymanagement.For2_13Use3(prefix, suffix)
           case None =>
             deserializationError("Expected JsObject but found None")
         }
       }
-      override def write[J](obj: sbt.librarymanagement.For2_13Use3, builder: Builder[J]): Unit = {
+      override def write[J](obj: bleep.nosbt.librarymanagement.For2_13Use3, builder: Builder[J]): Unit = {
         builder.beginObject()
         builder.addField("prefix", obj.prefix)
         builder.addField("suffix", obj.suffix)
@@ -456,13 +450,13 @@ trait For2_13Use3Formats { self: sjsonnew.BasicJsonProtocol =>
 
 trait CrossVersionFormats {
   self: sjsonnew.BasicJsonProtocol
-    with sbt.librarymanagement.DisabledFormats
-    with sbt.librarymanagement.BinaryFormats
-    with sbt.librarymanagement.ConstantFormats
-    with sbt.librarymanagement.PatchFormats
-    with sbt.librarymanagement.FullFormats
-    with sbt.librarymanagement.For3Use2_13Formats
-    with sbt.librarymanagement.For2_13Use3Formats =>
+    with bleep.nosbt.librarymanagement.DisabledFormats
+    with bleep.nosbt.librarymanagement.BinaryFormats
+    with bleep.nosbt.librarymanagement.ConstantFormats
+    with bleep.nosbt.librarymanagement.PatchFormats
+    with bleep.nosbt.librarymanagement.FullFormats
+    with bleep.nosbt.librarymanagement.For3Use2_13Formats
+    with bleep.nosbt.librarymanagement.For2_13Use3Formats =>
   implicit lazy val CrossVersionFormat: JsonFormat[CrossVersion] = {
     val format = flatUnionFormat8[
       CrossVersion,

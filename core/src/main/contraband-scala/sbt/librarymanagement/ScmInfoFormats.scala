@@ -1,13 +1,13 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 import _root_.sjsonnew.{ Unbuilder, Builder, JsonFormat, deserializationError }
 trait ScmInfoFormats { self: sjsonnew.BasicJsonProtocol =>
-implicit lazy val ScmInfoFormat: JsonFormat[sbt.librarymanagement.ScmInfo] = new JsonFormat[sbt.librarymanagement.ScmInfo] {
-  override def read[J](__jsOpt: Option[J], unbuilder: Unbuilder[J]): sbt.librarymanagement.ScmInfo = {
+implicit lazy val ScmInfoFormat: JsonFormat[bleep.nosbt.librarymanagement.ScmInfo] = new JsonFormat[bleep.nosbt.librarymanagement.ScmInfo] {
+  override def read[J](__jsOpt: Option[J], unbuilder: Unbuilder[J]): bleep.nosbt.librarymanagement.ScmInfo = {
     __jsOpt match {
       case Some(__js) =>
       unbuilder.beginObject(__js)
@@ -15,12 +15,12 @@ implicit lazy val ScmInfoFormat: JsonFormat[sbt.librarymanagement.ScmInfo] = new
       val connection = unbuilder.readField[String]("connection")
       val devConnection = unbuilder.readField[Option[String]]("devConnection")
       unbuilder.endObject()
-      sbt.librarymanagement.ScmInfo(browseUrl, connection, devConnection)
+      bleep.nosbt.librarymanagement.ScmInfo(browseUrl, connection, devConnection)
       case None =>
       deserializationError("Expected JsObject but found None")
     }
   }
-  override def write[J](obj: sbt.librarymanagement.ScmInfo, builder: Builder[J]): Unit = {
+  override def write[J](obj: bleep.nosbt.librarymanagement.ScmInfo, builder: Builder[J]): Unit = {
     builder.beginObject()
     builder.addField("browseUrl", obj.browseUrl)
     builder.addField("connection", obj.connection)

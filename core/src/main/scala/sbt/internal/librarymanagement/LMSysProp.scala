@@ -5,7 +5,7 @@
  * Licensed under Apache License 2.0 (see LICENSE)
  */
 
-package sbt
+package bleep.nosbt
 package internal
 package librarymanagement
 
@@ -27,21 +27,21 @@ object LMSysProp {
   def getOrTrue(name: String): Boolean = booleanOpt(name).getOrElse(true)
 
   // System property style:
-  //   1. use sbt. prefix
+  //   1. use bleep.nosbt. prefix
   //   2. prefer short nouns
   //   3. use dot for namespacing, and avoid making dot-separated English phrase
-  //   4. make active/enable properties, instead of "sbt.disable."
+  //   4. make active/enable properties, instead of "bleep.nosbt.disable."
   //
-  // Good: sbt.offline
+  // Good: bleep.nosbt.offline
   //
   // Bad:
-  // sbt.disable.interface.classloader.cache
-  // sbt.task.timings.on.shutdown
-  // sbt.skip.version.write -> sbt.genbuildprops=false
+  // bleep.nosbt.disable.interface.classloader.cache
+  // bleep.nosbt.task.timings.on.shutdown
+  // bleep.nosbt.skip.version.write -> bleep.nosbt.genbuildprops=false
 
-  val useSecureResolvers: Boolean = getOrTrue("sbt.repository.secure")
+  val useSecureResolvers: Boolean = getOrTrue("bleep.nosbt.repository.secure")
 
-  lazy val modifyVersionRange: Boolean = getOrTrue("sbt.modversionrange")
+  lazy val modifyVersionRange: Boolean = getOrTrue("bleep.nosbt.modversionrange")
 
   lazy val isJavaVersion9Plus: Boolean = javaVersion > 8
   lazy val javaVersion: Int = {
@@ -59,8 +59,8 @@ object LMSysProp {
     }
   }
 
-  lazy val useGigahorse: Boolean = getOrFalse("sbt.gigahorse")
+  lazy val useGigahorse: Boolean = getOrFalse("bleep.nosbt.gigahorse")
   lazy val maxPublishAttempts: Int =
-    java.lang.Integer.getInteger("sbt.repository.publish.attempts", 3)
+    java.lang.Integer.getInteger("bleep.nosbt.repository.publish.attempts", 3)
 
 }

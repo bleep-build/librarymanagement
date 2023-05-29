@@ -1,66 +1,66 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
-trait LibraryManagementCodec extends sbt.librarymanagement.ConfigRefFormats
+package bleep.nosbt.librarymanagement
+trait LibraryManagementCodec extends bleep.nosbt.librarymanagement.ConfigRefFormats
   with sjsonnew.BasicJsonProtocol
-  with sbt.librarymanagement.RetrieveConfigurationFormats
-  with sbt.librarymanagement.UpdateLoggingFormats
-  with sbt.internal.librarymanagement.formats.LogicalClockFormats
-  with sbt.librarymanagement.ArtifactTypeFilterFormats
-  with sbt.librarymanagement.UpdateConfigurationFormats
-  with sbt.librarymanagement.ChecksumFormats
-  with sbt.librarymanagement.ArtifactFormats
-  with sbt.librarymanagement.CrossVersionFormats
-  with sbt.librarymanagement.DisabledFormats
-  with sbt.librarymanagement.BinaryFormats
-  with sbt.librarymanagement.ConstantFormats
-  with sbt.librarymanagement.PatchFormats
-  with sbt.librarymanagement.FullFormats
-  with sbt.librarymanagement.For3Use2_13Formats
-  with sbt.librarymanagement.For2_13Use3Formats
-  with sbt.librarymanagement.InclExclRuleFormats
-  with sbt.librarymanagement.ModuleIDFormats
-  with sbt.librarymanagement.ConfigurationFormats
-  with sbt.librarymanagement.ScalaModuleInfoFormats
-  with sbt.librarymanagement.GetClassifiersModuleFormats
-  with sbt.librarymanagement.GetClassifiersConfigurationFormats
-  with sbt.librarymanagement.PublishConfigurationFormats
-  with sbt.librarymanagement.CallerFormats
-  with sbt.librarymanagement.ModuleReportFormats
-  with sbt.librarymanagement.OrganizationArtifactReportFormats
-  with sbt.librarymanagement.ConfigurationReportFormats
-  with sbt.librarymanagement.ConflictManagerFormats
-  with sbt.librarymanagement.DeveloperFormats
-  with sbt.librarymanagement.FileConfigurationFormats
-  with sbt.librarymanagement.ChainedResolverFormats
-  with sbt.librarymanagement.MavenRepoFormats
-  with sbt.librarymanagement.MavenCacheFormats
-  with sbt.librarymanagement.PatternsFormats
-  with sbt.librarymanagement.FileRepositoryFormats
-  with sbt.librarymanagement.URLRepositoryFormats
-  with sbt.librarymanagement.PasswordAuthenticationFormats
-  with sbt.librarymanagement.KeyFileAuthenticationFormats
-  with sbt.librarymanagement.SshAuthenticationFormats
-  with sbt.librarymanagement.SshConnectionFormats
-  with sbt.librarymanagement.SshRepositoryFormats
-  with sbt.librarymanagement.SftpRepositoryFormats
-  with sbt.librarymanagement.ResolverFormats
-  with sbt.librarymanagement.ModuleConfigurationFormats
-  with sbt.librarymanagement.ScmInfoFormats
-  with sbt.librarymanagement.ModuleInfoFormats
-  with sbt.librarymanagement.IvyFileConfigurationFormats
-  with sbt.librarymanagement.PomConfigurationFormats
-  with sbt.internal.librarymanagement.formats.NodeSeqFormat
-  with sbt.librarymanagement.ModuleDescriptorConfigurationFormats
-  with sbt.librarymanagement.ModuleSettingsFormats
-  with sbt.librarymanagement.MavenRepositoryFormats
-  with sbt.librarymanagement.PatternsBasedRepositoryFormats
-  with sbt.librarymanagement.SshBasedRepositoryFormats
-  with sbt.librarymanagement.UpdateStatsFormats
-  with sbt.librarymanagement.UpdateReportFormats
-  with sbt.librarymanagement.ConfigurationReportLiteFormats
-  with sbt.librarymanagement.UpdateReportLiteFormats
+  with bleep.nosbt.librarymanagement.RetrieveConfigurationFormats
+  with bleep.nosbt.librarymanagement.UpdateLoggingFormats
+  with bleep.nosbt.internal.librarymanagement.formats.LogicalClockFormats
+  with bleep.nosbt.librarymanagement.ArtifactTypeFilterFormats
+  with bleep.nosbt.librarymanagement.UpdateConfigurationFormats
+  with bleep.nosbt.librarymanagement.ChecksumFormats
+  with bleep.nosbt.librarymanagement.ArtifactFormats
+  with bleep.nosbt.librarymanagement.CrossVersionFormats
+  with bleep.nosbt.librarymanagement.DisabledFormats
+  with bleep.nosbt.librarymanagement.BinaryFormats
+  with bleep.nosbt.librarymanagement.ConstantFormats
+  with bleep.nosbt.librarymanagement.PatchFormats
+  with bleep.nosbt.librarymanagement.FullFormats
+  with bleep.nosbt.librarymanagement.For3Use2_13Formats
+  with bleep.nosbt.librarymanagement.For2_13Use3Formats
+  with bleep.nosbt.librarymanagement.InclExclRuleFormats
+  with bleep.nosbt.librarymanagement.ModuleIDFormats
+  with bleep.nosbt.librarymanagement.ConfigurationFormats
+  with bleep.nosbt.librarymanagement.ScalaModuleInfoFormats
+  with bleep.nosbt.librarymanagement.GetClassifiersModuleFormats
+  with bleep.nosbt.librarymanagement.GetClassifiersConfigurationFormats
+  with bleep.nosbt.librarymanagement.PublishConfigurationFormats
+  with bleep.nosbt.librarymanagement.CallerFormats
+  with bleep.nosbt.librarymanagement.ModuleReportFormats
+  with bleep.nosbt.librarymanagement.OrganizationArtifactReportFormats
+  with bleep.nosbt.librarymanagement.ConfigurationReportFormats
+  with bleep.nosbt.librarymanagement.ConflictManagerFormats
+  with bleep.nosbt.librarymanagement.DeveloperFormats
+  with bleep.nosbt.librarymanagement.FileConfigurationFormats
+  with bleep.nosbt.librarymanagement.ChainedResolverFormats
+  with bleep.nosbt.librarymanagement.MavenRepoFormats
+  with bleep.nosbt.librarymanagement.MavenCacheFormats
+  with bleep.nosbt.librarymanagement.PatternsFormats
+  with bleep.nosbt.librarymanagement.FileRepositoryFormats
+  with bleep.nosbt.librarymanagement.URLRepositoryFormats
+  with bleep.nosbt.librarymanagement.PasswordAuthenticationFormats
+  with bleep.nosbt.librarymanagement.KeyFileAuthenticationFormats
+  with bleep.nosbt.librarymanagement.SshAuthenticationFormats
+  with bleep.nosbt.librarymanagement.SshConnectionFormats
+  with bleep.nosbt.librarymanagement.SshRepositoryFormats
+  with bleep.nosbt.librarymanagement.SftpRepositoryFormats
+  with bleep.nosbt.librarymanagement.ResolverFormats
+  with bleep.nosbt.librarymanagement.ModuleConfigurationFormats
+  with bleep.nosbt.librarymanagement.ScmInfoFormats
+  with bleep.nosbt.librarymanagement.ModuleInfoFormats
+  with bleep.nosbt.librarymanagement.IvyFileConfigurationFormats
+  with bleep.nosbt.librarymanagement.PomConfigurationFormats
+  with bleep.nosbt.internal.librarymanagement.formats.NodeSeqFormat
+  with bleep.nosbt.librarymanagement.ModuleDescriptorConfigurationFormats
+  with bleep.nosbt.librarymanagement.ModuleSettingsFormats
+  with bleep.nosbt.librarymanagement.MavenRepositoryFormats
+  with bleep.nosbt.librarymanagement.PatternsBasedRepositoryFormats
+  with bleep.nosbt.librarymanagement.SshBasedRepositoryFormats
+  with bleep.nosbt.librarymanagement.UpdateStatsFormats
+  with bleep.nosbt.librarymanagement.UpdateReportFormats
+  with bleep.nosbt.librarymanagement.ConfigurationReportLiteFormats
+  with bleep.nosbt.librarymanagement.UpdateReportLiteFormats
 object LibraryManagementCodec extends LibraryManagementCodec

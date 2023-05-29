@@ -1,6 +1,6 @@
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 
-import sbt.librarymanagement.Configurations.config
+import bleep.nosbt.librarymanagement.Configurations.config
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should.Matchers
 

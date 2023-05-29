@@ -1,13 +1,13 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 /** sbt interface to an Ivy repository based on patterns, which is most Ivy repositories. */
 abstract class PatternsBasedRepository(
   name: String,
-  val patterns: sbt.librarymanagement.Patterns) extends sbt.librarymanagement.Resolver(name) with Serializable {
+  val patterns: bleep.nosbt.librarymanagement.Patterns) extends bleep.nosbt.librarymanagement.Resolver(name) with Serializable {
   
   
   
@@ -17,7 +17,7 @@ abstract class PatternsBasedRepository(
     case _ => false
   })
   override def hashCode: Int = {
-    37 * (37 * (37 * (17 + "sbt.librarymanagement.PatternsBasedRepository".##) + name.##) + patterns.##)
+    37 * (37 * (37 * (17 + "bleep.nosbt.librarymanagement.PatternsBasedRepository".##) + name.##) + patterns.##)
   }
   override def toString: String = {
     "PatternsBasedRepository(" + name + ", " + patterns + ")"

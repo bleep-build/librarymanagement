@@ -1,19 +1,19 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 import _root_.sjsonnew.{ Unbuilder, Builder, JsonFormat, deserializationError }
-trait ModuleReportFormats { self: sbt.librarymanagement.ModuleIDFormats with sbt.librarymanagement.ArtifactFormats with sbt.librarymanagement.ConfigRefFormats with sbt.librarymanagement.CallerFormats with sjsonnew.BasicJsonProtocol =>
-implicit lazy val ModuleReportFormat: JsonFormat[sbt.librarymanagement.ModuleReport] = new JsonFormat[sbt.librarymanagement.ModuleReport] {
-  override def read[J](__jsOpt: Option[J], unbuilder: Unbuilder[J]): sbt.librarymanagement.ModuleReport = {
+trait ModuleReportFormats { self: bleep.nosbt.librarymanagement.ModuleIDFormats with bleep.nosbt.librarymanagement.ArtifactFormats with bleep.nosbt.librarymanagement.ConfigRefFormats with bleep.nosbt.librarymanagement.CallerFormats with sjsonnew.BasicJsonProtocol =>
+implicit lazy val ModuleReportFormat: JsonFormat[bleep.nosbt.librarymanagement.ModuleReport] = new JsonFormat[bleep.nosbt.librarymanagement.ModuleReport] {
+  override def read[J](__jsOpt: Option[J], unbuilder: Unbuilder[J]): bleep.nosbt.librarymanagement.ModuleReport = {
     __jsOpt match {
       case Some(__js) =>
       unbuilder.beginObject(__js)
-      val module = unbuilder.readField[sbt.librarymanagement.ModuleID]("module")
-      val artifacts = unbuilder.readField[Vector[scala.Tuple2[sbt.librarymanagement.Artifact, java.io.File]]]("artifacts")
-      val missingArtifacts = unbuilder.readField[Vector[sbt.librarymanagement.Artifact]]("missingArtifacts")
+      val module = unbuilder.readField[bleep.nosbt.librarymanagement.ModuleID]("module")
+      val artifacts = unbuilder.readField[Vector[scala.Tuple2[bleep.nosbt.librarymanagement.Artifact, java.io.File]]]("artifacts")
+      val missingArtifacts = unbuilder.readField[Vector[bleep.nosbt.librarymanagement.Artifact]]("missingArtifacts")
       val status = unbuilder.readField[Option[String]]("status")
       val publicationDate = unbuilder.readField[Option[java.util.Calendar]]("publicationDate")
       val resolver = unbuilder.readField[Option[String]]("resolver")
@@ -26,16 +26,16 @@ implicit lazy val ModuleReportFormat: JsonFormat[sbt.librarymanagement.ModuleRep
       val extraAttributes = unbuilder.readField[Map[String, String]]("extraAttributes")
       val isDefault = unbuilder.readField[Option[Boolean]]("isDefault")
       val branch = unbuilder.readField[Option[String]]("branch")
-      val configurations = unbuilder.readField[Vector[sbt.librarymanagement.ConfigRef]]("configurations")
+      val configurations = unbuilder.readField[Vector[bleep.nosbt.librarymanagement.ConfigRef]]("configurations")
       val licenses = unbuilder.readField[Vector[scala.Tuple2[String, Option[String]]]]("licenses")
-      val callers = unbuilder.readField[Vector[sbt.librarymanagement.Caller]]("callers")
+      val callers = unbuilder.readField[Vector[bleep.nosbt.librarymanagement.Caller]]("callers")
       unbuilder.endObject()
-      sbt.librarymanagement.ModuleReport(module, artifacts, missingArtifacts, status, publicationDate, resolver, artifactResolver, evicted, evictedData, evictedReason, problem, homepage, extraAttributes, isDefault, branch, configurations, licenses, callers)
+      bleep.nosbt.librarymanagement.ModuleReport(module, artifacts, missingArtifacts, status, publicationDate, resolver, artifactResolver, evicted, evictedData, evictedReason, problem, homepage, extraAttributes, isDefault, branch, configurations, licenses, callers)
       case None =>
       deserializationError("Expected JsObject but found None")
     }
   }
-  override def write[J](obj: sbt.librarymanagement.ModuleReport, builder: Builder[J]): Unit = {
+  override def write[J](obj: bleep.nosbt.librarymanagement.ModuleReport, builder: Builder[J]): Unit = {
     builder.beginObject()
     builder.addField("module", obj.module)
     builder.addField("artifacts", obj.artifacts)

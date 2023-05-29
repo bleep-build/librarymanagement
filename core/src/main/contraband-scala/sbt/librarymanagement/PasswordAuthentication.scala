@@ -1,12 +1,12 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 final class PasswordAuthentication private (
   val user: String,
-  val password: Option[String]) extends sbt.librarymanagement.SshAuthentication() with Serializable {
+  val password: Option[String]) extends bleep.nosbt.librarymanagement.SshAuthentication() with Serializable {
   
   
   
@@ -15,7 +15,7 @@ final class PasswordAuthentication private (
     case _ => false
   })
   override def hashCode: Int = {
-    37 * (37 * (37 * (17 + "sbt.librarymanagement.PasswordAuthentication".##) + user.##) + password.##)
+    37 * (37 * (37 * (17 + "bleep.nosbt.librarymanagement.PasswordAuthentication".##) + user.##) + password.##)
   }
   override def toString: String = {
     "PasswordAuthentication(" + user + ", " + password + ")"

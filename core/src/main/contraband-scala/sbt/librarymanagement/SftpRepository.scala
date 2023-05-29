@@ -1,15 +1,15 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 /** sbt interface for an Ivy repository over sftp.  More convenient construction is done using Resolver.sftp. */
 final class SftpRepository private (
   name: String,
-  patterns: sbt.librarymanagement.Patterns,
-  connection: sbt.librarymanagement.SshConnection) extends sbt.librarymanagement.SshBasedRepository(name, patterns, connection) with sbt.librarymanagement.SftpRepositoryExtra with Serializable {
-  def this(name: String, connection: sbt.librarymanagement.SshConnection, patterns: sbt.librarymanagement.Patterns) =
+  patterns: bleep.nosbt.librarymanagement.Patterns,
+  connection: bleep.nosbt.librarymanagement.SshConnection) extends bleep.nosbt.librarymanagement.SshBasedRepository(name, patterns, connection) with bleep.nosbt.librarymanagement.SftpRepositoryExtra with Serializable {
+  def this(name: String, connection: bleep.nosbt.librarymanagement.SshConnection, patterns: bleep.nosbt.librarymanagement.Patterns) =
   this(name, patterns, connection)
   
   
@@ -18,26 +18,26 @@ final class SftpRepository private (
     case _ => false
   })
   override def hashCode: Int = {
-    37 * (37 * (37 * (37 * (17 + "sbt.librarymanagement.SftpRepository".##) + name.##) + patterns.##) + connection.##)
+    37 * (37 * (37 * (37 * (17 + "bleep.nosbt.librarymanagement.SftpRepository".##) + name.##) + patterns.##) + connection.##)
   }
   override def toString: String = {
     "SftpRepository(" + name + ", " + patterns + ", " + connection + ")"
   }
-  private[this] def copy(name: String = name, patterns: sbt.librarymanagement.Patterns = patterns, connection: sbt.librarymanagement.SshConnection = connection): SftpRepository = {
+  private[this] def copy(name: String = name, patterns: bleep.nosbt.librarymanagement.Patterns = patterns, connection: bleep.nosbt.librarymanagement.SshConnection = connection): SftpRepository = {
     new SftpRepository(name, patterns, connection)
   }
   def withName(name: String): SftpRepository = {
     copy(name = name)
   }
-  def withPatterns(patterns: sbt.librarymanagement.Patterns): SftpRepository = {
+  def withPatterns(patterns: bleep.nosbt.librarymanagement.Patterns): SftpRepository = {
     copy(patterns = patterns)
   }
-  def withConnection(connection: sbt.librarymanagement.SshConnection): SftpRepository = {
+  def withConnection(connection: bleep.nosbt.librarymanagement.SshConnection): SftpRepository = {
     copy(connection = connection)
   }
 }
 object SftpRepository {
-  def apply(name: String, connection: sbt.librarymanagement.SshConnection, patterns: sbt.librarymanagement.Patterns) =
+  def apply(name: String, connection: bleep.nosbt.librarymanagement.SshConnection, patterns: bleep.nosbt.librarymanagement.Patterns) =
   new SftpRepository(name, patterns, connection)
-  def apply(name: String, patterns: sbt.librarymanagement.Patterns, connection: sbt.librarymanagement.SshConnection): SftpRepository = new SftpRepository(name, patterns, connection)
+  def apply(name: String, patterns: bleep.nosbt.librarymanagement.Patterns, connection: bleep.nosbt.librarymanagement.SshConnection): SftpRepository = new SftpRepository(name, patterns, connection)
 }

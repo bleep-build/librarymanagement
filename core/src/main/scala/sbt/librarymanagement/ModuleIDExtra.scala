@@ -1,14 +1,14 @@
 /* sbt -- Simple Build Tool
  * Copyright 2008, 2009, 2010  Mark Harrah
  */
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 
 import java.net.URL
 
-import sbt.internal.librarymanagement.mavenint.SbtPomExtraProperties
+import bleep.nosbt.internal.librarymanagement.mavenint.SbtPomExtraProperties
 import scala.collection.mutable.ListBuffer
-import sbt.librarymanagement.syntax._
-import sbt.util.Logger
+import bleep.nosbt.librarymanagement.syntax._
+import bleep.nosbt.util.Logger
 
 private[librarymanagement] abstract class ModuleIDExtra {
   def organization: String
@@ -63,7 +63,7 @@ private[librarymanagement] abstract class ModuleIDExtra {
 
   /** Returns the extra attributes except for ones marked as information only (ones that typically would not be used for dependency resolution). */
   def extraDependencyAttributes: Map[String, String] =
-    extraAttributes.filterKeys(!_.startsWith(SbtPomExtraProperties.POM_INFO_KEY_PREFIX)).toMap
+    extraAttributes.filter { case (k, _) => !k.startsWith(SbtPomExtraProperties.POM_INFO_KEY_PREFIX) }
 
   @deprecated(
     "Use `cross(CrossVersion)`, the variant accepting a CrossVersion value constructed by a member of the CrossVersion object instead.",
@@ -115,7 +115,7 @@ private[librarymanagement] abstract class ModuleIDExtra {
    */
   def force(): ModuleID = withIsForce(true)
 
-  private[sbt] def validateProtocol(logger: Logger): Unit = {
+  private[nosbt] def validateProtocol(logger: Logger): Unit = {
     explicitArtifacts foreach { _.validateProtocol(logger) }
   }
 

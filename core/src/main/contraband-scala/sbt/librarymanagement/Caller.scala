@@ -1,12 +1,12 @@
 /**
- * This code is generated using [[https://www.scala-sbt.org/contraband/ sbt-contraband]].
+ * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
  */
 
 // DO NOT EDIT MANUALLY
-package sbt.librarymanagement
+package bleep.nosbt.librarymanagement
 final class Caller private (
-  val caller: sbt.librarymanagement.ModuleID,
-  val callerConfigurations: Vector[sbt.librarymanagement.ConfigRef],
+  val caller: bleep.nosbt.librarymanagement.ModuleID,
+  val callerConfigurations: Vector[bleep.nosbt.librarymanagement.ConfigRef],
   val callerExtraAttributes: Map[String, String],
   val isForceDependency: Boolean,
   val isChangingDependency: Boolean,
@@ -20,18 +20,18 @@ final class Caller private (
     case _ => false
   })
   override def hashCode: Int = {
-    37 * (37 * (37 * (37 * (37 * (37 * (37 * (37 * (17 + "sbt.librarymanagement.Caller".##) + caller.##) + callerConfigurations.##) + callerExtraAttributes.##) + isForceDependency.##) + isChangingDependency.##) + isTransitiveDependency.##) + isDirectlyForceDependency.##)
+    37 * (37 * (37 * (37 * (37 * (37 * (37 * (37 * (17 + "bleep.nosbt.librarymanagement.Caller".##) + caller.##) + callerConfigurations.##) + callerExtraAttributes.##) + isForceDependency.##) + isChangingDependency.##) + isTransitiveDependency.##) + isDirectlyForceDependency.##)
   }
   override def toString: String = {
     s"$caller"
   }
-  private[this] def copy(caller: sbt.librarymanagement.ModuleID = caller, callerConfigurations: Vector[sbt.librarymanagement.ConfigRef] = callerConfigurations, callerExtraAttributes: Map[String, String] = callerExtraAttributes, isForceDependency: Boolean = isForceDependency, isChangingDependency: Boolean = isChangingDependency, isTransitiveDependency: Boolean = isTransitiveDependency, isDirectlyForceDependency: Boolean = isDirectlyForceDependency): Caller = {
+  private[this] def copy(caller: bleep.nosbt.librarymanagement.ModuleID = caller, callerConfigurations: Vector[bleep.nosbt.librarymanagement.ConfigRef] = callerConfigurations, callerExtraAttributes: Map[String, String] = callerExtraAttributes, isForceDependency: Boolean = isForceDependency, isChangingDependency: Boolean = isChangingDependency, isTransitiveDependency: Boolean = isTransitiveDependency, isDirectlyForceDependency: Boolean = isDirectlyForceDependency): Caller = {
     new Caller(caller, callerConfigurations, callerExtraAttributes, isForceDependency, isChangingDependency, isTransitiveDependency, isDirectlyForceDependency)
   }
-  def withCaller(caller: sbt.librarymanagement.ModuleID): Caller = {
+  def withCaller(caller: bleep.nosbt.librarymanagement.ModuleID): Caller = {
     copy(caller = caller)
   }
-  def withCallerConfigurations(callerConfigurations: Vector[sbt.librarymanagement.ConfigRef]): Caller = {
+  def withCallerConfigurations(callerConfigurations: Vector[bleep.nosbt.librarymanagement.ConfigRef]): Caller = {
     copy(callerConfigurations = callerConfigurations)
   }
   def withCallerExtraAttributes(callerExtraAttributes: Map[String, String]): Caller = {
@@ -52,5 +52,5 @@ final class Caller private (
 }
 object Caller {
   
-  def apply(caller: sbt.librarymanagement.ModuleID, callerConfigurations: Vector[sbt.librarymanagement.ConfigRef], callerExtraAttributes: Map[String, String], isForceDependency: Boolean, isChangingDependency: Boolean, isTransitiveDependency: Boolean, isDirectlyForceDependency: Boolean): Caller = new Caller(caller, callerConfigurations, callerExtraAttributes, isForceDependency, isChangingDependency, isTransitiveDependency, isDirectlyForceDependency)
+  def apply(caller: bleep.nosbt.librarymanagement.ModuleID, callerConfigurations: Vector[bleep.nosbt.librarymanagement.ConfigRef], callerExtraAttributes: Map[String, String], isForceDependency: Boolean, isChangingDependency: Boolean, isTransitiveDependency: Boolean, isDirectlyForceDependency: Boolean): Caller = new Caller(caller, callerConfigurations, callerExtraAttributes, isForceDependency, isChangingDependency, isTransitiveDependency, isDirectlyForceDependency)
 }

@@ -1,4 +1,4 @@
-package sbt.internal.librarymanagement.mavenint;
+package bleep.nosbt.internal.librarymanagement.mavenint;
 
 /**
  * Extra properties we dump from Aether into the properties list.

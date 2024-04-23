@@ -3,12 +3,12 @@
  */
 package bleep.nosbt.librarymanagement
 
-import java.net.{URI, URL}
 import bleep.nosbt.internal.librarymanagement.mavenint.SbtPomExtraProperties
-
-import scala.collection.mutable.ListBuffer
 import bleep.nosbt.librarymanagement.syntax.*
 import bleep.nosbt.util.Logger
+
+import java.net.URI
+import scala.collection.mutable.ListBuffer
 
 private[librarymanagement] abstract class ModuleIDExtra {
   def organization: String

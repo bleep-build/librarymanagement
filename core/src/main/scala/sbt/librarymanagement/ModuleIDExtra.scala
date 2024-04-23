@@ -3,11 +3,11 @@
  */
 package bleep.nosbt.librarymanagement
 
-import java.net.URL
-
+import java.net.{URI, URL}
 import bleep.nosbt.internal.librarymanagement.mavenint.SbtPomExtraProperties
+
 import scala.collection.mutable.ListBuffer
-import bleep.nosbt.librarymanagement.syntax._
+import bleep.nosbt.librarymanagement.syntax.*
 import bleep.nosbt.util.Logger
 
 private[librarymanagement] abstract class ModuleIDExtra {
@@ -132,7 +132,7 @@ private[librarymanagement] abstract class ModuleIDExtra {
    * It is not included in published metadata.
    */
   def from(url: String, allowInsecureProtocol: Boolean): ModuleID =
-    artifacts(Artifact(name, new URL(url), allowInsecureProtocol))
+    artifacts(Artifact(name, URI.create(url).toURL, allowInsecureProtocol))
 
   /** Adds a dependency on the artifact for this module with classifier `c`. */
   def classifier(c: String): ModuleID = artifacts(Artifact(name, c))

@@ -268,7 +268,7 @@ object EvictionWarning {
     val confs = report.configurations filter { x =>
       options.configurations.contains[ConfigRef](x.configuration)
     }
-    confs flatMap { confReport =>
+    confs foreach { confReport =>
       confReport.details map { detail =>
         if ((detail.modules exists { _.evicted }) &&
             !(buffer exists { x =>

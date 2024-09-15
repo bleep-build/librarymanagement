@@ -3,7 +3,7 @@
  */
 package bleep.nosbt.librarymanagement
 
-import _root_.sjsonnew.{ Unbuilder, Builder, JsonFormat, deserializationError }
+import _root_.sjsonnew.{Builder, JsonFormat, Unbuilder, deserializationError}
 
 /** Configures how a module will be cross-versioned. */
 abstract class CrossVersion() extends Serializable {

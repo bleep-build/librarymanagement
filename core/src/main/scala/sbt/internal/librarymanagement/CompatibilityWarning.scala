@@ -1,9 +1,9 @@
 package bleep.nosbt.internal.librarymanagement
 
-import bleep.nosbt.librarymanagement._
+import bleep.nosbt.librarymanagement.*
 import bleep.nosbt.util.{ Level, Logger }
 
-import Configurations._
+import Configurations.*
 
 final class CompatibilityWarningOptions private[nosbt] (
     val configurations: Seq[Configuration],

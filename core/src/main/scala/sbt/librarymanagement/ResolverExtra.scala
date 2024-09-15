@@ -3,12 +3,13 @@
  */
 package bleep.nosbt.librarymanagement
 
-import java.io.{ IOException, File }
+import bleep.nosbt.util.Logger
+import org.xml.sax.SAXParseException
+
+import java.io.{File, IOException}
 import java.net.{ URI, URL }
 import scala.annotation.nowarn
 import scala.xml.XML
-import org.xml.sax.SAXParseException
-import bleep.nosbt.util.Logger
 
 final class RawRepository(val resolver: AnyRef, name: String) extends Resolver(name) {
   override def toString = "Raw(" + resolver.toString + ")"

@@ -1,10 +1,10 @@
 package bleep.nosbt.internal.librarymanagement
 
+import bleep.nosbt.internal.librarymanagement.SemSelOperator.{Eq, Gt, Gte, Lt, Lte}
 import bleep.nosbt.librarymanagement.VersionNumber
-import bleep.nosbt.internal.librarymanagement.SemSelOperator.{ Lt, Lte, Gt, Gte, Eq }
 
-import scala.annotation.tailrec
 import java.util.Locale
+import scala.annotation.tailrec
 
 private[librarymanagement] abstract class SemSelAndChunkFunctions {
   protected def parse(andClauseToken: String): SemSelAndChunk = {

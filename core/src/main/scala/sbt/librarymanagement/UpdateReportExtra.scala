@@ -4,7 +4,7 @@
 package bleep.nosbt.librarymanagement
 
 import java.io.File
-import java.{ util => ju }
+import java.util as ju
 
 private[librarymanagement] abstract class ConfigurationReportExtra {
   def configuration: ConfigRef

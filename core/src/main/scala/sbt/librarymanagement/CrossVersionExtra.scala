@@ -1,7 +1,7 @@
 package bleep.nosbt.librarymanagement
 
 import bleep.nosbt.internal.librarymanagement.cross.CrossVersionUtil
-import bleep.nosbt.librarymanagement.syntax._
+import bleep.nosbt.librarymanagement.syntax.*
 
 final case class ScalaVersion(full: String, binary: String)
 

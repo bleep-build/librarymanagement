@@ -3,7 +3,7 @@
  */
 package bleep.nosbt.librarymanagement
 
-import _root_.sjsonnew.{ Unbuilder, Builder, JsonFormat, deserializationError }
+import _root_.sjsonnew.{Builder, JsonFormat, Unbuilder, deserializationError}
 
 trait ConfigRefFormats { self: sjsonnew.BasicJsonProtocol =>
   implicit lazy val ConfigRefFormat: JsonFormat[bleep.nosbt.librarymanagement.ConfigRef] =

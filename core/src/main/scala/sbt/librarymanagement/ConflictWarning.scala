@@ -1,6 +1,6 @@
 package bleep.nosbt.librarymanagement
 
-import bleep.nosbt.util.{ Logger, Level }
+import bleep.nosbt.util.{Level, Logger}
 
 /**
  * Provide warnings for cross version conflicts.

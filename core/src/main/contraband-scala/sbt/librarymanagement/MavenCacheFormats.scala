@@ -4,7 +4,7 @@
 
 // DO NOT EDIT MANUALLY
 package bleep.nosbt.librarymanagement
-import _root_.sjsonnew.{ Unbuilder, Builder, JsonFormat, deserializationError }
+import _root_.sjsonnew.{Builder, JsonFormat, Unbuilder, deserializationError}
 trait MavenCacheFormats { self: sjsonnew.BasicJsonProtocol =>
 implicit lazy val MavenCacheFormat: JsonFormat[bleep.nosbt.librarymanagement.MavenCache] = new JsonFormat[bleep.nosbt.librarymanagement.MavenCache] {
   override def read[J](__jsOpt: Option[J], unbuilder: Unbuilder[J]): bleep.nosbt.librarymanagement.MavenCache = {

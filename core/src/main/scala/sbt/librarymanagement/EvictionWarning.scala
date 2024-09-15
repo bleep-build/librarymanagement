@@ -1,10 +1,11 @@
 package bleep.nosbt.librarymanagement
 
+import bleep.nosbt.internal.librarymanagement.VersionSchemes
+import bleep.nosbt.util.ShowLines
+
 import collection.mutable
 import Configurations.Compile
 import ScalaArtifacts.{CompilerID, LibraryID}
-import bleep.nosbt.internal.librarymanagement.VersionSchemes
-import bleep.nosbt.util.ShowLines
 
 final class EvictionWarningOptions private[nosbt] (
     val configurations: Seq[ConfigRef],

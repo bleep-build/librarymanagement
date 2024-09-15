@@ -4,7 +4,7 @@
 
 // DO NOT EDIT MANUALLY
 package bleep.nosbt.librarymanagement
-import _root_.sjsonnew.{ Unbuilder, Builder, JsonFormat, deserializationError }
+import _root_.sjsonnew.{Builder, JsonFormat, Unbuilder, deserializationError}
 trait KeyFileAuthenticationFormats { self: sjsonnew.BasicJsonProtocol =>
 implicit lazy val KeyFileAuthenticationFormat: JsonFormat[bleep.nosbt.librarymanagement.KeyFileAuthentication] = new JsonFormat[bleep.nosbt.librarymanagement.KeyFileAuthentication] {
   override def read[J](__jsOpt: Option[J], unbuilder: Unbuilder[J]): bleep.nosbt.librarymanagement.KeyFileAuthentication = {

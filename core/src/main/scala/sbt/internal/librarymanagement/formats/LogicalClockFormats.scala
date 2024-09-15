@@ -1,7 +1,7 @@
 package bleep.nosbt.internal.librarymanagement.formats
 
-import sjsonnew.*
 import bleep.nosbt.librarymanagement.LogicalClock
+import sjsonnew.*
 
 trait LogicalClockFormats { self: BasicJsonProtocol =>
   implicit lazy val LogicalClockFormat: JsonFormat[LogicalClock] =

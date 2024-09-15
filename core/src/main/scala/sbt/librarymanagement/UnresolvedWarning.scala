@@ -1,7 +1,8 @@
 package bleep.nosbt.librarymanagement
 
-import collection.mutable
 import bleep.nosbt.util.{LinePosition, LineRange, RangePosition, ShowLines, SourcePosition}
+
+import collection.mutable
 
 final class ResolveException(
     val messages: Seq[String],

@@ -1,8 +1,9 @@
 package bleep.nosbt.librarymanagement
 
-import java.io.File
-import bleep.nosbt.util.Logger
 import bleep.nosbt.io.Hash
+import bleep.nosbt.util.Logger
+
+import java.io.File
 
 /**
  * Library management API to resolve dependencies.

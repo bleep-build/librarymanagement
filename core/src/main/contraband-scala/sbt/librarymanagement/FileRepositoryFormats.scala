@@ -4,7 +4,7 @@
 
 // DO NOT EDIT MANUALLY
 package bleep.nosbt.librarymanagement
-import _root_.sjsonnew.{ Unbuilder, Builder, JsonFormat, deserializationError }
+import _root_.sjsonnew.{Builder, JsonFormat, Unbuilder, deserializationError}
 trait FileRepositoryFormats { self: bleep.nosbt.librarymanagement.PatternsFormats with bleep.nosbt.librarymanagement.FileConfigurationFormats with sjsonnew.BasicJsonProtocol =>
 implicit lazy val FileRepositoryFormat: JsonFormat[bleep.nosbt.librarymanagement.FileRepository] = new JsonFormat[bleep.nosbt.librarymanagement.FileRepository] {
   override def read[J](__jsOpt: Option[J], unbuilder: Unbuilder[J]): bleep.nosbt.librarymanagement.FileRepository = {

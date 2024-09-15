@@ -1,7 +1,8 @@
 package bleep.nosbt.librarymanagement
 
-import java.io.File
 import bleep.nosbt.util.Logger
+
+import java.io.File
 
 /**
  * Interface for dependency resolution intended for engine authors.

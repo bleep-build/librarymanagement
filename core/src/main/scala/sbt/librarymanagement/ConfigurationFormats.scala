@@ -4,7 +4,7 @@
 package bleep.nosbt
 package librarymanagement
 
-import _root_.sjsonnew.{ deserializationError, Builder, JsonFormat, Unbuilder }
+import _root_.sjsonnew.{Builder, JsonFormat, Unbuilder, deserializationError}
 
 trait ConfigurationFormats {
   self: bleep.nosbt.librarymanagement.ConfigurationFormats with sjsonnew.BasicJsonProtocol =>

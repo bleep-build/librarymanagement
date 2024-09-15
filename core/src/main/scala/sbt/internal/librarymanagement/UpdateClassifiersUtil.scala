@@ -1,7 +1,8 @@
 package bleep.nosbt.internal.librarymanagement
 
+import bleep.nosbt.librarymanagement.*
+
 import java.io.File
-import bleep.nosbt.librarymanagement._
 
 object UpdateClassifiersUtil {
 

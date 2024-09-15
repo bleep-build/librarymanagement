@@ -1,8 +1,9 @@
 package bleep.nosbt
 package internal.librarymanagement
 
+import bleep.nosbt.librarymanagement.*
+
 import java.io.File
-import bleep.nosbt.librarymanagement._
 
 /**
  * This is a list of functions with default values.

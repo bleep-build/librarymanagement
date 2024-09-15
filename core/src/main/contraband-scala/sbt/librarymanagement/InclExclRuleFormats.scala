@@ -4,7 +4,7 @@
 
 // DO NOT EDIT MANUALLY
 package bleep.nosbt.librarymanagement
-import _root_.sjsonnew.{ Unbuilder, Builder, JsonFormat, deserializationError }
+import _root_.sjsonnew.{Builder, JsonFormat, Unbuilder, deserializationError}
 trait InclExclRuleFormats { self: bleep.nosbt.librarymanagement.ConfigRefFormats with bleep.nosbt.librarymanagement.CrossVersionFormats with bleep.nosbt.librarymanagement.DisabledFormats with bleep.nosbt.librarymanagement.BinaryFormats with bleep.nosbt.librarymanagement.ConstantFormats with bleep.nosbt.librarymanagement.PatchFormats with bleep.nosbt.librarymanagement.FullFormats with bleep.nosbt.librarymanagement.For3Use2_13Formats with bleep.nosbt.librarymanagement.For2_13Use3Formats with sjsonnew.BasicJsonProtocol =>
 implicit lazy val InclExclRuleFormat: JsonFormat[bleep.nosbt.librarymanagement.InclExclRule] = new JsonFormat[bleep.nosbt.librarymanagement.InclExclRule] {
   override def read[J](__jsOpt: Option[J], unbuilder: Unbuilder[J]): bleep.nosbt.librarymanagement.InclExclRule = {

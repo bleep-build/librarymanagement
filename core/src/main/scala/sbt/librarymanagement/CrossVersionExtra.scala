@@ -31,76 +31,65 @@ private[librarymanagement] abstract class CrossVersionFunctions {
   /** Cross-versions a module with the full version (typically the full Scala version). */
   def full: CrossVersion = Full()
 
-  /**
-   * Cross-versions a module with the result of prepending `prefix` and appending `suffix` to the full version.
-   * (typically the full Scala version).  See also [[bleep.nosbt.librarymanagement.Full]]
-   */
+  /** Cross-versions a module with the result of prepending `prefix` and appending `suffix` to the full version. (typically the full Scala version). See also
+    * [[bleep.nosbt.librarymanagement.Full]]
+    */
   def fullWith(prefix: String, suffix: String): CrossVersion = Full(prefix, suffix)
 
-  /** Cross-versions a module with the binary version (typically the binary Scala version).  */
+  /** Cross-versions a module with the binary version (typically the binary Scala version). */
   def binary: CrossVersion = Binary()
 
   /** Disables cross versioning for a module. */
   def disabled: CrossVersion = bleep.nosbt.librarymanagement.Disabled
 
-  /** Cross-versions a module with a constant string (typically the binary Scala version).  */
+  /** Cross-versions a module with a constant string (typically the binary Scala version). */
   def constant(value: String): CrossVersion = Constant(value)
 
-  /**
-   * Cross-versions a module with the result of prepending `prefix` and appending `suffix` to the binary version
-   * (typically the binary Scala version).  See also [[bleep.nosbt.librarymanagement.Binary]].
-   */
+  /** Cross-versions a module with the result of prepending `prefix` and appending `suffix` to the binary version (typically the binary Scala version). See also
+    * [[bleep.nosbt.librarymanagement.Binary]].
+    */
   def binaryWith(prefix: String, suffix: String): CrossVersion = Binary(prefix, suffix)
 
-  /**
-   * Cross-versions a module with the full Scala version excluding any `-bin` suffix.
-   */
+  /** Cross-versions a module with the full Scala version excluding any `-bin` suffix.
+    */
   def patch: CrossVersion = Patch()
 
-  /**
-   * Cross-versions a module with the binary version but
-   * if the binary version is 3 (or of the form 3.0.0-x), cross-versions it with 2.13 instead
-   */
+  /** Cross-versions a module with the binary version but if the binary version is 3 (or of the form 3.0.0-x), cross-versions it with 2.13 instead
+    */
   def for3Use2_13: CrossVersion = For3Use2_13()
 
-  /**
-   * Cross-versions a module with the binary version but
-   * if the binary version is 3 (or of the form 3.0.0-x), cross-versions it with 2.13 instead
-   * Always prepend `prefix` and append `suffix`
-   */
+  /** Cross-versions a module with the binary version but if the binary version is 3 (or of the form 3.0.0-x), cross-versions it with 2.13 instead Always
+    * prepend `prefix` and append `suffix`
+    */
   def for3Use2_13With(prefix: String, suffix: String): CrossVersion = For3Use2_13(prefix, suffix)
 
-  /**
-   * Cross-versions a module with the binary version but
-   * if the binary version is 2.13 cross-versions it with 3 instead
-   */
+  /** Cross-versions a module with the binary version but if the binary version is 2.13 cross-versions it with 3 instead
+    */
   def for2_13Use3: CrossVersion = For2_13Use3()
 
-  /**
-   * Cross-versions a module with the binary version but
-   * if the binary version is 2.13 cross-versions it with 3 instead
-   * Always prepend `prefix` and append `suffix`
-   */
+  /** Cross-versions a module with the binary version but if the binary version is 2.13 cross-versions it with 3 instead Always prepend `prefix` and append
+    * `suffix`
+    */
   def for2_13Use3With(prefix: String, suffix: String): CrossVersion = For2_13Use3(prefix, suffix)
 
   private[nosbt] def getPrefixSuffix(value: CrossVersion): (String, String) =
     value match {
-      case (_: Disabled | _: Constant | _: Patch) => ("", "")
-      case b: Binary                              => (b.prefix, b.suffix)
-      case f: Full                                => (f.prefix, f.suffix)
-      case c: For3Use2_13                         => (c.prefix, c.suffix)
-      case c: For2_13Use3                         => (c.prefix, c.suffix)
-      case other                                  => throw new MatchError(other)
+      case _: Disabled | _: Constant | _: Patch => ("", "")
+      case b: Binary                            => (b.prefix, b.suffix)
+      case f: Full                              => (f.prefix, f.suffix)
+      case c: For3Use2_13                       => (c.prefix, c.suffix)
+      case c: For2_13Use3                       => (c.prefix, c.suffix)
+      case other                                => throw new MatchError(other)
     }
 
   private[nosbt] def setPrefixSuffix(value: CrossVersion, p: String, s: String): CrossVersion =
     value match {
-      case (_: Disabled | _: Constant | _: Patch) => value
-      case b: Binary                              => b.withPrefix(p).withSuffix(s)
-      case f: Full                                => f.withPrefix(p).withSuffix(s)
-      case c: For3Use2_13                         => c.withPrefix(p).withSuffix(s)
-      case c: For2_13Use3                         => c.withPrefix(p).withSuffix(s)
-      case other                                  => throw new MatchError(other)
+      case _: Disabled | _: Constant | _: Patch => value
+      case b: Binary                            => b.withPrefix(p).withSuffix(s)
+      case f: Full                              => f.withPrefix(p).withSuffix(s)
+      case c: For3Use2_13                       => c.withPrefix(p).withSuffix(s)
+      case c: For2_13Use3                       => c.withPrefix(p).withSuffix(s)
+      case other                                => throw new MatchError(other)
     }
 
   private[nosbt] def patchFun(fullVersion: String): String = {
@@ -113,22 +102,20 @@ private[librarymanagement] abstract class CrossVersionFunctions {
 
   private[nosbt] def append(s: String): Option[String => String] = Some(x => crossName(x, s))
 
-  /**
-   * Construct a cross-versioning function given cross-versioning configuration `cross`,
-   * full version `fullVersion` and binary version `binaryVersion`.  The behavior of the
-   * constructed function is as documented for the [[bleep.nosbt.librarymanagement.CrossVersion]] datatypes.
-   */
+  /** Construct a cross-versioning function given cross-versioning configuration `cross`, full version `fullVersion` and binary version `binaryVersion`. The
+    * behavior of the constructed function is as documented for the [[bleep.nosbt.librarymanagement.CrossVersion]] datatypes.
+    */
   def apply(
       cross: CrossVersion,
       fullVersion: String,
       binaryVersion: String
   ): Option[String => String] =
     cross match {
-      case _: Disabled => None
-      case b: Binary   => append(b.prefix + binaryVersion + b.suffix)
-      case c: Constant => append(c.value)
-      case _: Patch    => append(patchFun(fullVersion))
-      case f: Full     => append(f.prefix + fullVersion + f.suffix)
+      case _: Disabled    => None
+      case b: Binary      => append(b.prefix + binaryVersion + b.suffix)
+      case c: Constant    => append(c.value)
+      case _: Patch       => append(patchFun(fullVersion))
+      case f: Full        => append(f.prefix + fullVersion + f.suffix)
       case c: For3Use2_13 =>
         val compat =
           if (binaryVersion == "3" || binaryVersion.startsWith("3.0.0")) "2.13"
@@ -190,11 +177,9 @@ private[librarymanagement] abstract class CrossVersionFunctions {
       cross: Option[String => String]
   ): Vector[Artifact] = as.map(art => substituteCross(art, cross))
 
-  /**
-   * Constructs a function that will cross-version a ModuleID
-   * for the given full and binary Scala versions `scalaFullVersion` and `scalaBinaryVersion`
-   * according to the ModuleID's cross-versioning setting.
-   */
+  /** Constructs a function that will cross-version a ModuleID for the given full and binary Scala versions `scalaFullVersion` and `scalaBinaryVersion`
+    * according to the ModuleID's cross-versioning setting.
+    */
   def apply(scalaFullVersion: String, scalaBinaryVersion: String): ModuleID => ModuleID = m => {
     val cross = apply(m.crossVersion, scalaFullVersion, scalaBinaryVersion)
     if (cross.isDefined)
@@ -206,42 +191,36 @@ private[librarymanagement] abstract class CrossVersionFunctions {
 
   def isSbtApiCompatible(v: String): Boolean = CrossVersionUtil.isSbtApiCompatible(v)
 
-  /**
-   * Returns sbt binary interface x.y API compatible with the given version string v.
-   * RCs for x.y.0 are considered API compatible.
-   * Compatible versions include 0.12.0-1 and 0.12.0-RC1 for Some(0, 12).
-   */
+  /** Returns sbt binary interface x.y API compatible with the given version string v. RCs for x.y.0 are considered API compatible. Compatible versions include
+    * 0.12.0-1 and 0.12.0-RC1 for Some(0, 12).
+    */
   def sbtApiVersion(v: String): Option[(Long, Long)] = CrossVersionUtil.sbtApiVersion(v)
 
   def isScalaApiCompatible(v: String): Boolean = CrossVersionUtil.isScalaApiCompatible(v)
 
-  /**
-   * Returns Scala binary interface x.y API compatible with the given version string v.
-   * Compatible versions include 2.10.0-1 and 2.10.1-M1 for Some(2, 10), but not 2.10.0-RC1.
-   */
+  /** Returns Scala binary interface x.y API compatible with the given version string v. Compatible versions include 2.10.0-1 and 2.10.1-M1 for Some(2, 10), but
+    * not 2.10.0-RC1.
+    */
   def scalaApiVersion(v: String): Option[(Long, Long)] = CrossVersionUtil.scalaApiVersion(v)
 
-  /** Regular expression that extracts the major and minor components of a version into matched groups 1 and 2.*/
+  /** Regular expression that extracts the major and minor components of a version into matched groups 1 and 2. */
   val PartialVersion = CrossVersionUtil.PartialVersion
 
   /** Extracts the major and minor components of a version string `s` or returns `None` if the version is improperly formatted. */
   def partialVersion(s: String): Option[(Long, Long)] = CrossVersionUtil.partialVersion(s)
 
-  /**
-   * Computes the binary Scala version from the `full` version.
-   * Full Scala versions earlier than [[bleep.nosbt.librarymanagement.CrossVersion.TransitionScalaVersion]] are returned as is.
-   */
+  /** Computes the binary Scala version from the `full` version. Full Scala versions earlier than
+    * [[bleep.nosbt.librarymanagement.CrossVersion.TransitionScalaVersion]] are returned as is.
+    */
   def binaryScalaVersion(full: String): String = CrossVersionUtil.binaryScalaVersion(full)
 
-  /**
-   * Computes the binary sbt version from the `full` version.
-   * Full sbt versions earlier than [[bleep.nosbt.librarymanagement.CrossVersion.TransitionSbtVersion]] are returned as is.
-   */
+  /** Computes the binary sbt version from the `full` version. Full sbt versions earlier than
+    * [[bleep.nosbt.librarymanagement.CrossVersion.TransitionSbtVersion]] are returned as is.
+    */
   def binarySbtVersion(full: String): String = CrossVersionUtil.binarySbtVersion(full)
 
-  /**
-   * Returns `true` if a project targeting version `origVersion` can run with version `newVersion`.
-   */
+  /** Returns `true` if a project targeting version `origVersion` can run with version `newVersion`.
+    */
   def isScalaBinaryCompatibleWith(newVersion: String, origVersion: String): Boolean =
     CrossVersionUtil.isScalaBinaryCompatibleWith(newVersion, origVersion)
 }

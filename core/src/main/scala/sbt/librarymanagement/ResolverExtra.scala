@@ -7,7 +7,7 @@ import bleep.nosbt.util.Logger
 import org.xml.sax.SAXParseException
 
 import java.io.{File, IOException}
-import java.net.{ URI, URL }
+import java.net.{URI, URL}
 import scala.annotation.nowarn
 import scala.xml.XML
 
@@ -35,7 +35,7 @@ private[librarymanagement] abstract class MavenRepositoryFunctions {
 private[librarymanagement] abstract class PatternsFunctions {
   implicit def defaultPatterns: Patterns = Resolver.defaultPatterns
 
-  def apply(artifactPatterns: String*): Patterns = Patterns(true, artifactPatterns: _*)
+  def apply(artifactPatterns: String*): Patterns = Patterns(true, artifactPatterns*)
   def apply(isMavenCompatible: Boolean, artifactPatterns: String*): Patterns = {
     val patterns = artifactPatterns.toVector
     Patterns()
@@ -53,7 +53,7 @@ private[librarymanagement] trait SshBasedRepositoryExtra {
   type RepositoryType <: SshBasedRepository
   protected def copy(connection: SshConnection): RepositoryType
   private def copy(authentication: SshAuthentication): RepositoryType =
-    copy(connection withAuthentication authentication)
+    copy(connection `withAuthentication` authentication)
 
   /** Configures this to use the specified user name and password when connecting to the remote repository. */
   def as(user: String, password: String): RepositoryType = as(user, Some(password))
@@ -186,25 +186,20 @@ private[librarymanagement] abstract class ResolverFunctions {
     "https://repository.apache.org/content/repositories/snapshots/"
   )
 
-  /** Add the local and Maven Central repositories to the user repositories.  */
+  /** Add the local and Maven Central repositories to the user repositories. */
   def combineDefaultResolvers(userResolvers: Vector[Resolver]): Vector[Resolver] =
     combineDefaultResolvers(userResolvers, mavenCentral = true)
 
-  /**
-   * Add the local Ivy repository to the user repositories.
-   * If `mavenCentral` is true, add the Maven Central repository.
-   */
+  /** Add the local Ivy repository to the user repositories. If `mavenCentral` is true, add the Maven Central repository.
+    */
   def combineDefaultResolvers(
       userResolvers: Vector[Resolver],
       mavenCentral: Boolean
   ): Vector[Resolver] =
     combineDefaultResolvers(userResolvers, jcenter = false, mavenCentral)
 
-  /**
-   * Add the local Ivy repository to the user repositories.
-   * If `jcenter` is true, add the JCenter.
-   * If `mavenCentral` is true, add the Maven Central repository.
-   */
+  /** Add the local Ivy repository to the user repositories. If `jcenter` is true, add the JCenter. If `mavenCentral` is true, add the Maven Central repository.
+    */
   def combineDefaultResolvers(
       userResolvers: Vector[Resolver],
       jcenter: Boolean,
@@ -215,11 +210,9 @@ private[librarymanagement] abstract class ResolverFunctions {
       single(JCenterRepository, jcenter) ++
       single(DefaultMavenRepository, mavenCentral)
 
-  /**
-   * Reorganize the built-in resolvers that is configured for this application by the sbt launcher.
-   * If `jcenter` is true, add the JCenter.
-   * If `mavenCentral` is true, add the Maven Central repository.
-   */
+  /** Reorganize the built-in resolvers that is configured for this application by the sbt launcher. If `jcenter` is true, add the JCenter. If `mavenCentral` is
+    * true, add the Maven Central repository.
+    */
   private[nosbt] def reorganizeAppResolvers(
       appResolvers: Vector[Resolver],
       jcenter: Boolean,
@@ -241,7 +234,7 @@ private[librarymanagement] abstract class ResolverFunctions {
   private def single[T](value: T, nonEmpty: Boolean): Vector[T] =
     if (nonEmpty) Vector(value) else Vector.empty
 
-  /** A base class for defining factories for interfaces to Ivy repositories that require a hostname , port, and patterns.  */
+  /** A base class for defining factories for interfaces to Ivy repositories that require a hostname , port, and patterns. */
   sealed abstract class Define[RepositoryType <: SshBasedRepository] {
 
     /** Subclasses should implement this method to */
@@ -251,67 +244,61 @@ private[librarymanagement] abstract class ResolverFunctions {
         patterns: Patterns
     ): RepositoryType
 
-    /**
-     * Constructs this repository type with the given `name`.  `basePatterns` are the initial patterns to use.  A ManagedProject
-     * has an implicit defining these initial patterns based on a setting for either Maven or Ivy style patterns.
-     */
+    /** Constructs this repository type with the given `name`. `basePatterns` are the initial patterns to use. A ManagedProject has an implicit defining these
+      * initial patterns based on a setting for either Maven or Ivy style patterns.
+      */
     def apply(name: String)(implicit basePatterns: Patterns): RepositoryType =
       apply(name, None, None, None)
 
-    /**
-     * Constructs this repository type with the given `name` and `hostname`.  `basePatterns` are the initial patterns to use.
-     * A ManagedProject has an implicit defining these initial patterns based on a setting for either Maven or Ivy style patterns.
-     */
+    /** Constructs this repository type with the given `name` and `hostname`. `basePatterns` are the initial patterns to use. A ManagedProject has an implicit
+      * defining these initial patterns based on a setting for either Maven or Ivy style patterns.
+      */
     def apply(name: String, hostname: String)(implicit basePatterns: Patterns): RepositoryType =
       apply(name, Some(hostname), None, None)
 
-    /**
-     * Constructs this repository type with the given `name`, `hostname`, and the `basePath` against which the initial
-     * patterns will be resolved.  `basePatterns` are the initial patterns to use.
-     * A ManagedProject has an implicit defining these initial patterns based on a setting for either Maven or Ivy style patterns.
-     */
-    def apply(name: String, hostname: String, basePath: String)(
-        implicit basePatterns: Patterns
+    /** Constructs this repository type with the given `name`, `hostname`, and the `basePath` against which the initial patterns will be resolved.
+      * `basePatterns` are the initial patterns to use. A ManagedProject has an implicit defining these initial patterns based on a setting for either Maven or
+      * Ivy style patterns.
+      */
+    def apply(name: String, hostname: String, basePath: String)(implicit
+        basePatterns: Patterns
     ): RepositoryType =
       apply(name, Some(hostname), None, Some(basePath))
 
-    /**
-     * Constructs this repository type with the given `name`, `hostname`, and `port`.  `basePatterns` are the initial patterns to use.
-     * A ManagedProject has an implicit defining these initial patterns based on a setting for either Maven or Ivy style patterns.
-     */
-    def apply(name: String, hostname: String, port: Int)(
-        implicit basePatterns: Patterns
+    /** Constructs this repository type with the given `name`, `hostname`, and `port`. `basePatterns` are the initial patterns to use. A ManagedProject has an
+      * implicit defining these initial patterns based on a setting for either Maven or Ivy style patterns.
+      */
+    def apply(name: String, hostname: String, port: Int)(implicit
+        basePatterns: Patterns
     ): RepositoryType =
       apply(name, Some(hostname), Some(port), None)
 
-    /**
-     * Constructs this repository type with the given `name`, `hostname`, `port`, and the `basePath` against which the initial
-     * patterns will be resolved.  `basePatterns` are the initial patterns to use.
-     * A ManagedProject has an implicit defining these initial patterns based on a setting for either Maven or Ivy style patterns.
-     */
-    def apply(name: String, hostname: String, port: Int, basePath: String)(
-        implicit basePatterns: Patterns
+    /** Constructs this repository type with the given `name`, `hostname`, `port`, and the `basePath` against which the initial patterns will be resolved.
+      * `basePatterns` are the initial patterns to use. A ManagedProject has an implicit defining these initial patterns based on a setting for either Maven or
+      * Ivy style patterns.
+      */
+    def apply(name: String, hostname: String, port: Int, basePath: String)(implicit
+        basePatterns: Patterns
     ): RepositoryType =
       apply(name, Some(hostname), Some(port), Some(basePath))
 
-    /**
-     * Constructs this repository type with the given `name`, `hostname`, `port`, and the `basePath` against which the initial
-     * patterns will be resolved.  `basePatterns` are the initial patterns to use.  All but the `name` are optional (use None).
-     * A ManagedProject has an implicit defining these initial patterns based on a setting for either Maven or Ivy style patterns.
-     */
-    def apply(name: String, hostname: Option[String], port: Option[Int], basePath: Option[String])(
-        implicit basePatterns: Patterns
+    /** Constructs this repository type with the given `name`, `hostname`, `port`, and the `basePath` against which the initial patterns will be resolved.
+      * `basePatterns` are the initial patterns to use. All but the `name` are optional (use None). A ManagedProject has an implicit defining these initial
+      * patterns based on a setting for either Maven or Ivy style patterns.
+      */
+    def apply(name: String, hostname: Option[String], port: Option[Int], basePath: Option[String])(implicit
+        basePatterns: Patterns
     ): RepositoryType =
       construct(name, SshConnection(None, hostname, port), resolvePatterns(basePath, basePatterns))
   }
 
-  /** A factory to construct an interface to an Ivy SSH resolver.*/
+  /** A factory to construct an interface to an Ivy SSH resolver. */
   object ssh extends Define[SshRepository] {
     protected def construct(name: String, connection: SshConnection, patterns: Patterns) =
       SshRepository(name, connection, patterns, None)
   }
 
-  /** A factory to construct an interface to an Ivy SFTP resolver.*/
+  /** A factory to construct an interface to an Ivy SFTP resolver. */
   object sftp extends Define[SftpRepository] {
     protected def construct(name: String, connection: SshConnection, patterns: Patterns) =
       SftpRepository(name, connection, patterns)
@@ -320,10 +307,9 @@ private[librarymanagement] abstract class ResolverFunctions {
   /** A factory to construct an interface to an Ivy filesystem resolver. */
   object file {
 
-    /**
-     * Constructs a file resolver with the given name.  The patterns to use must be explicitly specified
-     * using the `withPatterns` method on the constructed resolver object.
-     */
+    /** Constructs a file resolver with the given name. The patterns to use must be explicitly specified using the `withPatterns` method on the constructed
+      * resolver object.
+      */
     def apply(name: String): FileRepository =
       FileRepository(name, defaultFileConfiguration, Patterns(false))
 
@@ -339,25 +325,22 @@ private[librarymanagement] abstract class ResolverFunctions {
   }
   object url {
 
-    /**
-     * Constructs a URL resolver with the given name.  The patterns to use must be explicitly specified
-     * using the `withPatterns` method on the constructed resolver object.
-     */
+    /** Constructs a URL resolver with the given name. The patterns to use must be explicitly specified using the `withPatterns` method on the constructed
+      * resolver object.
+      */
     def apply(name: String): URLRepository = URLRepository(name, Patterns(false))
 
     /** Constructs a file resolver with the given name and base directory. */
     def apply(name: String, baseURL: URL)(implicit basePatterns: Patterns): URLRepository =
       baseRepository(baseURL.toURI.normalize.toString)(URLRepository(name, _))
   }
-  private def baseRepository[T](base: String)(construct: Patterns => T)(
-      implicit basePatterns: Patterns
+  private def baseRepository[T](base: String)(construct: Patterns => T)(implicit
+      basePatterns: Patterns
   ): T =
     construct(resolvePatterns(base, basePatterns))
 
-  /**
-   * If `base` is None, `patterns` is returned unchanged.
-   * Otherwise, the ivy file and artifact patterns in `patterns` are resolved against the given base.
-   */
+  /** If `base` is None, `patterns` is returned unchanged. Otherwise, the ivy file and artifact patterns in `patterns` are resolved against the given base.
+    */
   private def resolvePatterns(base: Option[String], patterns: Patterns): Patterns =
     base match {
       case Some(path) => resolvePatterns(path, patterns)
@@ -382,7 +365,7 @@ private[librarymanagement] abstract class ResolverFunctions {
   }
   def defaultFileConfiguration = FileConfiguration(true, None)
   def mavenStylePatterns = Patterns().withArtifactPatterns(Vector(mavenStyleBasePattern))
-  def ivyStylePatterns = defaultIvyPatterns //Patterns(Nil, Nil, false)
+  def ivyStylePatterns = defaultIvyPatterns // Patterns(Nil, Nil, false)
 
   def defaultPatterns = mavenStylePatterns
   def mavenStyleBasePattern =
@@ -398,26 +381,29 @@ private[librarymanagement] abstract class ResolverFunctions {
     val findQuoted = "\\$\\{([^\\}]*)\\}".r
     val env = "env\\.(.*)".r
 
-    findQuoted.replaceAllIn(str, _.group(1) match {
-      case env(variable) => sys.env.getOrElse(variable, "")
-      case property      => sys.props.getOrElse(property, "")
-    })
+    findQuoted.replaceAllIn(
+      str,
+      _.group(1) match {
+        case env(variable) => sys.env.getOrElse(variable, "")
+        case property      => sys.props.getOrElse(property, "")
+      }
+    )
   }
-  private[this] def mavenLocalDir: File = {
+  private def mavenLocalDir: File = {
     def loadHomeFromSettings(f: () => File): Option[File] =
       try {
         val file = f()
         if (!file.exists) None
         else
-          ((XML.loadFile(file) \ "localRepository").text match {
+          (XML.loadFile(file) \ "localRepository").text match {
             case ""    => None
             case e @ _ => Some(new File(expandMavenSettings(e)))
-          })
+          }
       } catch {
         // Occurs inside File constructor when property or environment variable does not exist
         case _: NullPointerException => None
         // Occurs when File does not exist
-        case _: IOException => None
+        case _: IOException       => None
         case e: SAXParseException =>
           System.err.println(s"WARNING: Problem parsing ${f().getAbsolutePath}, ${e.getMessage}");
           None
@@ -446,18 +432,16 @@ private[librarymanagement] abstract class ResolverFunctions {
   }
 
   // to display all error messages at once, just log here don't throw
-  private[nosbt] def warnHttp(value: String, suggestion: String, logger: Logger): Unit = {
+  private[nosbt] def warnHttp(value: String, suggestion: String, logger: Logger): Unit =
     logger.error(s"insecure HTTP request is unsupported '$value'; switch to HTTPS$suggestion")
-  }
-  private[nosbt] def isInsecureUrl(str: String): Boolean = {
+  private[nosbt] def isInsecureUrl(str: String): Boolean =
     // don't try to parse str as URL because it could contain $variable from Ivy pattern
     str.startsWith("http:") &&
-    !(str.startsWith("http://localhost/")
-      || str.startsWith("http://localhost:")
-      || str.startsWith("http://127.0.0.1/")
-      || str.startsWith("http://127.0.0.1:"))
-  }
-  private[nosbt] def validateURLRepository(repo: URLRepository, logger: Logger): Boolean = {
+      !(str.startsWith("http://localhost/")
+        || str.startsWith("http://localhost:")
+        || str.startsWith("http://127.0.0.1/")
+        || str.startsWith("http://127.0.0.1:"))
+  private[nosbt] def validateURLRepository(repo: URLRepository, logger: Logger): Boolean =
     if (repo.allowInsecureProtocol) false
     else {
       val patterns = repo.patterns
@@ -478,7 +462,6 @@ private[librarymanagement] abstract class ResolverFunctions {
         true
       } else false
     }
-  }
 
   private[nosbt] def validateMavenRepo(repo: MavenRepo, logger: Logger): Boolean =
     if (repo.allowInsecureProtocol) false

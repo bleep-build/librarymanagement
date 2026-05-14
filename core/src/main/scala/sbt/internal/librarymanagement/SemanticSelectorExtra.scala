@@ -42,11 +42,10 @@ private[librarymanagement] abstract class SemSelAndChunkFunctions {
     SemSelAndChunk(comparators.flatMap(_.expandWildcard).toIndexedSeq)
   }
 
-  private[this] def hasOperator(comparator: String): Boolean = {
+  private def hasOperator(comparator: String): Boolean =
     comparator.startsWith("<") ||
-    comparator.startsWith(">") ||
-    comparator.startsWith("=")
-  }
+      comparator.startsWith(">") ||
+      comparator.startsWith("=")
 }
 
 private[librarymanagement] abstract class SemComparatorExtra {
@@ -58,8 +57,8 @@ private[librarymanagement] abstract class SemComparatorExtra {
 
   protected def toStringImpl: String = {
     val versionStr = Seq(major, minor, patch)
-      .collect {
-        case Some(v) => v.toString
+      .collect { case Some(v) =>
+        v.toString
       }
       .mkString(".")
     val tagsStr = if (tags.nonEmpty) s"-${tags.mkString("-")}" else ""
@@ -102,16 +101,15 @@ private[librarymanagement] abstract class SemComparatorExtra {
       case _               => false
     }
   }
-  private[this] def comparePreReleaseTags(ts1: Seq[String], ts2: Seq[String]): Int = {
+  private def comparePreReleaseTags(ts1: Seq[String], ts2: Seq[String]): Int =
     // > When major, minor, and patch are equal, a pre-release version has lower precedence than a normal version.
     if (ts1.isEmpty && ts2.isEmpty) 0
     else if (ts1.nonEmpty && ts2.isEmpty) -1 // ts1 is pre-release version
     else if (ts1.isEmpty && ts2.nonEmpty) 1 // ts2 is pre-release version
     else compareTags(ts1, ts2)
-  }
 
   @tailrec
-  private[this] def compareTags(ts1: Seq[String], ts2: Seq[String]): Int = {
+  private def compareTags(ts1: Seq[String], ts2: Seq[String]): Int =
     // > A larger set of pre-release fields has a higher precedence than a smaller set,
     // > if all of the preceding identifiers are equal.
     if (ts1.isEmpty && ts2.isEmpty) 0
@@ -124,16 +122,15 @@ private[librarymanagement] abstract class SemComparatorExtra {
         // Identifiers consisting of only digits are compared numerically.
         // Numeric identifiers always have lower precedence than non-numeric identifiers.
         // Identifiers with letters are compared case insensitive lexical order.
-        case (true, true)  => implicitly[Ordering[Long]].compare(ts1head.toLong, ts2head.toLong)
-        case (false, true) => 1
-        case (true, false) => -1
+        case (true, true)   => implicitly[Ordering[Long]].compare(ts1head.toLong, ts2head.toLong)
+        case (false, true)  => 1
+        case (true, false)  => -1
         case (false, false) =>
           ts1head.toLowerCase(Locale.ENGLISH).compareTo(ts2head.toLowerCase(Locale.ENGLISH))
       }
       if (cmp == 0) compareTags(ts1.tail, ts2.tail)
       else cmp
     }
-  }
 
   // Expand wildcard with `=` operator to and clause of comparators.
   // `=1.0` is equivalent to `>=1.0 <=1.0`
@@ -142,7 +139,7 @@ private[librarymanagement] abstract class SemComparatorExtra {
 }
 
 private[librarymanagement] abstract class SemComparatorFunctions {
-  private[this] val ComparatorRegex = """(?x)^
+  private val ComparatorRegex = """(?x)^
       ([<>]=?|=)?
       (?:(\d+|[xX*])
         (?:\.(\d+|[xX*])
@@ -150,7 +147,7 @@ private[librarymanagement] abstract class SemComparatorFunctions {
         )?
       )((?:-\w+(?:\.\w+)*)*)$
     """.r
-  protected def parse(comparator: String): SemComparator = {
+  protected def parse(comparator: String): SemComparator =
     comparator match {
       case ComparatorRegex(rawOp, rawMajor, rawMinor, rawPatch, ts) =>
         val opStr = Option(rawOp)
@@ -177,8 +174,8 @@ private[librarymanagement] abstract class SemComparatorFunctions {
           }
           parse(
             numbers
-              .collect {
-                case Some(v) => v.toString
+              .collect { case Some(v) =>
+                v.toString
               }
               .mkString(".")
           )
@@ -194,7 +191,7 @@ private[librarymanagement] abstract class SemComparatorFunctions {
             case Some(">=") => Gte
             case Some("=")  => Eq
             case None       => Eq
-            case Some(_) =>
+            case Some(_)    =>
               throw new IllegalArgumentException(s"Invalid operator: $opStr")
           }
           SemComparator(
@@ -207,9 +204,8 @@ private[librarymanagement] abstract class SemComparatorFunctions {
         }
       case _ => throw new IllegalArgumentException(s"Invalid comparator: $comparator")
     }
-  }
-  private[this] def splitOn[A](s: String, sep: Char): Vector[String] =
+  private def splitOn[A](s: String, sep: Char): Vector[String] =
     if (s eq null) Vector()
     else s.split(sep).filterNot(_ == "").toVector
-  private[this] def splitDash(s: String) = splitOn(s, '-')
+  private def splitDash(s: String) = splitOn(s, '-')
 }

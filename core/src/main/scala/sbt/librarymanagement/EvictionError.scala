@@ -11,17 +11,16 @@ object EvictionError {
   def apply(
       report: UpdateReport,
       module: ModuleDescriptor,
-      schemes: Seq[ModuleID],
-  ): EvictionError = {
+      schemes: Seq[ModuleID]
+  ): EvictionError =
     apply(report, module, schemes, "always", "always")
-  }
 
   def apply(
       report: UpdateReport,
       module: ModuleDescriptor,
       schemes: Seq[ModuleID],
       assumedVersionScheme: String,
-      assumedVersionSchemeJava: String,
+      assumedVersionSchemeJava: String
   ): EvictionError = {
     val options = EvictionWarningOptions.full
     val evictions = EvictionWarning.buildEvictions(options, report)
@@ -31,7 +30,7 @@ object EvictionError {
       evictions,
       schemes,
       assumedVersionScheme,
-      assumedVersionSchemeJava,
+      assumedVersionSchemeJava
     )
   }
 
@@ -41,7 +40,7 @@ object EvictionError {
       reports: Seq[OrganizationArtifactReport],
       schemes: Seq[ModuleID],
       assumedVersionScheme: String,
-      assumedVersionSchemeJava: String,
+      assumedVersionSchemeJava: String
   ): EvictionError = {
 
     val pairs = reports map { detail =>
@@ -60,7 +59,6 @@ object EvictionError {
     val assumedIncompatEvictions: mutable.ListBuffer[(EvictionPair, String)] = mutable.ListBuffer()
     val sbvOpt = module.scalaModuleInfo.map(_.scalaBinaryVersion)
     val userDefinedSchemes: Map[(String, String), String] = Map(schemes flatMap { s =>
-
       VersionSchemes.validateScheme(s.revision)
       val versionScheme = s.revision
       (s.crossVersion, sbvOpt) match {
@@ -79,7 +77,7 @@ object EvictionError {
         case _ =>
           List((s.organization, s.name) -> versionScheme)
       }
-    }: _*)
+    }*)
 
     pairs foreach {
       // don't report on a transitive eviction that does not have a winner
@@ -129,7 +127,7 @@ object EvictionError {
 
     new EvictionError(
       incompatibleEvictions.toList,
-      assumedIncompatEvictions.toList,
+      assumedIncompatEvictions.toList
     )
   }
 
@@ -140,7 +138,7 @@ object EvictionError {
 
 final class EvictionError private[nosbt] (
     val incompatibleEvictions: Seq[(EvictionPair, String)],
-    val assumedIncompatibleEvictions: Seq[(EvictionPair, String)],
+    val assumedIncompatibleEvictions: Seq[(EvictionPair, String)]
 ) {
   def run(): Unit =
     if (incompatibleEvictions.nonEmpty) {
@@ -155,31 +153,30 @@ final class EvictionError private[nosbt] (
     val out: mutable.ListBuffer[String] = mutable.ListBuffer()
     out += "found version conflict(s) in library dependencies; some are suspected to be binary incompatible:"
     out += ""
-    evictions.foreach({
-      case (a, scheme) =>
-        val revs = a.evicteds map { _.module.revision }
-        val revsStr =
-          if (revs.size <= 1) revs.mkString else "{" + revs.distinct.mkString(", ") + "}"
-        val seen: mutable.Set[ModuleID] = mutable.Set()
-        val callers: List[String] = (a.evicteds.toList ::: a.winner.toList) flatMap { r =>
-          val rev = r.module.revision
-          r.callers.toList flatMap { caller =>
-            if (seen(caller.caller)) Nil
-            else {
-              seen += caller.caller
-              List(f"\t    +- ${caller}%-50s (depends on $rev)")
-            }
+    evictions.foreach { case (a, scheme) =>
+      val revs = a.evicteds map { _.module.revision }
+      val revsStr =
+        if (revs.size <= 1) revs.mkString else "{" + revs.distinct.mkString(", ") + "}"
+      val seen: mutable.Set[ModuleID] = mutable.Set()
+      val callers: List[String] = (a.evicteds.toList ::: a.winner.toList) flatMap { r =>
+        val rev = r.module.revision
+        r.callers.toList flatMap { caller =>
+          if (seen(caller.caller)) Nil
+          else {
+            seen += caller.caller
+            List(f"\t    +- ${caller}%-50s (depends on $rev)")
           }
         }
-        val que = if (assumed) "?" else ""
-        val winnerRev = a.winner match {
-          case Some(r) => s":${r.module.revision} ($scheme$que) is selected over ${revsStr}"
-          case _       => " is evicted for all versions"
-        }
-        val title = s"\t* ${a.organization}:${a.name}$winnerRev"
-        val lines = title :: (if (a.showCallers) callers.reverse else Nil) ::: List("")
-        out ++= lines
-    })
+      }
+      val que = if (assumed) "?" else ""
+      val winnerRev = a.winner match {
+        case Some(r) => s":${r.module.revision} ($scheme$que) is selected over ${revsStr}"
+        case _       => " is evicted for all versions"
+      }
+      val title = s"\t* ${a.organization}:${a.name}$winnerRev"
+      val lines = title :: (if (a.showCallers) callers.reverse else Nil) ::: List("")
+      out ++= lines
+    }
     out.toList
   }
 }

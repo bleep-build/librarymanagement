@@ -5,9 +5,8 @@ import bleep.nosbt.librarymanagement.*
 
 import java.io.File
 
-/**
- * This is a list of functions with default values.
- */
+/** This is a list of functions with default values.
+  */
 object InternalDefaults {
   val modulePrefixTemp = "temp-module-"
 

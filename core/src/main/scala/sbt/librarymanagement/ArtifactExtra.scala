@@ -15,7 +15,7 @@ private[librarymanagement] abstract class ArtifactExtra {
     withExtraAttributes(extraAttributes ++ ModuleID.checkE(attributes))
 }
 
-import Configurations.{ Optional, Pom, Test }
+import Configurations.{Optional, Pom, Test}
 
 private[librarymanagement] abstract class ArtifactFunctions {
   def apply(name: String, extra: Map[String, String]): Artifact =
@@ -117,11 +117,9 @@ private[librarymanagement] abstract class ArtifactFunctions {
   def classifierType(classifier: String): String =
     classifierTypeMap.getOrElse(classifier.stripPrefix(TestsClassifier + "-"), DefaultType)
 
-  /**
-   * Create a classified explicit artifact, to be used when trying to resolve sources|javadocs from Maven. This is
-   * necessary because those artifacts are not published in the Ivy generated from the Pom of the module in question.
-   * The artifact is created under the default configuration.
-   */
+  /** Create a classified explicit artifact, to be used when trying to resolve sources|javadocs from Maven. This is necessary because those artifacts are not
+    * published in the Ivy generated from the Pom of the module in question. The artifact is created under the default configuration.
+    */
   def classified(name: String, classifier: String): Artifact =
     Artifact(
       name,

@@ -27,22 +27,23 @@ final class VersionNumber private[nosbt] (
     case _                => false
   }
 
-  def matchesSemVer(selsem: SemanticSelector): Boolean = {
+  def matchesSemVer(selsem: SemanticSelector): Boolean =
     selsem.matches(this)
-  }
 
   /** A variant of mkString that returns the empty string if the sequence is empty. */
-  private[this] def mkString1[A](xs: Seq[A], start: String, sep: String, end: String): String =
+  private def mkString1[A](xs: Seq[A], start: String, sep: String, end: String): String =
     if (xs.isEmpty) "" else xs.mkString(start, sep, end)
 }
 
 object VersionNumber {
 
-  /**
-   * @param numbers numbers delimited by a dot.
-   * @param tags string prefixed by a dash.
-   * @param extras strings at the end.
-   */
+  /** @param numbers
+    *   numbers delimited by a dot.
+    * @param tags
+    *   string prefixed by a dash.
+    * @param extras
+    *   strings at the end.
+    */
   def apply(numbers: Seq[Long], tags: Seq[String], extras: Seq[String]): VersionNumber =
     new VersionNumber(numbers, tags, extras)
 
@@ -140,7 +141,7 @@ object VersionNumber {
     def isCompatible(v1: VersionNumber, v2: VersionNumber): Boolean =
       doIsCompat(dropBuildMetadata(v1), dropBuildMetadata(v2))
 
-    private[this] def doIsCompat(v1: VersionNumber, v2: VersionNumber): Boolean =
+    private def doIsCompat(v1: VersionNumber, v2: VersionNumber): Boolean =
       (v1, v2) match {
         case (NormalVersion(0, _, _), NormalVersion(0, _, _))   => v1 == v2 // R4
         case (NormalVersion(_, 0, 0), NormalVersion(_, 0, 0))   => v1 == v2 // R9 maybe?
@@ -162,20 +163,18 @@ object VersionNumber {
     }
   }
 
-  /** A variant of SemVar that seems to be common among the Scala libraries.
-   * The second segment (y in x.y.z) increments breaks the binary compatibility even when x > 0.
-   * Also API compatibility is expected even when the first segment is zero.
-   */
+  /** A variant of SemVar that seems to be common among the Scala libraries. The second segment (y in x.y.z) increments breaks the binary compatibility even
+    * when x > 0. Also API compatibility is expected even when the first segment is zero.
+    */
   object SecondSegment extends VersionNumberCompatibility {
     def name: String = "Second Segment Variant"
     def isCompatible(v1: VersionNumber, v2: VersionNumber): Boolean =
       PackVer.isCompatible(v1, v2)
   }
 
-  /** A variant of SemVar that seems to be common among the Scala libraries.
-   * The second segment (y in x.y.z) increments breaks the binary compatibility even when x > 0.
-   * Also API compatibility is expected even when the first segment is zero.
-   */
+  /** A variant of SemVar that seems to be common among the Scala libraries. The second segment (y in x.y.z) increments breaks the binary compatibility even
+    * when x > 0. Also API compatibility is expected even when the first segment is zero.
+    */
   object PackVer extends VersionNumberCompatibility {
     import SemVer._
 
@@ -184,17 +183,16 @@ object VersionNumber {
     def isCompatible(v1: VersionNumber, v2: VersionNumber): Boolean =
       doIsCompat(dropBuildMetadata(v1), dropBuildMetadata(v2))
 
-    private[this] def doIsCompat(v1: VersionNumber, v2: VersionNumber): Boolean = {
+    private def doIsCompat(v1: VersionNumber, v2: VersionNumber): Boolean =
       (v1, v2) match {
         case (NormalVersion(_, _, 0), NormalVersion(_, _, 0))     => v1 == v2 // R9 maybe?
         case (NormalVersion(x1, y1, _), NormalVersion(x2, y2, _)) => (x1 == x2) && (y1 == y2)
         case _                                                    => false
       }
-    }
   }
 
   /** A variant of SemVar that enforces API compatibility when the first segment is zero.
-   */
+    */
   object EarlySemVer extends VersionNumberCompatibility {
     import SemVer._
 
@@ -246,7 +244,7 @@ object VersionNumber {
     def isCompatible(v1: VersionNumber, v2: VersionNumber): Boolean =
       doIsCompat(dropBuildMetadata(v1), dropBuildMetadata(v2))
 
-    private[this] def doIsCompat(v1: VersionNumber, v2: VersionNumber): Boolean =
+    private def doIsCompat(v1: VersionNumber, v2: VersionNumber): Boolean =
       (v1, v2) match {
         case (NormalVersion(0, _, 0), NormalVersion(0, _, 0))   => v1 == v2
         case (NormalVersion(0, y1, _), NormalVersion(0, y2, _)) => y1 == y2

@@ -55,19 +55,12 @@ object UpdateClassifiersUtil {
       Artifact.classified(name, c)
     }
 
-  /**
-   * Explicitly set an "include all" rule (the default) because otherwise, if we declare ANY explicitArtifacts,
-   * [[org.apache.ivy.core.resolve.IvyNode#getArtifacts]] (in Ivy 2.3.0-rc1) will not merge in the descriptor's
-   * artifacts and will only keep the explicitArtifacts.
-   * <br>
-   * Look for the comment saying {{{
-   *   // and now we filter according to include rules
-   * }}}
-   * in `IvyNode`, which iterates on `includes`, which will ordinarily be empty because higher up, in {{{
-   *   addAllIfNotNull(includes, usage.getDependencyIncludesSet(rootModuleConf));
-   * }}}
-   * `usage.getDependencyIncludesSet` returns null if there are no (explicit) include rules.
-   */
+  /** Explicitly set an "include all" rule (the default) because otherwise, if we declare ANY explicitArtifacts,
+    * [[org.apache.ivy.core.resolve.IvyNode#getArtifacts]] (in Ivy 2.3.0-rc1) will not merge in the descriptor's artifacts and will only keep the
+    * explicitArtifacts. <br> Look for the comment saying {{{// and now we filter according to include rules}}} in `IvyNode`, which iterates on `includes`,
+    * which will ordinarily be empty because higher up, in {{{addAllIfNotNull(includes, usage.getDependencyIncludesSet(rootModuleConf));}}}
+    * `usage.getDependencyIncludesSet` returns null if there are no (explicit) include rules.
+    */
   private def intransitiveModuleWithExplicitArts(
       module: ModuleID,
       arts: Vector[Artifact]

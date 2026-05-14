@@ -1,34 +1,29 @@
-/**
- * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
- */
+/** This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
+  */
 package bleep.nosbt.librarymanagement
 
 import scala.collection.concurrent.TrieMap
 
-/**
- * A reference to Configuration.
- * @param name The name of the configuration that eventually get used by Maven.
- */
+/** A reference to Configuration.
+  * @param name
+  *   The name of the configuration that eventually get used by Maven.
+  */
 final class ConfigRef private (val name: String) extends Serializable {
 
   override def equals(o: Any): Boolean =
     this.eq(o.asInstanceOf[AnyRef])
 
-  override val hashCode: Int = {
+  override val hashCode: Int =
     37 * (37 * (17 + "bleep.nosbt.librarymanagement.ConfigRef".##) + name.##)
-  }
 
-  override def toString: String = {
+  override def toString: String =
     name
-  }
 
-  private[this] def copy(name: String): ConfigRef = {
+  private def copy(name: String): ConfigRef =
     ConfigRef(name)
-  }
 
-  def withName(name: String): ConfigRef = {
+  def withName(name: String): ConfigRef =
     copy(name = name)
-  }
 }
 
 object ConfigRef extends bleep.nosbt.librarymanagement.ConfigRefFunctions {

@@ -1,11 +1,8 @@
 package bleep.nosbt.librarymanagement
 
-trait LibraryManagementSyntax0 {
-}
+trait LibraryManagementSyntax0 {}
 
-trait LibraryManagementSyntax
-    extends LibraryManagementSyntax0
-    with DependencyBuilders{
+trait LibraryManagementSyntax extends LibraryManagementSyntax0 with DependencyBuilders {
   // See http://www.scala-lang.org/news/2.12.0#traits-compile-to-interfaces
   // Avoid defining fields (val or var, but a constant is ok – final val without result type)
   // Avoid calling super
@@ -17,7 +14,7 @@ trait LibraryManagementSyntax
   type InclusionRule = InclExclRule
   final val InclusionRule = InclExclRule
 
-  import bleep.nosbt.librarymanagement.{ Configurations => C }
+  import bleep.nosbt.librarymanagement.{Configurations => C}
   final val Compile = C.Compile
   final val Test = C.Test
   final val Runtime = C.Runtime

@@ -1,9 +1,8 @@
-/**
- * This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
- */
+/** This code is generated using [[https://www.scala-bleep.nosbt.org/contraband/ sbt-contraband]].
+  */
 package bleep.nosbt.librarymanagement
 
-import _root_.sjsonnew.{Builder, JsonFormat, Unbuilder, deserializationError}
+import _root_.sjsonnew.{deserializationError, Builder, JsonFormat, Unbuilder}
 
 trait ConfigRefFormats { self: sjsonnew.BasicJsonProtocol =>
   implicit lazy val ConfigRefFormat: JsonFormat[bleep.nosbt.librarymanagement.ConfigRef] =
@@ -11,7 +10,7 @@ trait ConfigRefFormats { self: sjsonnew.BasicJsonProtocol =>
       override def read[J](
           __jsOpt: Option[J],
           unbuilder: Unbuilder[J]
-      ): bleep.nosbt.librarymanagement.ConfigRef = {
+      ): bleep.nosbt.librarymanagement.ConfigRef =
         __jsOpt match {
           case Some(__js) =>
             unbuilder.beginObject(__js)
@@ -21,7 +20,6 @@ trait ConfigRefFormats { self: sjsonnew.BasicJsonProtocol =>
           case None =>
             deserializationError("Expected JsObject but found None")
         }
-      }
       override def write[J](obj: bleep.nosbt.librarymanagement.ConfigRef, builder: Builder[J]): Unit = {
         builder.beginObject()
         builder.addField("name", obj.name)

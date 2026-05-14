@@ -3,7 +3,7 @@
  */
 package bleep.nosbt.librarymanagement
 
-import bleep.nosbt.librarymanagement.DependencyBuilders.{ Organization, OrganizationArtifactName }
+import bleep.nosbt.librarymanagement.DependencyBuilders.{Organization, OrganizationArtifactName}
 
 private[librarymanagement] abstract class InclExclRuleFunctions {
   def everything = InclExclRule("*", "*", "*", Vector.empty, Disabled())

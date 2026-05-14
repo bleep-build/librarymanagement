@@ -2,11 +2,8 @@ package bleep.nosbt.librarymanagement
 
 import java.net.{URI, URL}
 
-/**
- * Commonly used software licenses
- * Names are SPDX ids:
- * https://raw.githubusercontent.com/spdx/license-list-data/master/json/licenses.json
- */
+/** Commonly used software licenses Names are SPDX ids: https://raw.githubusercontent.com/spdx/license-list-data/master/json/licenses.json
+  */
 object License {
   lazy val Apache2: (String, URL) =
     ("Apache-2.0", URI.create("https://www.apache.org/licenses/LICENSE-2.0.txt").toURL)

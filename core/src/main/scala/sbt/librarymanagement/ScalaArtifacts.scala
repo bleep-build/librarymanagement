@@ -24,18 +24,16 @@ object ScalaArtifacts {
   private[nosbt] final val Scala3DocPrefix = Scala3DocID + "_"
   private[nosbt] final val Scala3TastyInspectorPrefix = Scala3TastyInspectorID + "_"
 
-  def isScala2Artifact(name: String): Boolean = {
+  def isScala2Artifact(name: String): Boolean =
     name == LibraryID || name == CompilerID || name == ReflectID || name == ActorsID || name == ScalapID
-  }
-  def isScala3Artifact(name: String): Boolean = {
+  def isScala3Artifact(name: String): Boolean =
     name.startsWith(Scala3LibraryPrefix) ||
-    name.startsWith(Scala3CompilerPrefix) ||
-    name.startsWith(TastyCorePrefix) ||
-    name == Scala3InterfacesID ||
-    name.startsWith(ScaladocPrefix) ||
-    name.startsWith(Scala3DocPrefix) ||
-    name.startsWith(Scala3TastyInspectorPrefix)
-  }
+      name.startsWith(Scala3CompilerPrefix) ||
+      name.startsWith(TastyCorePrefix) ||
+      name == Scala3InterfacesID ||
+      name.startsWith(ScaladocPrefix) ||
+      name.startsWith(Scala3DocPrefix) ||
+      name.startsWith(Scala3TastyInspectorPrefix)
 
   def isScala3(scalaVersion: String): Boolean = scalaVersion.startsWith("3.")
 
@@ -44,25 +42,22 @@ object ScalaArtifacts {
       (scalaVersion == "3.0.0-M2") ||
       (scalaVersion == "3.0.0-M3")
 
-  def libraryIds(version: String): Array[String] = {
+  def libraryIds(version: String): Array[String] =
     if (isScala3(version))
       Array(Scala3LibraryID, LibraryID)
     else Array(LibraryID)
-  }
 
-  def compilerId(version: String): String = {
+  def compilerId(version: String): String =
     if (isScala3(version)) Scala3CompilerID
     else CompilerID
-  }
 
   def libraryDependency(version: String): ModuleID = libraryDependency(Organization, version)
 
-  def libraryDependency(org: String, version: String): ModuleID = {
+  def libraryDependency(org: String, version: String): ModuleID =
     if (isScala3(version))
       ModuleID(org, Scala3LibraryID, version).withCrossVersion(CrossVersion.binary)
     else
       ModuleID(org, LibraryID, version)
-  }
 
   private[nosbt] def docToolDependencies(
       org: String,
@@ -98,7 +93,7 @@ object ScalaArtifacts {
         scala2ToolDependency(org, LibraryID, version)
       )
 
-  private[this] def scala2ToolDependency(org: String, id: String, version: String): ModuleID =
+  private def scala2ToolDependency(org: String, id: String, version: String): ModuleID =
     ModuleID(org, id, version).withConfigurations(
       Some(Configurations.ScalaTool.name + "->default,optional(default)")
     )

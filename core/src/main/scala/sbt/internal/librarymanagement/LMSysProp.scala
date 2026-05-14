@@ -44,7 +44,7 @@ object LMSysProp {
   lazy val modifyVersionRange: Boolean = getOrTrue("bleep.nosbt.modversionrange")
 
   lazy val isJavaVersion9Plus: Boolean = javaVersion > 8
-  lazy val javaVersion: Int = {
+  lazy val javaVersion: Int =
     try {
       // See Oracle section 1.5.3 at:
       // https://docs.oracle.com/javase/8/docs/technotes/guides/versioning/spec/versioning2.html
@@ -57,7 +57,6 @@ object LMSysProp {
     } catch {
       case NonFatal(_) => 0
     }
-  }
 
   lazy val useGigahorse: Boolean = getOrFalse("bleep.nosbt.gigahorse")
   lazy val maxPublishAttempts: Int =

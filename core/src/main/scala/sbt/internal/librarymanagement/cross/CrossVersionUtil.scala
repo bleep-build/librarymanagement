@@ -18,7 +18,7 @@ object CrossVersionUtil {
   def isDisabled(s: String): Boolean =
     (s == falseString) || (s == noneString) || (s == disabledString)
 
-  def isBinary(s: String): Boolean = (s == binaryString)
+  def isBinary(s: String): Boolean = s == binaryString
 
   private val longPattern = """\d{1,19}"""
   private val basicVersion = raw"""($longPattern)\.($longPattern)\.($longPattern)"""
@@ -32,14 +32,12 @@ object CrossVersionUtil {
 
   private[nosbt] def isSbtApiCompatible(v: String): Boolean = sbtApiVersion(v).isDefined
 
-  /**
-   * Returns sbt binary interface x.y API compatible with the given version string v.
-   * RCs for x.y.0 are considered API compatible.
-   * Compatible versions include 0.12.0-1 and 0.12.0-RC1 for Some(0, 12).
-   */
+  /** Returns sbt binary interface x.y API compatible with the given version string v. RCs for x.y.0 are considered API compatible. Compatible versions include
+    * 0.12.0-1 and 0.12.0-RC1 for Some(0, 12).
+    */
   private[nosbt] def sbtApiVersion(v: String): Option[(Long, Long)] = v match {
-    case ReleaseV(x, y, _, _)   => Some(sbtApiVersion(x.toLong, y.toLong))
-    case CandidateV(x, y, _, _) => Some(sbtApiVersion(x.toLong, y.toLong))
+    case ReleaseV(x, y, _, _)                                       => Some(sbtApiVersion(x.toLong, y.toLong))
+    case CandidateV(x, y, _, _)                                     => Some(sbtApiVersion(x.toLong, y.toLong))
     case NonReleaseV_n(x, y, z, _) if x.toLong == 0 && z.toLong > 0 =>
       Some(sbtApiVersion(x.toLong, y.toLong))
     case NonReleaseV_n(x, y, z, _) if x.toLong > 0 && (y.toLong > 0 || z.toLong > 0) =>
@@ -47,20 +45,18 @@ object CrossVersionUtil {
     case _ => None
   }
 
-  private def sbtApiVersion(x: Long, y: Long) = {
+  private def sbtApiVersion(x: Long, y: Long) =
     // Prior to sbt 1 the "sbt api version" was the X.Y in the X.Y.Z version.
     // For example for sbt 0.13.x releases, the sbt api version is 0.13
     // As of sbt 1 it is now X.0.
     // This means, for example, that all versions of sbt 1.x have sbt api version 1.0
     if (x > 0) (x, 0L) else (x, y)
-  }
 
   private[nosbt] def isScalaApiCompatible(v: String): Boolean = scalaApiVersion(v).isDefined
 
-  /**
-   * Returns Scala binary interface x.y API compatible with the given version string v.
-   * Compatible versions include 2.10.0-1 and 2.10.1-M1 for Some(2, 10), but not 2.10.0-RC1.
-   */
+  /** Returns Scala binary interface x.y API compatible with the given version string v. Compatible versions include 2.10.0-1 and 2.10.1-M1 for Some(2, 10), but
+    * not 2.10.0-RC1.
+    */
   private[nosbt] def scalaApiVersion(v: String): Option[(Long, Long)] = v match {
     case ReleaseV(x, y, _, _)                     => Some((x.toLong, y.toLong))
     case BinCompatV(x, y, _, _, _)                => Some((x.toLong, y.toLong))
@@ -77,7 +73,7 @@ object CrossVersionUtil {
   private[nosbt] def binaryScala3Version(full: String): String = full match {
     case ReleaseV(maj, _, _, _)                                                  => maj
     case NonReleaseV_n(maj, min, patch, _) if min.toLong > 0 || patch.toLong > 0 => maj
-    case BinCompatV(maj, min, patch, stageOrNull, _) =>
+    case BinCompatV(maj, min, patch, stageOrNull, _)                             =>
       val stage = if (stageOrNull != null) stageOrNull else ""
       binaryScala3Version(s"$maj.$min.$patch$stage")
     case _ => full
@@ -91,44 +87,38 @@ object CrossVersionUtil {
   //
   //   - For non-stable Scala 3 versions, compiler versions can read TASTy in an older stable format but their TASTY versions are not compatible between each other even if the compilers have the same minor version (https://docs.scala-lang.org/scala3/reference/language-versions/binary-compatibility.html)
   //
-  private[nosbt] def isScalaBinaryCompatibleWith(newVersion: String, origVersion: String): Boolean = {
+  private[nosbt] def isScalaBinaryCompatibleWith(newVersion: String, origVersion: String): Boolean =
     (newVersion, origVersion) match {
       case (NonReleaseV_n("2", _, _, _), NonReleaseV_n("2", _, _, _)) =>
         val api1 = scalaApiVersion(newVersion)
         val api2 = scalaApiVersion(origVersion)
         (api1.isDefined && api1 == api2) || (newVersion == origVersion)
-      case (ReleaseV(nMaj, nMin, _, _), ReleaseV(oMaj, oMin, _, _))
-          if nMaj == oMaj && nMaj.toLong >= 3 =>
+      case (ReleaseV(nMaj, nMin, _, _), ReleaseV(oMaj, oMin, _, _)) if nMaj == oMaj && nMaj.toLong >= 3 =>
         nMin.toInt >= oMin.toInt
-      case (NonReleaseV_1(nMaj, nMin, _, _), ReleaseV(oMaj, oMin, _, _))
-          if nMaj == oMaj && nMaj.toLong >= 3 =>
+      case (NonReleaseV_1(nMaj, nMin, _, _), ReleaseV(oMaj, oMin, _, _)) if nMaj == oMaj && nMaj.toLong >= 3 =>
         nMin.toInt > oMin.toInt
       case _ =>
         newVersion == origVersion
     }
-  }
 
-  def binaryScalaVersion(full: String): String = {
+  def binaryScalaVersion(full: String): String =
     if (ScalaArtifacts.isScala3(full)) binaryScala3Version(full)
     else
       binaryVersionWithApi(full, TransitionScalaVersion)(scalaApiVersion) // Scala 2 binary version
-  }
 
   def binarySbtVersion(full: String): String =
     binaryVersionWithApi(full, TransitionSbtVersion)(sbtApiVersion)
 
-  private[this] def isNewer(major: Long, minor: Long, minMajor: Long, minMinor: Long): Boolean =
+  private def isNewer(major: Long, minor: Long, minMajor: Long, minMinor: Long): Boolean =
     major > minMajor || (major == minMajor && minor >= minMinor)
 
-  private[this] def binaryVersionWithApi(full: String, cutoff: String)(
+  private def binaryVersionWithApi(full: String, cutoff: String)(
       apiVersion: String => Option[(Long, Long)]
-  ): String = {
+  ): String =
     (apiVersion(full), partialVersion(cutoff)) match {
-      case (Some((major, minor)), None) => s"$major.$minor"
-      case (Some((major, minor)), Some((minMajor, minMinor)))
-          if isNewer(major, minor, minMajor, minMinor) =>
+      case (Some((major, minor)), None)                                                                    => s"$major.$minor"
+      case (Some((major, minor)), Some((minMajor, minMinor))) if isNewer(major, minor, minMajor, minMinor) =>
         s"$major.$minor"
       case _ => full
     }
-  }
 }

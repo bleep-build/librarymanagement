@@ -1,5 +1,3 @@
 package bleep.nosbt.librarymanagement
 
-trait Repository {
-
-}
+trait Repository {}

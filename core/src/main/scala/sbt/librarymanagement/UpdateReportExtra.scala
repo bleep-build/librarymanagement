@@ -15,12 +15,10 @@ private[librarymanagement] abstract class ConfigurationReportExtra {
   def evicted: Seq[ModuleID] =
     details flatMap (_.modules) filter (_.evicted) map (_.module)
 
-  /**
-   * All resolved modules for this configuration.
-   * For a given organization and module name, there is only one revision/`ModuleID` in this sequence.
-   */
+  /** All resolved modules for this configuration. For a given organization and module name, there is only one revision/`ModuleID` in this sequence.
+    */
   def allModules: Seq[ModuleID] = modules map addConfiguration
-  private[this] def addConfiguration(mr: ModuleReport): ModuleID = {
+  private def addConfiguration(mr: ModuleReport): ModuleID = {
     val module = mr.module
     if (module.configurations.isEmpty) {
       val conf = mr.configurations map (c => s"$configuration->$c") mkString ";"
@@ -29,9 +27,13 @@ private[librarymanagement] abstract class ConfigurationReportExtra {
   }
 
   def retrieve(f: (ConfigRef, ModuleID, Artifact, File) => File): ConfigurationReport =
-    ConfigurationReport(configuration, modules map {
-      _.retrieve((mid, art, file) => f(configuration, mid, art, file))
-    }, details)
+    ConfigurationReport(
+      configuration,
+      modules map {
+        _.retrieve((mid, art, file) => f(configuration, mid, art, file))
+      },
+      details
+    )
 }
 
 private[librarymanagement] abstract class ModuleReportExtra {
@@ -56,7 +58,7 @@ private[librarymanagement] abstract class ModuleReportExtra {
 
   def withArtifacts(artifacts: Vector[(Artifact, File)]): ModuleReport
 
-  protected[this] def arts: Vector[String] =
+  protected def arts: Vector[String] =
     artifacts.map(_.toString) ++ missingArtifacts.map(art => "(MISSING) " + art)
 
   def detailReport: String =
@@ -106,7 +108,7 @@ private[librarymanagement] abstract class ModuleReportExtra {
       s"\t\t\t$key: $x\n"
     } getOrElse ""
 
-  private[this] def calendarToString(c: ju.Calendar): String = {
+  private def calendarToString(c: ju.Calendar): String = {
     import sjsonnew._, BasicJsonProtocol._
     implicitly[IsoString[ju.Calendar]] to c
   }
@@ -124,24 +126,23 @@ private[librarymanagement] abstract class UpdateReportExtra {
   /** All resolved modules in all configurations. */
   def allModules: Vector[ModuleID] = {
     val key = (m: ModuleID) => (m.organization, m.name, m.revision)
-    configurations.flatMap(_.allModules).groupBy(key).toVector map {
-      case (_, v) =>
-        v reduceLeft { (agg, x) =>
-          agg.withConfigurations(
-            (agg.configurations, x.configurations) match {
-              case (None, _)            => x.configurations
-              case (Some(ac), None)     => Some(ac)
-              case (Some(ac), Some(xc)) => Some(s"$ac;$xc")
-            }
-          )
-        }
+    configurations.flatMap(_.allModules).groupBy(key).toVector map { case (_, v) =>
+      v reduceLeft { (agg, x) =>
+        agg.withConfigurations(
+          (agg.configurations, x.configurations) match {
+            case (None, _)            => x.configurations
+            case (Some(ac), None)     => Some(ac)
+            case (Some(ac), Some(xc)) => Some(s"$ac;$xc")
+          }
+        )
+      }
     }
   }
 
   def retrieve(f: (ConfigRef, ModuleID, Artifact, File) => File): UpdateReport =
-    UpdateReport(cachedDescriptor, configurations map { _ retrieve f }, stats, stamps)
+    UpdateReport(cachedDescriptor, configurations map { _ `retrieve` f }, stats, stamps)
 
-  /** Gets the report for the given configuration, or `None` if the configuration was not resolved.*/
+  /** Gets the report for the given configuration, or `None` if the configuration was not resolved. */
   def configuration(s: ConfigRef) = configurations.find(_.configuration == s)
 
   /** Gets the names of all resolved configurations.  This `UpdateReport` contains one `ConfigurationReport` for each configuration in this list. */

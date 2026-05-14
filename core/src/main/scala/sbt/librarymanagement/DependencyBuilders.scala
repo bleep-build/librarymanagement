@@ -5,9 +5,8 @@ package bleep.nosbt.librarymanagement
 
 import bleep.nosbt.internal.librarymanagement.StringUtilities.nonEmpty
 
-/**
- * DependencyBuilders implements the implicits for % and %% DSL.
- */
+/** DependencyBuilders implements the implicits for % and %% DSL.
+  */
 trait DependencyBuilders {
   // See http://www.scala-lang.org/news/2.12.0#traits-compile-to-interfaces
   // Avoid defining fields (val or var, but a constant is ok – final val without result type)

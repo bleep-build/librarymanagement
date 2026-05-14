@@ -44,8 +44,7 @@ final class EvictionWarningOptions private[nosbt] (
       warnEvictionSummary: Boolean = warnEvictionSummary,
       infoAllEvictions: Boolean = infoAllEvictions,
       showCallers: Boolean = showCallers,
-      guessCompatible: Function1[(ModuleID, Option[ModuleID], Option[ScalaModuleInfo]), Boolean] =
-        guessCompatible
+      guessCompatible: Function1[(ModuleID, Option[ModuleID], Option[ScalaModuleInfo]), Boolean] = guessCompatible
   ): EvictionWarningOptions =
     new EvictionWarningOptions(
       configurations = configurations,
@@ -102,8 +101,7 @@ object EvictionWarningOptions {
     name.contains("_2.") || name.contains("_3") || name.contains("_4")
 
   /** A partial function that checks if given m2 is suffixed, and use pvp to evaluate. */
-  lazy val guessSecondSegment
-      : PartialFunction[(ModuleID, Option[ModuleID], Option[ScalaModuleInfo]), Boolean] = {
+  lazy val guessSecondSegment: PartialFunction[(ModuleID, Option[ModuleID], Option[ScalaModuleInfo]), Boolean] = {
     case (m1, Some(m2), Some(_)) if isNameScalaSuffixed(m2.name) =>
       (m1.revision, m2.revision) match {
         case (VersionNumber(ns1, ts1, es1), VersionNumber(ns2, ts2, es2)) =>
@@ -114,19 +112,16 @@ object EvictionWarningOptions {
   }
 
   /** A partial function that checks two versions match pvp. */
-  private[nosbt] lazy val evalPvp
-      : PartialFunction[(ModuleID, Option[ModuleID], Option[ScalaModuleInfo]), Boolean] = {
-    case (m1, Some(m2), _) =>
-      (m1.revision, m2.revision) match {
-        case (VersionNumber(ns1, ts1, es1), VersionNumber(ns2, ts2, es2)) =>
-          VersionNumber.SecondSegment
-            .isCompatible(VersionNumber(ns1, ts1, es1), VersionNumber(ns2, ts2, es2))
-        case _ => false
-      }
+  private[nosbt] lazy val evalPvp: PartialFunction[(ModuleID, Option[ModuleID], Option[ScalaModuleInfo]), Boolean] = { case (m1, Some(m2), _) =>
+    (m1.revision, m2.revision) match {
+      case (VersionNumber(ns1, ts1, es1), VersionNumber(ns2, ts2, es2)) =>
+        VersionNumber.SecondSegment
+          .isCompatible(VersionNumber(ns1, ts1, es1), VersionNumber(ns2, ts2, es2))
+      case _ => false
+    }
   }
 
-  lazy val guessSbtOne
-      : PartialFunction[(ModuleID, Option[ModuleID], Option[ScalaModuleInfo]), Boolean] = {
+  lazy val guessSbtOne: PartialFunction[(ModuleID, Option[ModuleID], Option[ScalaModuleInfo]), Boolean] = {
     case (m1, Some(m2), Some(scalaModuleInfo))
         if (m2.organization == "org.scala-sbt") &&
           (m2.name.endsWith("_" + scalaModuleInfo.scalaFullVersion) ||
@@ -139,47 +134,39 @@ object EvictionWarningOptions {
       }
   }
 
-  lazy val guessSemVer
-      : PartialFunction[(ModuleID, Option[ModuleID], Option[ScalaModuleInfo]), Boolean] = {
-    case (m1, Some(m2), _) =>
-      (m1.revision, m2.revision) match {
-        case (VersionNumber(ns1, ts1, es1), VersionNumber(ns2, ts2, es2)) =>
-          VersionNumber.SemVer
-            .isCompatible(VersionNumber(ns1, ts1, es1), VersionNumber(ns2, ts2, es2))
-        case _ => false
-      }
+  lazy val guessSemVer: PartialFunction[(ModuleID, Option[ModuleID], Option[ScalaModuleInfo]), Boolean] = { case (m1, Some(m2), _) =>
+    (m1.revision, m2.revision) match {
+      case (VersionNumber(ns1, ts1, es1), VersionNumber(ns2, ts2, es2)) =>
+        VersionNumber.SemVer
+          .isCompatible(VersionNumber(ns1, ts1, es1), VersionNumber(ns2, ts2, es2))
+      case _ => false
+    }
   }
 
-  lazy val guessEarlySemVer
-      : PartialFunction[(ModuleID, Option[ModuleID], Option[ScalaModuleInfo]), Boolean] = {
-    case (m1, Some(m2), _) =>
-      (m1.revision, m2.revision) match {
-        case (VersionNumber(ns1, ts1, es1), VersionNumber(ns2, ts2, es2)) =>
-          VersionNumber.EarlySemVer
-            .isCompatible(VersionNumber(ns1, ts1, es1), VersionNumber(ns2, ts2, es2))
-        case _ => false
-      }
+  lazy val guessEarlySemVer: PartialFunction[(ModuleID, Option[ModuleID], Option[ScalaModuleInfo]), Boolean] = { case (m1, Some(m2), _) =>
+    (m1.revision, m2.revision) match {
+      case (VersionNumber(ns1, ts1, es1), VersionNumber(ns2, ts2, es2)) =>
+        VersionNumber.EarlySemVer
+          .isCompatible(VersionNumber(ns1, ts1, es1), VersionNumber(ns2, ts2, es2))
+      case _ => false
+    }
   }
 
-  lazy val guessStrict
-      : PartialFunction[(ModuleID, Option[ModuleID], Option[ScalaModuleInfo]), Boolean] = {
-    case (m1, Some(m2), _) =>
-      (m1.revision, m2.revision) match {
-        case (VersionNumber(ns1, ts1, es1), VersionNumber(ns2, ts2, es2)) =>
-          VersionNumber.Strict
-            .isCompatible(VersionNumber(ns1, ts1, es1), VersionNumber(ns2, ts2, es2))
-        case _ => false
-      }
+  lazy val guessStrict: PartialFunction[(ModuleID, Option[ModuleID], Option[ScalaModuleInfo]), Boolean] = { case (m1, Some(m2), _) =>
+    (m1.revision, m2.revision) match {
+      case (VersionNumber(ns1, ts1, es1), VersionNumber(ns2, ts2, es2)) =>
+        VersionNumber.Strict
+          .isCompatible(VersionNumber(ns1, ts1, es1), VersionNumber(ns2, ts2, es2))
+      case _ => false
+    }
   }
 
-  lazy val guessFalse
-      : PartialFunction[(ModuleID, Option[ModuleID], Option[ScalaModuleInfo]), Boolean] = {
-    case (_, _, _) => false
+  lazy val guessFalse: PartialFunction[(ModuleID, Option[ModuleID], Option[ScalaModuleInfo]), Boolean] = { case (_, _, _) =>
+    false
   }
 
-  lazy val guessTrue
-      : PartialFunction[(ModuleID, Option[ModuleID], Option[ScalaModuleInfo]), Boolean] = {
-    case (_, _, _) => true
+  lazy val guessTrue: PartialFunction[(ModuleID, Option[ModuleID], Option[ScalaModuleInfo]), Boolean] = { case (_, _, _) =>
+    true
   }
 }
 
@@ -196,7 +183,7 @@ final class EvictionPair private[nosbt] (
   override def equals(o: Any): Boolean = o match {
     case o: EvictionPair =>
       (this.organization == o.organization) &&
-        (this.name == o.name)
+      (this.name == o.name)
     case _ => false
   }
   override def hashCode: Int = {
@@ -271,10 +258,12 @@ object EvictionWarning {
     }
     confs foreach { confReport =>
       confReport.details map { detail =>
-        if ((detail.modules exists { _.evicted }) &&
-            !(buffer exists { x =>
-              (x.organization == detail.organization) && (x.name == detail.name)
-            })) {
+        if (
+          (detail.modules exists { _.evicted }) &&
+          !(buffer exists { x =>
+            (x.organization == detail.organization) && (x.name == detail.name)
+          })
+        ) {
           buffer += detail
         }
       }
@@ -290,7 +279,7 @@ object EvictionWarning {
     module.scalaModuleInfo match {
       case Some(s) =>
         organization == s.scalaOrganization &&
-          (name == LibraryID) || (name == CompilerID)
+        (name == LibraryID) || (name == CompilerID)
       case _ => false
     }
 
@@ -350,7 +339,7 @@ object EvictionWarning {
     pairs foreach {
       case p if isScalaArtifact(module, p.organization, p.name) =>
         (module.scalaModuleInfo, p.winner) match {
-          case (Some(s), Some(winner)) if (s.scalaFullVersion != winner.module.revision) =>
+          case (Some(s), Some(winner)) if s.scalaFullVersion != winner.module.revision =>
             if (options.warnScalaVersionEviction)
               scalaEvictions += p
             if (options.warnEvictionSummary)

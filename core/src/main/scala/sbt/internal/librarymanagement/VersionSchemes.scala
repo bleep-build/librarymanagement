@@ -10,7 +10,7 @@ package internal
 package librarymanagement
 
 import bleep.nosbt.internal.librarymanagement.mavenint.SbtPomExtraProperties
-import bleep.nosbt.librarymanagement.{ EvictionWarningOptions, ModuleID, ScalaModuleInfo }
+import bleep.nosbt.librarymanagement.{EvictionWarningOptions, ModuleID, ScalaModuleInfo}
 
 // See APIMappings.scala
 private[nosbt] object VersionSchemes {
@@ -23,7 +23,7 @@ private[nosbt] object VersionSchemes {
   def validateScheme(value: String): Unit =
     value match {
       case EarlySemVer | SemVerSpec | PackVer | Strict | Always => ()
-      case "semver" =>
+      case "semver"                                             =>
         sys.error(
           s"""'semver' is ambiguous.
              |Based on the Semantic Versioning 2.0.0, 0.y.z updates are all initial development and thus
@@ -37,7 +37,7 @@ private[nosbt] object VersionSchemes {
     }
 
   /** info.versionScheme property will be included into POM after sbt 1.4.0.
-   */
+    */
   def extractFromId(mid: ModuleID): Option[String] = extractFromExtraAttributes(mid.extraAttributes)
 
   def extractFromExtraAttributes(extraAttributes: Map[String, String]): Option[String] =

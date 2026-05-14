@@ -1,7 +1,7 @@
 package bleep.nosbt.internal.librarymanagement
 
 import bleep.nosbt.librarymanagement.*
-import bleep.nosbt.util.{ Level, Logger }
+import bleep.nosbt.util.{Level, Logger}
 
 import Configurations.*
 
@@ -29,11 +29,10 @@ private[nosbt] object CompatibilityWarning {
       module: ModuleDescriptor,
       mavenStyle: Boolean,
       log: Logger
-  ): Unit = {
+  ): Unit =
     if (mavenStyle) {
       processIntransitive(config, module, log)
     }
-  }
   def processIntransitive(
       config: CompatibilityWarningOptions,
       module: ModuleDescriptor,
